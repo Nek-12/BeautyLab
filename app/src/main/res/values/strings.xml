@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">BeautyLab</string>
+    <string name="did_not_contain_error_template">Input must contain \"%1$s\"</string>
+    <string name="max_length_error_template">Length must be between %1$d and %2$d symbols</string>
+    <string name="empty_input_error">Please fill out this field</string>
+    <string name="alphanumeric_error">Input must only contain letters and digits</string>
+    <string name="not_time_error">Please input a time value (hh:mm:ss)</string>
+    <string name="value_is_not_error">Please input a valid %1$s</string>
+    <string name="contains_character_type_error">The value should contain %1$s</string>
+    <string name="digits">digits</string>
+    <string name="letters">letters</string>
+    <string name="start_with_error">Value must start with %1$s</string>
+    <string name="email">Email</string>
+    <string name="no_message">No message</string>
+    <string name="unknown_error_template">Unknown error: %1$s</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="created_at_template">Created at: %1$s</string>
+</resources>

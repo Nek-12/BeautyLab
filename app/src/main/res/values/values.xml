@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="Theme.BeautyLab" parent="" />
+
+    <color name="ic_launcher_background">#6667AB</color>
+</resources>
