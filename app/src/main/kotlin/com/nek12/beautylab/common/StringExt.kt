@@ -3,17 +3,20 @@ package com.nek12.beautylab.common
 import androidx.compose.runtime.Composable
 import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
+import com.nek12.beautylab.common.Text.Resource
 import com.nek12.beautylab.common.input.ValidationError
 import com.nek12.beautylab.common.input.toMessages
+import com.nek12.beautylab.data.util.ApiError
 import java.time.Duration
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-inline val <reified T : Throwable?> T.genericMessage: String
-    @Composable inline get() = when (this) {
-        //TODO
-        null -> R.string.unknown_error_template.string(R.string.no_message)
-        else -> localizedMessage ?: message ?: R.string.unknown_error_template.string(toString())
+inline val <reified T : Throwable?> T.genericMessage: Text
+    inline get() = when (this) {
+        is ApiError.NoInternet -> Resource(R.string.no_internet_error)
+        is ApiError.SerializationError, is ApiError.Unknown -> Resource(R.string.internal_error, message ?: toString())
+        is ApiError.Unauthorized -> Resource(R.string.log_in_again)
+        else -> Resource(R.string.unknown_error_template, this?.localizedMessage ?: this?.message ?: "")
     }
 
 @Composable

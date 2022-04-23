@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mikepenz.iconics.typeface.IIcon
-import com.nek12.beautylab.common.GMBLIcon
+import com.nek12.beautylab.common.GMRIcon
 
 @Composable
 fun BLCircleIcon(
@@ -36,5 +36,5 @@ fun BLCircleIcon(
 @Composable
 @Preview(name = "BLCircleIcon", showSystemUi = false, showBackground = true)
 private fun BLCircleIconPreview() {
-    BLCircleIcon(color = Color.Blue, icon = GMBLIcon.gmr_lightbulb_outline)
+    BLCircleIcon(color = Color.Blue, icon = GMRIcon.gmr_lightbulb_outline)
 }

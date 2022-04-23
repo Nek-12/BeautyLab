@@ -57,4 +57,39 @@ sealed class Form(
             val DEFAULT_LENGTH_RANGE = 3..32
         }
     }
+
+    data class Username(
+        val lengthRange: IntRange = DEFAULT_LENGTH_RANGE,
+    ) : Form(
+        NonEmpty,
+        LengthRange(lengthRange),
+        DigitsAndLettersOnly,
+    ) {
+
+        companion object {
+
+            val DEFAULT_LENGTH_RANGE = 4..20
+        }
+    }
+
+    object Password : Form(
+        NonEmpty,
+        Regex("^[a-zA-Z0-9_.,!@#$%^&*]{4,32}$", R.string.password)
+    ) {
+
+        val LENGTH_RANGE = 4..32
+    }
+
+    data class Name(
+        val lengthRange: IntRange = DEFAULT_LENGTH_RANGE,
+    ) : Form(
+        NonEmpty,
+        LengthRange(lengthRange),
+    ) {
+
+        companion object {
+
+            val DEFAULT_LENGTH_RANGE = 3..32
+        }
+    }
 }

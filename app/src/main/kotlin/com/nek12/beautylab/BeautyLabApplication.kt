@@ -1,6 +1,10 @@
 package com.nek12.beautylab
 
 import android.app.Application
+import com.nek12.beautylab.data.di.dataModule
+import com.nek12.beautylab.data.di.networkModule
+import com.nek12.beautylab.data.di.repoModule
+import com.nek12.beautylab.di.appModule
 import logcat.AndroidLogcatLogger
 import logcat.LogPriority
 import org.koin.android.ext.koin.androidContext
@@ -15,6 +19,7 @@ class BeautyLabApplication : Application() {
 
         startKoin {
             androidContext(applicationContext)
+            modules(networkModule, dataModule, repoModule, appModule)
         }
     }
 }

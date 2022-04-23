@@ -4,12 +4,12 @@ object Versions {
 
     val java = JavaVersion.VERSION_11
     const val jvmTarget = "11"
-    const val compileSdk = 31
+    const val compileSdk = 32
     const val targetSdk = compileSdk
     const val minSdk = 26
     const val buildTools = "32.0.0"
     const val gradleAndroid = "7.1.3"
-    const val kotlin = "1.6.10"
+    const val kotlin = "1.6.20"
     const val datetime = "0.3.2"
     const val ksp = "1.0.4"
     const val activity = "1.6.0-alpha01"
@@ -32,7 +32,7 @@ object Versions {
     const val coil = "2.0.0-rc02"
     const val coilTransformations = "1.1.2"
     const val lifecycle = "2.5.0-alpha05"
-    const val mvi = "0.1.2"
+    const val mvi = "0.1.3"
     const val ktor = "2.0.0"
     const val flowExt = "0.2.0"
 
@@ -47,13 +47,13 @@ object Versions {
 
     object Compose {
 
-        const val accompanist = "0.24.5-alpha"
-        const val compose = "1.2.0-alpha06"
+        const val accompanist = "0.24.7-alpha"
+        const val compose = "1.2.0-alpha08"
         const val material3 = "1.0.0-alpha03"
         const val constraintLayout = "1.0.0"
         const val navigation = "2.5.0-alpha03"
         const val dialogs = "0.7.0"
-        const val destinations = "1.2.2-beta"
+        const val destinations = "1.5.1-beta"
         const val collapsingToolbar = "2.3.3"
         const val paging = "1.0.0-alpha14"
     }

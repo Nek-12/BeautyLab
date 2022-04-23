@@ -6,3 +6,5 @@ object MimeType {
 
     const val image = "image/\\*"
 }
+
+const val BACKEND_URL = "https://beautylab.herokuapp.com/api/"

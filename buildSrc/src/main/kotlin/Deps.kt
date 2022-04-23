@@ -227,8 +227,9 @@ object Deps {
         const val logging = "io.ktor:ktor-client-logging:${Versions.ktor}"
         const val contentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
         const val serialization = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
+        const val auth = "io.ktor:ktor-client-auth:${Versions.ktor}"
 
-        val all = listOf(core, engine, logging, contentNegotiation, serialization)
+        val all = listOf(core, engine, logging, contentNegotiation, serialization, auth)
     }
 
     object Ksp {

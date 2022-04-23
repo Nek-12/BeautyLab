@@ -12,9 +12,24 @@
     <string name="start_with_error">Value must start with %1$s</string>
     <string name="email">Email</string>
     <string name="no_message">No message</string>
-    <string name="unknown_error_template">Unknown error: %1$s</string>
+    <string name="unknown_error_template">Unknown error %1$s</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="created_at_template">Created at: %1$s</string>
+    <string name="home">Home</string>
+    <string name="products">Products</string>
+    <string name="account">Me</string>
+    <string name="cart">Cart</string>
+    <string name="news">News</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="no_internet_error">It seems you are offline. Check your internet connection</string>
+    <string name="internal_error">Oops! Looks like a bug! Please report the issue to the developer: %s</string>
+    <string name="log_in_again">Please try logging in again</string>
+    <string name="your_name">Your name</string>
+    <string name="sign_up">Sign up</string>
+    <string name="log_in">"Log In "</string>
+    <string name="does_not_match_field_template">Value does not match %s</string>
+    <string name="invalid_credentials">Invalid credentials or user not found</string>
 </resources>

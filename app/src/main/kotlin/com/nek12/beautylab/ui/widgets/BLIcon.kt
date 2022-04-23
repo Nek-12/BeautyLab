@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mikepenz.iconics.compose.Image
 import com.mikepenz.iconics.typeface.IIcon
-import com.nek12.beautylab.common.GMBLIcon
+import com.nek12.beautylab.common.GMRIcon
 
 @Composable
 fun BLIcon(
@@ -24,6 +24,7 @@ fun BLIcon(
     onClick: (() -> Unit)? = null,
     size: Dp = 28.dp,
     tint: Color = MaterialTheme.colors.onSurface,
+    contentDescription: String? = null,
 ) {
     Image(
         asset = asset,
@@ -33,6 +34,7 @@ fun BLIcon(
             .then(onClick?.let { Modifier.clickable(onClick = onClick) } ?: Modifier),
         alignment = Alignment.Center,
         contentScale = ContentScale.Fit,
+        contentDescription = contentDescription,
         colorFilter = ColorFilter.tint(tint),
     )
 }
@@ -40,5 +42,5 @@ fun BLIcon(
 @Composable
 @Preview
 private fun BLIconPreview() {
-    BLIcon(asset = GMBLIcon.gmr_check)
+    BLIcon(asset = GMRIcon.gmr_check)
 }

@@ -95,6 +95,15 @@ sealed class Rules {
             else DoesNotStartWith(prefix).invalidNel()
         }
     }
+
+    data class Regex(val regex: kotlin.text.Regex, val representationStringRes: Int) : Rule {
+
+        constructor(regex: String, representationStringRes: Int) : this(regex.toRegex(), representationStringRes)
+
+        override fun invoke(value: String): ValidatedNel<ValidationError, String> {
+            return if (value.matches(regex)) value.validNel() else IsNot(representationStringRes).invalidNel()
+        }
+    }
 }
 
 operator fun Array<out Rule>.invoke(input: String, strategy: Strategy): Either<Nel<ValidationError>, String> {
@@ -166,6 +175,11 @@ sealed class ValidationError {
     data class DoesNotStartWith(val value: String) : ValidationError() {
 
         override val message: String @Composable get() = R.string.start_with_error.string(value)
+    }
+
+    data class IsNotEqualTo(val otherFieldName: Int) : ValidationError() {
+
+        override val message: String @Composable get() = R.string.does_not_match_field_template.string(otherFieldName.string())
     }
 }
 

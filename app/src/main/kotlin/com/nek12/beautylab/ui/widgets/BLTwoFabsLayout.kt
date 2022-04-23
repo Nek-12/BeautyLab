@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mikepenz.iconics.typeface.IIcon
-import com.nek12.beautylab.common.GMBLIcon
+import com.nek12.beautylab.common.GMRIcon
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -61,10 +61,10 @@ fun BLTwoFabsLayout(
 @Preview(name = "BLTwoFabsLayout", showSystemUi = false, showBackground = true)
 private fun BLTwoFabsLayoutPreview() {
     Column {
-        BLTwoFabsLayout(GMBLIcon.gmr_delete, GMBLIcon.gmr_check, {}, {})
-        BLTwoFabsLayout(GMBLIcon.gmr_delete, GMBLIcon.gmr_check, {}, {}, firstVisible = false)
-        BLTwoFabsLayout(GMBLIcon.gmr_delete, GMBLIcon.gmr_check, {}, {}, secondVisible = false)
+        BLTwoFabsLayout(GMRIcon.gmr_delete, GMRIcon.gmr_check, {}, {})
+        BLTwoFabsLayout(GMRIcon.gmr_delete, GMRIcon.gmr_check, {}, {}, firstVisible = false)
+        BLTwoFabsLayout(GMRIcon.gmr_delete, GMRIcon.gmr_check, {}, {}, secondVisible = false)
         Divider(Modifier.fillMaxWidth())
-        BLTwoFabsLayout(GMBLIcon.gmr_delete, GMBLIcon.gmr_check, {}, {}, secondVisible = false, firstVisible = false)
+        BLTwoFabsLayout(GMRIcon.gmr_delete, GMRIcon.gmr_check, {}, {}, secondVisible = false, firstVisible = false)
     }
 }
