@@ -10,6 +10,7 @@ object Configuration {
                 coil,
                 coilTransformations,
                 logcat,
+                pagingAndroid,
             ) + with(Deps.AndroidUtils) {
                 listOf(
                     android,
@@ -60,6 +61,8 @@ object Configuration {
 
     object Core {
 
-        val api = Common.implementation + Deps.kotlinSerialization
+        val api = Common.implementation + listOf(
+            Deps.kotlinSerialization, Deps.paging
+        )
     }
 }

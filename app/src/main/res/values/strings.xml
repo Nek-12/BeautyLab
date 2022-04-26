@@ -32,4 +32,19 @@
     <string name="log_in">"Log In "</string>
     <string name="does_not_match_field_template">Value does not match %s</string>
     <string name="invalid_credentials">Invalid credentials or user not found</string>
+    <string name="descending">Descending</string>
+    <string name="sort_template">By %s %s</string>
+    <string name="ascending">Ascending</string>
+    <string name="sort_date">Date added</string>
+    <string name="sort_price">Price</string>
+    <string name="sort_amount">Amount</string>
+    <string name="sort_name">Name</string>
+    <string name="popular_products_title">Top Selling</string>
+    <string name="new_products_title">Grab While it\'s Hot</string>
+    <string name="discounted_products_title">On Sale</string>
+    <string name="error_occurred">We\'re sorry - an error occurred</string>
+    <string name="error_details_template">Details: %s</string>
+    <string name="retry">Retry</string>
+    <string name="explore_brands">Explore Brands We Sell</string>
+    <string name="explore_categories">Interested in specific category?</string>
 </resources>

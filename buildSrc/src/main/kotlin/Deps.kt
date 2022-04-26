@@ -29,7 +29,8 @@ object Deps {
     const val vectorDrawable = "androidx.vectordrawable:vectordrawable-animated:${Versions.vectorDrawable}"
 
     const val startup = "androidx.startup:startup-runtime:${Versions.startup}"
-    const val paging = "androidx.paging:paging-runtime:${Versions.paging}"
+    const val pagingAndroid = "androidx.paging:paging-runtime:${Versions.paging}"
+    const val paging = "androidx.paging:paging-common:${Versions.paging}"
     const val roomPaging = "androidx.room:room-paging:${Versions.room}"
 
     /* Ktx */
@@ -204,7 +205,6 @@ object Deps {
         const val koin = "io.insert-koin:koin-test:${Versions.koin}"
         const val mockito = "org.mockito:mockito-core:${Versions.Test.mockito}"
         const val robolectric = "org.robolectric:robolectric:${Versions.Test.robolectric}"
-        const val paging = "androidx.paging:paging-common:${Versions.paging}"
         const val ktor = "io.ktor:ktor-client-mock:${Versions.ktor}"
     }
 

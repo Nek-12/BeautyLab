@@ -1,6 +1,7 @@
 package com.nek12.beautylab.common
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.SnackbarDuration
@@ -9,8 +10,16 @@ import androidx.compose.ui.graphics.ColorFilter
 import com.mikepenz.iconics.typeface.IIcon
 import com.mikepenz.iconics.typeface.ITypeface
 import com.mikepenz.iconics.typeface.library.googlematerial.RoundedGoogleMaterial
+import com.nek12.androidutils.compose.string
+import com.nek12.beautylab.R
+import com.nek12.beautylab.core.model.net.Color
+import com.nek12.beautylab.core.model.net.SortDirection
+import com.nek12.beautylab.core.model.net.product.ProductSort
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
+import java.time.Instant
+import java.util.*
 
 typealias GMRIcon = RoundedGoogleMaterial.Icon
 
@@ -32,3 +41,46 @@ fun CoroutineScope.snackbar(
     scaffoldState: ScaffoldState,
     duration: SnackbarDuration = SnackbarDuration.Short,
 ) = snackbar(text.string(context), scaffoldState, duration)
+
+
+fun Color.toComposeColor() = androidx.compose.ui.graphics.Color(value)
+
+
+@Parcelize
+data class FiltersPayload(
+    val sort: ProductSort = ProductSort.Name,
+    val direction: SortDirection = SortDirection.Desc,
+    val brandId: UUID? = null,
+    val categoryId: UUID? = null,
+    val minDiscount: Float = 0f,
+    val maxDiscount: Float = 1f,
+    val minPrice: Double = 0.0,
+    val maxPrice: Double? = null,
+    val isActive: Boolean = true,
+    val createdBefore: Instant = Instant.now(),
+    val createdAfter: Instant? = null,
+    val minAmountAvailable: Long = 0,
+) : Parcelable {
+
+    @Composable
+    fun sortRepresentation(): String = R.string.sort_template.string(
+        sort.representation().lowercase(),
+        direction.representation().lowercase()
+    )
+}
+
+
+@Composable
+fun ProductSort.representation() = when (this) {
+    ProductSort.Name -> R.string.sort_name.string()
+    ProductSort.Amount -> R.string.sort_amount.string()
+    ProductSort.Price -> R.string.sort_price.string()
+    ProductSort.CreatedAt -> R.string.sort_date.string()
+}
+
+
+@Composable
+fun SortDirection.representation() = when (this) {
+    SortDirection.Asc -> R.string.descending.string()
+    SortDirection.Desc -> R.string.ascending.string()
+}

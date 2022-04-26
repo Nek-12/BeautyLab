@@ -16,7 +16,7 @@ class BeautyLabActivity : ComponentActivity(), KoinComponent {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         actionBar?.hide()
 
         setContent {

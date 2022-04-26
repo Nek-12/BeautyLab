@@ -20,7 +20,7 @@ import com.nek12.beautylab.ui.widgets.BLBottomSheet
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
+import com.ramcosta.composedestinations.spec.Direction
 
 @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
 @Composable
@@ -52,13 +52,13 @@ fun BeautyLabNavigation() {
 
 
 enum class BottomBarDestination(
-    val direction: DirectionDestinationSpec,
+    val direction: Direction,
     val icon: IIcon,
     @StringRes val label: Int,
 ) {
 
     Home(HomeScreenDestination, GMRIcon.gmr_home, R.string.home),
-    Products(ProductsScreenDestination, GMRIcon.gmr_shopping_bag, R.string.products),
+    Products(ProductsScreenDestination(), GMRIcon.gmr_shopping_bag, R.string.products),
     Profile(ProfileScreenDestination, GMRIcon.gmr_account_circle, R.string.account),
     Cart(CartScreenDestination, GMRIcon.gmr_shopping_cart, R.string.cart),
     News(NewsScreenDestination, GMRIcon.gmr_receipt_long, R.string.news),

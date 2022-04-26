@@ -38,7 +38,11 @@ fun LoginScreen(
 
     consume { action ->
         when (action) {
-            is GoToMain -> navigator.navigate(HomeScreenDestination())
+            is GoToMain -> navigator.navigate(HomeScreenDestination()) {
+                popUpTo(HomeScreenDestination.route) {
+                    inclusive = true
+                }
+            }
             GoToSignUp -> navigator.navigate(SignUpScreenDestination())
             is ShowSnackbar -> snackbar(action.text.string(context), scaffoldState, SnackbarDuration.Long)
         }
@@ -59,7 +63,7 @@ fun LoginScreen(
                         .heightIn(300.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        BLIcon(asset = GMRIcon.gmr_spa)
+                        BLIcon(asset = GMRIcon.gmr_spa, size = 64.dp)
                     }
                     BLTextInput(
                         input = state.username,
