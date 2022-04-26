@@ -15,11 +15,17 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.core.model.net.Color
 import com.nek12.beautylab.core.model.net.SortDirection
 import com.nek12.beautylab.core.model.net.product.ProductSort
+import com.nek12.beautylab.ui.theme.BeautyLabTheme
+import com.nek12.flowMVI.MVIAction
+import com.nek12.flowMVI.MVIIntent
+import com.nek12.flowMVI.android.compose.EmptyScope
+import com.nek12.flowMVI.android.compose.MVIIntentScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import java.time.Instant
 import java.util.*
+import kotlin.experimental.ExperimentalTypeInference
 
 typealias GMRIcon = RoundedGoogleMaterial.Icon
 
@@ -44,6 +50,18 @@ fun CoroutineScope.snackbar(
 
 
 fun Color.toComposeColor() = androidx.compose.ui.graphics.Color(value)
+
+@OptIn(ExperimentalTypeInference::class)
+@Composable
+inline fun <A : MVIAction, I : MVIIntent> ScreenPreview(
+    darkMode: Boolean = false,
+    @BuilderInference
+    crossinline content: @Composable MVIIntentScope<I, A>.() -> Unit,
+) = EmptyScope {
+    BeautyLabTheme(darkMode) {
+        content()
+    }
+}
 
 
 @Parcelize

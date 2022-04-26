@@ -1,13 +1,14 @@
-package com.nek12.beautylab.ui.screens.product.details
+package com.nek12.beautylab.ui.screens.product.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
-import com.nek12.beautylab.ui.screens.product.details.ProductDetailsAction.*
-import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.*
-import com.nek12.beautylab.ui.widgets.BLEmptyView
+import com.nek12.beautylab.ui.screens.cart.BLEmptyView
+import com.nek12.beautylab.ui.screens.product.list.ProductListAction.*
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.*
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
@@ -17,9 +18,10 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 @Destination
-fun ProductDetailsScreen(
+fun ProductListScreen(
+    filters: FiltersPayload? = null,
     navigator: DestinationsNavigator,
-) = MVIComposable(getViewModel<ProductDetailsViewModel>()) { state ->
+) = MVIComposable(getViewModel<ProductListViewModel>()) { state ->
 
     consume { action ->
         when (action) {
@@ -27,11 +29,11 @@ fun ProductDetailsScreen(
         }
     }
 
-    ProductDetailsContent(state)
+    ProductListContent(state)
 }
 
 @Composable
-private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDetailsContent(state: ProductDetailsState) {
+private fun MVIIntentScope<ProductListIntent, ProductListAction>.ProductListContent(state: ProductListState) {
     when (state) {
         is Empty -> BLEmptyView()
         is Error -> BLErrorView(state.e.genericMessage.string())
@@ -40,10 +42,10 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
 }
 
 @Composable
-@Preview(name = "ProductDetails", showSystemUi = true, showBackground = true)
-private fun ProductDetailsPreview() = ScreenPreview {
+@Preview(name = "ProductList", showSystemUi = true, showBackground = true)
+private fun ProductListPreview() = ScreenPreview {
     Column {
-        ProductDetailsContent(state = Empty)
-        ProductDetailsContent(state = Error(Exception()))
+        ProductListContent(state = Empty)
+        ProductListContent(state = Error(Exception()))
     }
 }

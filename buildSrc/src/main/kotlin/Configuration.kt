@@ -25,7 +25,7 @@ object Configuration {
             } + Deps.Compose.all + Common.implementation + Deps.Koin.all
         }
         val debugImplementation = listOf(
-            Deps.Compose.tooling
+            Deps.Compose.tooling,
         )
     }
 

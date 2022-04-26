@@ -47,4 +47,6 @@
     <string name="retry">Retry</string>
     <string name="explore_brands">Explore Brands We Sell</string>
     <string name="explore_categories">Interested in specific category?</string>
+    <string name="price_template">%1$.2f ₽</string>
+    <string name="amount_template">%d left</string>
 </resources>

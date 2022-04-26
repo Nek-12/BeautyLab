@@ -1,5 +1,6 @@
 package com.nek12.beautylab.ui.screens.home
 
+import androidx.compose.runtime.Immutable
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.common.Text
 import com.nek12.beautylab.core.model.net.mobile.MobileViewResponse
@@ -13,6 +14,7 @@ import com.nek12.flowMVI.MVIState
 import java.util.*
 
 
+@Immutable
 sealed class HomeState : MVIState {
     object Loading : HomeState()
     data class Error(val text: Text) : HomeState()
@@ -39,12 +41,14 @@ sealed class HomeState : MVIState {
     }
 }
 
+@Immutable
 sealed class HomeIntent : MVIIntent {
     data class ClickedProduct(val item: ProductCardItem) : HomeIntent()
     data class ClickedCategory(val item: CategoryChipItem) : HomeIntent()
     data class ClickedBrand(val item: BrandChipItem) : HomeIntent()
 }
 
+@Immutable
 sealed class HomeAction : MVIAction {
     data class GoToProductList(val filters: FiltersPayload) : HomeAction()
     object GoToLogIn : HomeAction()

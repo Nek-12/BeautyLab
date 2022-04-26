@@ -1,10 +1,21 @@
 package com.nek12.beautylab.ui.screens.home
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.*
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FilterChip
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +30,7 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.ui.items.ProductCardItem
 import com.nek12.beautylab.ui.screens.destinations.LoginScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
-import com.nek12.beautylab.ui.screens.destinations.ProductsScreenDestination
+import com.nek12.beautylab.ui.screens.destinations.ProductListScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProfileScreenDestination
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
@@ -33,8 +44,10 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun ProductPager(items: List<ProductCardItem>, onClick: (ProductCardItem) -> Unit) {
-    HorizontalPager(count = items.size,
-        itemSpacing = 8.dp,
+    HorizontalPager(
+        modifier = Modifier.fillMaxWidth(),
+        count = items.size,
+        contentPadding = PaddingValues(4.dp),
         key = { items[it].id }
     ) { page ->
         val item = items[page]
@@ -56,12 +69,11 @@ fun HomeScreen(
     consume { action ->
         when (action) {
             is HomeAction.GoToLogIn -> navController.navigateTo(LoginScreenDestination()) {
-                popUpTo(LoginScreenDestination.route) {
-                    inclusive = true
-                }
+                popUpTo(LoginScreenDestination.route)
+                launchSingleTop = true
             }
             is HomeAction.GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination())
-            is HomeAction.GoToProductList -> navController.navigateTo(ProductsScreenDestination(action.filters))
+            is HomeAction.GoToProductList -> navController.navigateTo(ProductListScreenDestination(action.filters))
             is HomeAction.GoToProfile -> navController.navigateTo(ProfileScreenDestination())
         }
     }
@@ -73,11 +85,12 @@ fun HomeScreen(
     ) { padding ->
         Column(
             Modifier
+                .fillMaxWidth()
                 .padding(padding)
-                .scrollable(rememberScrollState(), Orientation.Vertical)
-                .fillMaxWidth(),
+                .padding(4.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
         ) {
             when (state) {
                 is HomeState.DisplayingContent -> {
@@ -98,7 +111,7 @@ fun HomeScreen(
                     BLSpacer()
 
                     Text(R.string.explore_brands.string(), style = MaterialTheme.typography.h5)
-                    FlowRow {
+                    FlowRow(mainAxisSpacing = 4.dp, crossAxisSpacing = 4.dp) {
                         state.brands.forEach {
                             FilterChip(selected = false, onClick = { send(HomeIntent.ClickedBrand(it)) }) {
                                 Text(it.name, style = MaterialTheme.typography.caption)
@@ -108,7 +121,7 @@ fun HomeScreen(
                     BLSpacer()
 
                     Text(R.string.explore_categories.string(), style = MaterialTheme.typography.h5)
-                    FlowRow {
+                    FlowRow(mainAxisSpacing = 4.dp, crossAxisSpacing = 4.dp) {
                         state.categories.forEach {
                             FilterChip(selected = false, onClick = { send(HomeIntent.ClickedCategory(it)) }) {
                                 Text(it.name, style = MaterialTheme.typography.caption)

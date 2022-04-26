@@ -3,6 +3,7 @@ package com.nek12.beautylab.data.util
 import com.nek12.androidutils.extensions.core.ApiResult
 import com.nek12.androidutils.extensions.core.mapError
 import io.ktor.client.plugins.*
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.serialization.SerializationException
 import logcat.LogPriority
 import logcat.logcat
@@ -27,7 +28,7 @@ fun <T> ApiResult<T>.apiErrors() = mapError {
             }
         }
         is SerializationException -> ApiError.SerializationError(it.message)
-        is HttpRequestTimeoutException, is IOException -> {
+        is HttpRequestTimeoutException, is TimeoutCancellationException, is IOException -> {
             ApiError.NoInternet
         }
         else -> it
