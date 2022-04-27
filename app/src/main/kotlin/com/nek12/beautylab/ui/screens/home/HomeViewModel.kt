@@ -7,6 +7,7 @@ import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.data.util.ApiError
 import com.nek12.flowMVI.android.MVIViewModel
+import kotlinx.coroutines.Dispatchers
 
 class HomeViewModel(
     private val repo: BeautyLabRepo,
@@ -43,9 +44,13 @@ class HomeViewModel(
             send(HomeAction.GoToProductDetails(intent.item.id))
             currentState
         }
+        is HomeIntent.ClickedRetry -> {
+            launchLoadData()
+            HomeState.Loading
+        }
     }
 
-    private fun launchLoadData() = launchForState {
+    private fun launchLoadData() = launchForState(Dispatchers.IO) {
         repo.getMainScreen().fold(
             onSuccess = { HomeState.DisplayingContent(it) },
             onError = {

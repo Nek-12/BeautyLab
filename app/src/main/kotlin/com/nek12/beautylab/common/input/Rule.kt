@@ -2,8 +2,14 @@ package com.nek12.beautylab.common.input
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
-import arrow.core.*
+import androidx.core.text.isDigitsOnly
+import arrow.core.Either
+import arrow.core.Nel
+import arrow.core.ValidatedNel
+import arrow.core.combineAll
 import arrow.core.computations.either
+import arrow.core.invalidNel
+import arrow.core.validNel
 import arrow.typeclasses.Monoid
 import arrow.typeclasses.Semigroup
 import com.nek12.androidutils.compose.string
@@ -12,8 +18,7 @@ import com.nek12.androidutils.extensions.core.isValid
 import com.nek12.androidutils.extensions.core.isValidPattern
 import com.nek12.androidutils.extensions.core.spans
 import com.nek12.beautylab.R
-import com.nek12.beautylab.common.input.Strategy.FailFast
-import com.nek12.beautylab.common.input.Strategy.LazyEvaluation
+import com.nek12.beautylab.common.input.Strategy.*
 import com.nek12.beautylab.common.input.ValidationError.*
 import java.util.regex.Pattern
 
@@ -78,6 +83,13 @@ sealed class Rules {
 
         override fun invoke(value: String): ValidatedNel<ValidationError, String> {
             return if (value.none { !it.isLetterOrDigit() }) value.validNel() else NotAlphaNumeric.invalidNel()
+        }
+    }
+
+    object DigitsOnly : Rule {
+
+        override fun invoke(value: String): ValidatedNel<ValidationError, String> {
+            return if (value.isDigitsOnly()) value.validNel() else IsNot(R.string.number).invalidNel()
         }
     }
 

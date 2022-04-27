@@ -35,6 +35,9 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
         pagingSourceFactory = { ProductPagingSource(sort, direction, request, api) },
     ).flow
 
+    suspend fun getBrands() = api.getBrands()
+
+    suspend fun getCategories() = api.getCategories()
 
     private fun <T> ApiResult<T>.saveTokens(selector: (T) -> AuthTokensResponse) = onSuccess {
         val (access, refresh) = selector(it)

@@ -14,12 +14,15 @@ import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
+import java.util.*
 
 @Composable
 @Destination
 fun ProductDetailsScreen(
+    id: UUID,
     navigator: DestinationsNavigator,
-) = MVIComposable(getViewModel<ProductDetailsViewModel>()) { state ->
+) = MVIComposable(getViewModel<ProductDetailsViewModel> { parametersOf(id) }) { state ->
 
     consume { action ->
         when (action) {

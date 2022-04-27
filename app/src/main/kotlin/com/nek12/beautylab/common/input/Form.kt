@@ -80,6 +80,8 @@ sealed class Form(
         val LENGTH_RANGE = 4..32
     }
 
+    object Number : Form(NonEmpty, DigitsOnly)
+
     data class Name(
         val lengthRange: IntRange = DEFAULT_LENGTH_RANGE,
     ) : Form(

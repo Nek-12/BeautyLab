@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
@@ -29,7 +30,7 @@ fun BLErrorView(
         BLIcon(asset = GMRIcon.gmr_error_outline, size = 64.dp)
         Text(R.string.error_occurred.string())
         BLSpacer()
-        Text(R.string.error_details_template.string(message))
+        Text(R.string.error_details_template.string(message), textAlign = TextAlign.Center)
         onRetry?.let {
             Button(onClick = it) {
                 Text(R.string.retry.string())

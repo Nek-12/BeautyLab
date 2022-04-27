@@ -7,6 +7,7 @@ import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.screens.cart.CartAction.*
 import com.nek12.beautylab.ui.screens.cart.CartState.*
+import com.nek12.beautylab.ui.widgets.BLEmptyView
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
@@ -38,10 +39,6 @@ private fun MVIIntentScope<CartIntent, CartAction>.CartContent(state: CartState)
     }
 }
 
-@Composable
-fun BLEmptyView() {
-    TODO("Not yet implemented")
-}
 
 @Composable
 @Preview(name = "Cart", showSystemUi = true, showBackground = true)

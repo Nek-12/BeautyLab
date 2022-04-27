@@ -11,7 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FilterChip
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -22,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.nek12.androidutils.compose.string
@@ -36,6 +34,7 @@ import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLSpacer
 import com.nek12.beautylab.ui.widgets.BLUserProfileCard
+import com.nek12.beautylab.ui.widgets.ChipFlowRow
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.navigateTo
@@ -72,7 +71,7 @@ fun HomeScreen(
                 popUpTo(LoginScreenDestination.route)
                 launchSingleTop = true
             }
-            is HomeAction.GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination())
+            is HomeAction.GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.id))
             is HomeAction.GoToProductList -> navController.navigateTo(ProductListScreenDestination(action.filters))
             is HomeAction.GoToProfile -> navController.navigateTo(ProfileScreenDestination())
         }
@@ -83,17 +82,17 @@ fun HomeScreen(
         scaffoldState = scaffoldState,
         bottomBar = { BLBottomBar(navController) },
     ) { padding ->
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(padding)
-                .padding(4.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.Start,
-        ) {
-            when (state) {
-                is HomeState.DisplayingContent -> {
+        when (state) {
+            is HomeState.DisplayingContent -> {
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(padding)
+                        .padding(4.dp)
+                        .verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.Start,
+                ) {
                     BLUserProfileCard(state.userName, state.userBalance)
                     BLSpacer()
 
@@ -111,30 +110,19 @@ fun HomeScreen(
                     BLSpacer()
 
                     Text(R.string.explore_brands.string(), style = MaterialTheme.typography.h5)
-                    FlowRow(mainAxisSpacing = 4.dp, crossAxisSpacing = 4.dp) {
-                        state.brands.forEach {
-                            FilterChip(selected = false, onClick = { send(HomeIntent.ClickedBrand(it)) }) {
-                                Text(it.name, style = MaterialTheme.typography.caption)
-                            }
-                        }
-                    }
+                    ChipFlowRow(state.brands, { it.name }, { send(HomeIntent.ClickedBrand(it)) })
                     BLSpacer()
 
                     Text(R.string.explore_categories.string(), style = MaterialTheme.typography.h5)
-                    FlowRow(mainAxisSpacing = 4.dp, crossAxisSpacing = 4.dp) {
-                        state.categories.forEach {
-                            FilterChip(selected = false, onClick = { send(HomeIntent.ClickedCategory(it)) }) {
-                                Text(it.name, style = MaterialTheme.typography.caption)
-                            }
-                        }
-                    }
+                    ChipFlowRow(state.categories, { it.name }, { send(HomeIntent.ClickedCategory(it)) })
+                    BLSpacer()
                 }
-                is HomeState.Error -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    BLErrorView(state.text.string()) //Todo retry
-                }
-                is HomeState.Loading -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
+            }
+            is HomeState.Error -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                BLErrorView(state.text.string(), onRetry = { send(HomeIntent.ClickedRetry) }) //Todo retry
+            }
+            is HomeState.Loading -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
             }
         }
     }

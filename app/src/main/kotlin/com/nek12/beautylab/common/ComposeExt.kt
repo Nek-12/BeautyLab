@@ -14,6 +14,7 @@ import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
 import com.nek12.beautylab.core.model.net.Color
 import com.nek12.beautylab.core.model.net.SortDirection
+import com.nek12.beautylab.core.model.net.product.GetProductsFilteredRequest
 import com.nek12.beautylab.core.model.net.product.ProductSort
 import com.nek12.beautylab.ui.theme.BeautyLabTheme
 import com.nek12.flowMVI.MVIAction
@@ -79,6 +80,19 @@ data class FiltersPayload(
     val createdAfter: Instant? = null,
     val minAmountAvailable: Long = 0,
 ) : Parcelable {
+
+    fun toRequest() = GetProductsFilteredRequest(
+        brandId,
+        categoryId,
+        minDiscount,
+        maxDiscount,
+        minPrice,
+        maxPrice,
+        isActive,
+        createdBefore,
+        createdAfter,
+        minAmountAvailable
+    )
 
     @Composable
     fun sortRepresentation(): String = R.string.sort_template.string(

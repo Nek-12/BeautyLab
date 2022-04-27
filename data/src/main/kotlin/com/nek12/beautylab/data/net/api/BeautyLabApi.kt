@@ -2,9 +2,11 @@ package com.nek12.beautylab.data.net.api
 
 import com.nek12.androidutils.extensions.core.ApiResult
 import com.nek12.beautylab.core.model.net.PageResponse
+import com.nek12.beautylab.core.model.net.brand.BrandResponse
 import com.nek12.beautylab.core.model.net.mobile.MobileViewResponse
 import com.nek12.beautylab.core.model.net.product.GetProductResponse
 import com.nek12.beautylab.core.model.net.product.GetProductsFilteredRequest
+import com.nek12.beautylab.core.model.net.product.category.ProductCategoryResponse
 import com.nek12.beautylab.core.model.net.user.EditUserResponse
 import com.nek12.beautylab.core.model.net.user.LoginRequest
 import com.nek12.beautylab.core.model.net.user.SignupRequest
@@ -29,12 +31,16 @@ class BeautyLabApi(client: HttpClient) : BaseApi(client) {
         pageSize: Int = PAGE_SIZE,
         sort: String? = null,
         sortDirection: String? = null,
-    ): ApiResult<PageResponse<GetProductResponse>> = get("/product/", request) {
+    ): ApiResult<PageResponse<GetProductResponse>> = get("product/", request) {
         parameter("page", page)
         parameter("per_page", pageSize)
         parameter("sort", sort)
         parameter("$sort.dir", sortDirection)
     }
+
+    suspend fun getBrands() = get<List<BrandResponse>, Any>("brand/")
+
+    suspend fun getCategories() = get<List<ProductCategoryResponse>, Any>("product/category/")
 
     companion object {
 

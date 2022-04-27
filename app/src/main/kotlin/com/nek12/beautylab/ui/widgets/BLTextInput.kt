@@ -1,8 +1,16 @@
 package com.nek12.beautylab.ui.widgets
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +48,7 @@ fun BLTextInput(
         OutlinedTextField(
             value = input.value,
             onValueChange = onTextChange,
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier,
             enabled = enabled,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,

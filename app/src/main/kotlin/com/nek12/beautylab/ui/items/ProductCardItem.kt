@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Chip
@@ -21,9 +21,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -72,7 +74,7 @@ fun ProductCardItem(
 ) {
     Card(onClick = onClick, modifier = modifier
         .padding(8.dp)
-        .sizeIn(maxHeight = 128.dp)) {
+        .height(152.dp)) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -82,47 +84,62 @@ fun ProductCardItem(
                 model = request,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(96.dp)
                     .padding(8.dp)
+                    .size(80.dp)
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
             )
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(item.title,
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start,
+            ) {
+
+                Text(
+                    item.title,
                     style = MaterialTheme.typography.subtitle1,
-                    modifier = Modifier.padding(8.dp),
-                    maxLines = 1)
+                    modifier = Modifier.padding(4.dp),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
 
-                val price = buildAnnotatedString {
-                    if (item.price == item.priceWithDiscount) {
-                        append(R.string.price_template.string(item.price))
-                    } else {
-                        withStyle(SpanStyle(
-                            textDecoration = TextDecoration.LineThrough,
-                            color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
-                        )) {
-                            append(R.string.price_template.string(item.price))
-                        }
-                        append(" ")
-                        withStyle(SpanStyle(color = MaterialTheme.colors.error)) {
-                            append(R.string.price_template.string(item.priceWithDiscount))
-                        }
-                    }
-                }
-
-                Text(price)
+                Text(annotatedPrice(item.price, item.priceWithDiscount))
 
                 Text(R.string.amount_template.string(item.amountAvailable))
 
-                Row(Modifier.fillMaxWidth(), Arrangement.spacedBy(4.dp), Alignment.CenterVertically) {
-                    Chip({}) {
-                        Text(item.brandName, style = MaterialTheme.typography.caption)
-                    }
-                    Chip({}) {
-                        Text(item.categoryName, style = MaterialTheme.typography.caption)
-                    }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Chip({}) { Text(item.brandName, style = MaterialTheme.typography.caption) }
+                    Chip({}) { Text(item.categoryName, style = MaterialTheme.typography.caption) }
                 }
+            }
+
+        }
+    }
+}
+
+
+@Composable
+fun annotatedPrice(price: Double, priceWithDiscount: Double): AnnotatedString {
+    return buildAnnotatedString {
+        if (price == priceWithDiscount) {
+            append(R.string.price_template.string(price))
+        } else {
+            withStyle(SpanStyle(
+                textDecoration = TextDecoration.LineThrough,
+                color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
+            )) {
+                append(R.string.price_template.string(price))
+            }
+            append(" ")
+            withStyle(SpanStyle(color = MaterialTheme.colors.error)) {
+                append(R.string.price_template.string(priceWithDiscount))
             }
         }
     }

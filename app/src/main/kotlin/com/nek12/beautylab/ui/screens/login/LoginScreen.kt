@@ -1,7 +1,19 @@
 package com.nek12.beautylab.ui.screens.login
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,9 +51,8 @@ fun LoginScreen(
     consume { action ->
         when (action) {
             is GoToMain -> navigator.navigate(HomeScreenDestination()) {
-                popUpTo(HomeScreenDestination.route) {
-                    inclusive = true
-                }
+                launchSingleTop = true
+                popUpTo(HomeScreenDestination.route)
             }
             GoToSignUp -> navigator.navigate(SignUpScreenDestination())
             is ShowSnackbar -> snackbar(action.text.string(context), scaffoldState, SnackbarDuration.Long)
@@ -70,12 +81,14 @@ fun LoginScreen(
                         onTextChange = { send(LoginIntent.UsernameChanged(it)) },
                         lengthRange = Form.Username.DEFAULT_LENGTH_RANGE,
                         label = R.string.username.string(),
+                        modifier = Modifier.fillMaxWidth(),
                     )
                     BLTextInput(
                         input = state.password,
                         onTextChange = { send(LoginIntent.PasswordChanged(it)) },
                         lengthRange = Form.Password.LENGTH_RANGE,
                         label = R.string.password.string(),
+                        modifier = Modifier.fillMaxWidth(),
                     )
                     Row(Modifier
                         .padding(vertical = 32.dp)
