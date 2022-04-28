@@ -12,7 +12,7 @@ object Versions {
     const val kotlin = "1.6.20"
     const val datetime = "0.3.2"
     const val ksp = "1.0.4"
-    const val activity = "1.6.0-alpha01"
+    const val activity = "1.5.0-beta01" //do NOT use alpha until Tiramisu release
     const val serialization = "1.3.2"
     const val room = "2.5.0-alpha01"
     const val koin = "3.2.0-beta-1"
