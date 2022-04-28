@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
@@ -22,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
 import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
 import com.nek12.beautylab.ui.items.ProductCardItem
@@ -30,9 +31,17 @@ import com.nek12.beautylab.ui.screens.destinations.LoginScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductListScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProfileScreenDestination
-import com.nek12.beautylab.ui.screens.home.HomeAction.*
-import com.nek12.beautylab.ui.screens.home.HomeIntent.*
-import com.nek12.beautylab.ui.screens.home.HomeState.*
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToLogIn
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductDetails
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductList
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProfile
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedBrand
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedProduct
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedRetry
+import com.nek12.beautylab.ui.screens.home.HomeState.DisplayingContent
+import com.nek12.beautylab.ui.screens.home.HomeState.Error
+import com.nek12.beautylab.ui.screens.home.HomeState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLSpacer
@@ -47,16 +56,27 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun ProductPager(items: List<ProductCardItem>, onClick: (ProductCardItem) -> Unit) {
-    HorizontalPager(
-        modifier = Modifier.fillMaxWidth(),
-        count = items.size,
-        contentPadding = PaddingValues(4.dp),
-        key = { items[it].id }
-    ) { page ->
-        val item = items[page]
-
-        ProductCardItem(item, onClick = { onClick(item) })
+    LazyRow(
+            contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+    ) {
+        items(items, key = { it.id }) { item ->
+            ProductCardItem(item, onClick = { onClick(item) })
+        }
     }
+
+// Disabled due to poor performance
+//    HorizontalPager(
+//        modifier = Modifier.fillMaxWidth(),
+//        count = items.size,
+//        contentPadding = PaddingValues(4.dp),
+//        key = { items[it].id }
+//    ) { page ->
+//        val item = items[page]
+//        ProductCardItem(item, onClick = { onClick(item) })
+//    }
 }
 
 @RootNavGraph(start = true)
@@ -92,14 +112,14 @@ fun HomeScreen(
             when (state) {
                 is DisplayingContent -> {
                     Column(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(4.dp)
-                            .verticalScroll(rememberScrollState()),
+                            Modifier
+                                .fillMaxSize()
+                                .padding(4.dp)
+                                .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.Start,
                     ) {
-                        BLUserProfileCard(state.userName, state.userBalance)
+                        BLUserProfileCard(state.userName, state.userBalance, Modifier.padding(8.dp))
                         BLSpacer()
 
                         Text(R.string.popular_products_title.string(), style = MaterialTheme.typography.h5)
