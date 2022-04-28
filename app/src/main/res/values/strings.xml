@@ -63,4 +63,11 @@
     <string name="mininum_amount_available">Minimum items available</string>
     <string name="number">number</string>
     <string name="discount_template">Discount: %1$d %% - %2$d %%</string>
+    <string name="favorites">Favorites</string>
+    <string name="welcome_template">Welcome, %s</string>
+    <string name="bonus_balance_template">Balance: %1$.2f</string>
+    <string name="product_image_cd">Product Image</string>
+    <string name="description">Description</string>
+    <string name="buy">Buy</string>
+    <string name="properties">Properties</string>
 </resources>

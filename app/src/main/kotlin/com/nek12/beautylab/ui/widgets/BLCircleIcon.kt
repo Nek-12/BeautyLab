@@ -15,21 +15,22 @@ import com.nek12.beautylab.common.GMRIcon
 
 @Composable
 fun BLCircleIcon(
-    icon: IIcon,
-    modifier: Modifier = Modifier,
-    color: Color,
-    elevation: Dp = 0.dp,
-    size: Dp = 44.dp,
+        icon: IIcon,
+        modifier: Modifier = Modifier,
+        color: Color,
+        elevation: Dp = 0.dp,
+        size: Dp = 44.dp,
+        onClick: (() -> Unit)? = null,
 ) {
     Surface(
-        modifier = modifier
-            .size(size),
-        shape = CircleShape,
-        color = color.copy(alpha = 0.2f),
-        contentColor = color,
-        elevation = elevation,
-        border = null,
-        content = { BLIcon(asset = icon, tint = color, modifier = Modifier.padding(4.dp)) },
+            modifier = modifier
+                .size(size),
+            shape = CircleShape,
+            color = color.copy(alpha = 0.2f),
+            contentColor = color,
+            elevation = elevation,
+            border = null,
+            content = { BLIcon(asset = icon, tint = color, modifier = Modifier.padding(4.dp), onClick = onClick) },
     )
 }
 

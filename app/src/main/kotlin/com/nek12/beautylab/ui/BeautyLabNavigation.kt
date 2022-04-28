@@ -15,7 +15,7 @@ import com.mikepenz.iconics.typeface.IIcon
 import com.nek12.beautylab.R
 import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.ui.screens.NavGraphs
-import com.nek12.beautylab.ui.screens.destinations.CartScreenDestination
+import com.nek12.beautylab.ui.screens.destinations.FavoritesScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.HomeScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.NewsScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductListScreenDestination
@@ -64,6 +64,6 @@ enum class BottomBarDestination(
     Home(HomeScreenDestination, GMRIcon.gmr_home, R.string.home),
     Products(ProductListScreenDestination(), GMRIcon.gmr_shopping_bag, R.string.products),
     Profile(ProfileScreenDestination, GMRIcon.gmr_account_circle, R.string.account),
-    Cart(CartScreenDestination, GMRIcon.gmr_shopping_cart, R.string.cart),
+    Favorites(FavoritesScreenDestination, GMRIcon.gmr_favorite, R.string.favorites),
     News(NewsScreenDestination, GMRIcon.gmr_receipt_long, R.string.news),
 }

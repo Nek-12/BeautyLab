@@ -1,6 +1,6 @@
 package com.nek12.beautylab.di
 
-import com.nek12.beautylab.ui.screens.cart.CartViewModel
+import com.nek12.beautylab.ui.screens.favorites.FavoritesViewModel
 import com.nek12.beautylab.ui.screens.home.HomeViewModel
 import com.nek12.beautylab.ui.screens.login.LoginViewModel
 import com.nek12.beautylab.ui.screens.news.NewsViewModel
@@ -18,7 +18,7 @@ val appModule = module {
     viewModel { LoginViewModel(get(), get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { CartViewModel() }
+    viewModel { FavoritesViewModel() }
     viewModel { NewsViewModel(get()) }
     viewModel { OrdersViewModel() }
     viewModel { params -> ProductListViewModel(params.getOrNull(), get()) }
