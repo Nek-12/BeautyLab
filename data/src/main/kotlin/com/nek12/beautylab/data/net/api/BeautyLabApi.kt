@@ -4,6 +4,7 @@ import com.nek12.androidutils.extensions.core.ApiResult
 import com.nek12.beautylab.core.model.net.PageResponse
 import com.nek12.beautylab.core.model.net.brand.BrandResponse
 import com.nek12.beautylab.core.model.net.mobile.MobileViewResponse
+import com.nek12.beautylab.core.model.net.news.GetNewsResponse
 import com.nek12.beautylab.core.model.net.product.GetProductResponse
 import com.nek12.beautylab.core.model.net.product.GetProductsFilteredRequest
 import com.nek12.beautylab.core.model.net.product.category.ProductCategoryResponse
@@ -36,6 +37,14 @@ class BeautyLabApi(client: HttpClient) : BaseApi(client) {
         parameter("per_page", pageSize)
         parameter("sort", sort)
         parameter("$sort.dir", sortDirection)
+    }
+
+    suspend fun news(
+        page: Int? = null,
+        pageSize: Int = PAGE_SIZE,
+    ) = get<PageResponse<GetNewsResponse>, Any>("news/") {
+        parameter("page", page)
+        parameter("per_page", pageSize)
     }
 
     suspend fun getBrands() = get<List<BrandResponse>, Any>("brand/")

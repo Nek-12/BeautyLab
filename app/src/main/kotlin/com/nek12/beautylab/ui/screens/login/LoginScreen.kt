@@ -1,5 +1,7 @@
 package com.nek12.beautylab.ui.screens.login
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,7 +27,6 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
-import com.nek12.beautylab.ui.screens.destinations.HomeScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.SignUpScreenDestination
 import com.nek12.beautylab.ui.screens.login.LoginAction.*
 import com.nek12.beautylab.ui.widgets.BLIcon
@@ -33,12 +34,10 @@ import com.nek12.beautylab.ui.widgets.BLTextInput
 import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
 
 
-@RootNavGraph(start = true)
 @Destination
 @Composable
 fun LoginScreen(
@@ -50,13 +49,14 @@ fun LoginScreen(
 
     consume { action ->
         when (action) {
-            is GoToMain -> navigator.navigate(HomeScreenDestination()) {
-                launchSingleTop = true
-                popUpTo(HomeScreenDestination.route)
-            }
+            is GoBack -> navigator.navigateUp()
             GoToSignUp -> navigator.navigate(SignUpScreenDestination())
             is ShowSnackbar -> snackbar(action.text.string(context), scaffoldState, SnackbarDuration.Long)
         }
+    }
+
+    BackHandler {
+        (context as? Activity)?.finish()
     }
 
     Scaffold(

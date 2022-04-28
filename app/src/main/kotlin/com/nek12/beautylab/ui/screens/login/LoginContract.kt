@@ -16,7 +16,7 @@ sealed class LoginState : MVIState {
 @Immutable
 sealed class LoginAction : MVIAction {
     data class ShowSnackbar(val text: Text) : LoginAction()
-    object GoToMain : LoginAction()
+    object GoBack : LoginAction()
     object GoToSignUp : LoginAction()
 }
 

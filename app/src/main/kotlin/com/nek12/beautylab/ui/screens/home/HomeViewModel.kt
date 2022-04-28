@@ -18,13 +18,7 @@ class HomeViewModel(
     override fun recover(from: Exception) = HomeState.Error(from.genericMessage)
 
     init {
-
-        if (!authManager.isLoggedIn) {
-            send(HomeAction.GoToLogIn)
-        } else {
-            launchLoadData()
-        }
-
+        launchLoadData()
     }
 
     override suspend fun reduce(intent: HomeIntent): HomeState = when (intent) {

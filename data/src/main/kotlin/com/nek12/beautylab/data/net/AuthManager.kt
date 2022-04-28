@@ -2,6 +2,8 @@ package com.nek12.beautylab.data.net
 
 import android.content.Context
 import com.nek12.androidutils.extensions.core.ApiResult
+import com.nek12.androidutils.extensions.core.isValid
+import com.nek12.androidutils.extensions.core.onError
 import com.nek12.androidutils.extensions.core.orNull
 import com.nek12.androidutils.extensions.core.wrap
 import com.nek12.beautylab.core.BACKEND_URL
@@ -17,7 +19,7 @@ import io.ktor.http.*
 
 class AuthManager(private val context: Context) {
 
-    val isLoggedIn get() = context.accessToken != null && context.refreshToken != null
+    val isLoggedIn get() = context.accessToken.isValid && context.refreshToken.isValid
 
     fun saveTokens(accessToken: String, refreshToken: String) {
         context.accessToken = accessToken
@@ -32,6 +34,7 @@ class AuthManager(private val context: Context) {
             setBody(RefreshTokenRequest(context.refreshToken ?: return null))
         }.body<AuthTokensResponse>()
     }
+        .onError { reset() }
         .orNull()
         ?.run { BearerTokens(accessToken, refreshToken) }
         ?.also { saveTokens(it.accessToken, it.refreshToken) }

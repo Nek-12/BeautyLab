@@ -10,8 +10,7 @@ import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.data.util.ApiError
 import com.nek12.beautylab.ui.screens.login.LoginIntent.*
-import com.nek12.beautylab.ui.screens.login.LoginState.AcceptingInput
-import com.nek12.beautylab.ui.screens.login.LoginState.Loading
+import com.nek12.beautylab.ui.screens.login.LoginState.*
 import com.nek12.flowMVI.android.MVIViewModel
 
 class LoginViewModel(
@@ -23,7 +22,7 @@ class LoginViewModel(
 
     init {
         if (authManager.isLoggedIn) {
-            send(LoginAction.GoToMain)
+            send(LoginAction.GoBack)
         }
     }
 
@@ -56,7 +55,7 @@ class LoginViewModel(
 
     private fun launchLogin(username: String, password: String) = launchForState {
         repo.logIn(username, password).fold(
-            onSuccess = { send(LoginAction.GoToMain) },
+            onSuccess = { send(LoginAction.GoBack) },
             onError = {
                 send(LoginAction.ShowSnackbar(
                     if (it is ApiError.NotFound) {

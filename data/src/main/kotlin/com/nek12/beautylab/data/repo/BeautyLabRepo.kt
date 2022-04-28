@@ -12,6 +12,7 @@ import com.nek12.beautylab.core.model.net.user.AuthTokensResponse
 import com.nek12.beautylab.core.model.net.user.LoginRequest
 import com.nek12.beautylab.core.model.net.user.SignupRequest
 import com.nek12.beautylab.data.net.AuthManager
+import com.nek12.beautylab.data.net.NewsPagingSource
 import com.nek12.beautylab.data.net.ProductPagingSource
 import com.nek12.beautylab.data.net.api.BeautyLabApi
 
@@ -38,6 +39,11 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
     suspend fun getBrands() = api.getBrands()
 
     suspend fun getCategories() = api.getCategories()
+
+    fun getNews() = Pager(
+        config = PagingConfig(BeautyLabApi.PAGE_SIZE),
+        pagingSourceFactory = { NewsPagingSource(api) },
+    ).flow
 
     private fun <T> ApiResult<T>.saveTokens(selector: (T) -> AuthTokensResponse) = onSuccess {
         val (access, refresh) = selector(it)

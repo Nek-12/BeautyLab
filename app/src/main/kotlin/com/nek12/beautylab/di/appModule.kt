@@ -19,7 +19,7 @@ val appModule = module {
     viewModel { SignUpViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
     viewModel { CartViewModel() }
-    viewModel { NewsViewModel()}
+    viewModel { NewsViewModel(get()) }
     viewModel { OrdersViewModel() }
     viewModel { params -> ProductListViewModel(params.getOrNull(), get()) }
     viewModel { ProductDetailsViewModel() }

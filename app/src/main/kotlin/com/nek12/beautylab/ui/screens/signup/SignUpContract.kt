@@ -19,7 +19,6 @@ sealed class SignUpState : MVIState {
 
 sealed class SignUpAction : MVIAction {
     data class ShowSnackbar(val text: Text) : SignUpAction()
-    object GoToMain : SignUpAction()
     object GoBack : SignUpAction()
 }
 

@@ -25,7 +25,6 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
-import com.nek12.beautylab.ui.screens.destinations.HomeScreenDestination
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.*
 import com.nek12.beautylab.ui.screens.signup.SignUpState.*
 import com.nek12.beautylab.ui.widgets.BLIcon
@@ -48,13 +47,8 @@ fun SignUpScreen(
 
     consume { action ->
         when (action) {
-            is GoToMain -> navigator.navigate(HomeScreenDestination()) {
-                popUpTo(HomeScreenDestination.route) {
-                    inclusive = true
-                }
-            }
             is ShowSnackbar -> snackbar(action.text.string(context), scaffoldState, SnackbarDuration.Long)
-            GoBack -> navigator.navigateUp()
+            is GoBack -> navigator.navigateUp()
         }
     }
 

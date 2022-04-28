@@ -6,14 +6,12 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.input.Input
-import com.nek12.beautylab.common.input.Input.Empty
-import com.nek12.beautylab.common.input.Input.Invalid
+import com.nek12.beautylab.common.input.Input.*
 import com.nek12.beautylab.common.input.ValidationError
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.*
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.*
-import com.nek12.beautylab.ui.screens.signup.SignUpState.AcceptingInput
-import com.nek12.beautylab.ui.screens.signup.SignUpState.Loading
+import com.nek12.beautylab.ui.screens.signup.SignUpState.*
 import com.nek12.flowMVI.android.MVIViewModel
 
 class SignUpViewModel(
@@ -68,7 +66,7 @@ class SignUpViewModel(
 
     private fun launchSignUp(username: String, name: String, password: String) = launchForState {
         repo.signUp(username, name, password).fold(
-            onSuccess = { send(GoToMain) },
+            onSuccess = { send(GoBack) },
             onError = { send(ShowSnackbar(it.genericMessage)) }
         )
         AcceptingInput(
