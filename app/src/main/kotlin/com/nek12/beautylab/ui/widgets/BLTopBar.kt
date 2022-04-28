@@ -21,10 +21,12 @@ fun BLTopBar(
         backgroundColor = Color.Transparent
     ) {
         Text(
-            title,
-            style = MaterialTheme.typography.h5,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
+                title,
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                softWrap = true,
+                maxLines = 2
         )
     }
 }
