@@ -32,15 +32,18 @@ fun SliderWithLabel(
 
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
 
-            val offset by animateDpAsState(targetValue = getSliderOffset(
-                value = value,
-                valueRange = valueRange,
-                boxWidth = maxWidth,
-                labelWidth = labelMinWidth + 4.dp // Since we use a padding of 2.dp on either sides of the SliderLabel, we need to account for this in our calculation
-            ))
+            val offset by animateDpAsState(
+                targetValue = getSliderOffset(
+                    value = value,
+                    valueRange = valueRange,
+                    boxWidth = maxWidth,
+                    labelWidth = labelMinWidth + 4.dp // Since we use a padding of 2.dp on either sides of the SliderLabel, we need to account for this in our calculation
+                )
+            )
 
             val endValueText =
-                if (!finiteEnd && value >= valueRange.endInclusive) "${value.toInt()}+" else value.toInt().toString()
+                if (!finiteEnd && value >= valueRange.endInclusive) "${value.toInt()}+" else value.toInt()
+                    .toString()
 
             //label
             Text(

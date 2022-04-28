@@ -37,7 +37,7 @@ data class NewsCardItem(
     val id: UUID,
 ) {
 
-    constructor(response: GetNewsResponse) : this(
+    constructor(response: GetNewsResponse): this(
         response.title,
         response.content,
         response.imageUrl,

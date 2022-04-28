@@ -2,7 +2,14 @@ package com.nek12.beautylab.common.input
 
 import android.util.Patterns
 import com.nek12.beautylab.R
-import com.nek12.beautylab.common.input.Rules.*
+import com.nek12.beautylab.common.input.Rules.DigitsAndLettersOnly
+import com.nek12.beautylab.common.input.Rules.DigitsOnly
+import com.nek12.beautylab.common.input.Rules.LengthRange
+import com.nek12.beautylab.common.input.Rules.Matches
+import com.nek12.beautylab.common.input.Rules.NoDigits
+import com.nek12.beautylab.common.input.Rules.NonEmpty
+import com.nek12.beautylab.common.input.Rules.Regex
+import com.nek12.beautylab.common.input.Rules.TimeOnly
 
 sealed class Form(
     private vararg val rules: Rule,
@@ -14,13 +21,13 @@ sealed class Form(
             ifRight = { Input.Valid(it) },
         )
 
-    object Email : Form(
+    object Email: Form(
         NonEmpty,
         LengthRange(1..250),
         Matches(Patterns.EMAIL_ADDRESS, R.string.email),
     )
 
-    data class Title(val length: IntRange = DEFAULT_LENGTH_RANGE) : Form(
+    data class Title(val length: IntRange = DEFAULT_LENGTH_RANGE): Form(
         NonEmpty,
         LengthRange(length),
         NoDigits,
@@ -32,7 +39,7 @@ sealed class Form(
         }
     }
 
-    data class Description(val range: IntRange = DEFAULT_LENGTH_RANGE) : Form(
+    data class Description(val range: IntRange = DEFAULT_LENGTH_RANGE): Form(
         LengthRange(range),
     ) {
 
@@ -42,11 +49,11 @@ sealed class Form(
         }
     }
 
-    object Time : Form(TimeOnly)
+    object Time: Form(TimeOnly)
 
     data class Search(
         val lengthRange: IntRange = DEFAULT_LENGTH_RANGE,
-    ) : Form(
+    ): Form(
         NonEmpty,
         LengthRange(lengthRange),
         DigitsAndLettersOnly,
@@ -60,7 +67,7 @@ sealed class Form(
 
     data class Username(
         val lengthRange: IntRange = DEFAULT_LENGTH_RANGE,
-    ) : Form(
+    ): Form(
         NonEmpty,
         LengthRange(lengthRange),
         DigitsAndLettersOnly,
@@ -72,7 +79,7 @@ sealed class Form(
         }
     }
 
-    object Password : Form(
+    object Password: Form(
         NonEmpty,
         Regex("^[a-zA-Z0-9_.,!@#$%^&*]{4,32}$", R.string.password)
     ) {
@@ -80,11 +87,11 @@ sealed class Form(
         val LENGTH_RANGE = 4..32
     }
 
-    object Number : Form(NonEmpty, DigitsOnly)
+    object Number: Form(NonEmpty, DigitsOnly)
 
     data class Name(
         val lengthRange: IntRange = DEFAULT_LENGTH_RANGE,
-    ) : Form(
+    ): Form(
         NonEmpty,
         LengthRange(lengthRange),
     ) {

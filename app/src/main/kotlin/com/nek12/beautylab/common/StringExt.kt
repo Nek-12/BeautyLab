@@ -11,7 +11,7 @@ import java.time.Duration
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-inline val <reified T : Throwable?> T.genericMessage: Text
+inline val <reified T: Throwable?> T.genericMessage: Text
     inline get() = when (this) {
         is ApiError.NoInternet -> Resource(R.string.no_internet_error)
         is ApiError.SerializationError, is ApiError.Unknown -> Resource(R.string.internal_error, message ?: toString())

@@ -50,7 +50,7 @@ data class ProductCardItem(
     val id: UUID,
 ) {
 
-    constructor(product: GetProductResponse) : this(
+    constructor(product: GetProductResponse): this(
         product.name,
         product.imageUrl?.toUri(),
         product.amountAvailable,
@@ -72,9 +72,11 @@ fun ProductCardItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(onClick = onClick, modifier = modifier
-        .padding(8.dp)
-        .height(152.dp)) {
+    Card(
+        onClick = onClick, modifier = modifier
+            .padding(8.dp)
+            .height(152.dp)
+    ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -131,10 +133,12 @@ fun annotatedPrice(price: Double, priceWithDiscount: Double): AnnotatedString {
         if (price == priceWithDiscount) {
             append(R.string.price_template.string(price))
         } else {
-            withStyle(SpanStyle(
-                textDecoration = TextDecoration.LineThrough,
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
-            )) {
+            withStyle(
+                SpanStyle(
+                    textDecoration = TextDecoration.LineThrough,
+                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
+                )
+            ) {
                 append(R.string.price_template.string(price))
             }
             append(" ")

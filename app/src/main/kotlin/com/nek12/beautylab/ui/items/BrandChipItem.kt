@@ -8,7 +8,7 @@ data class BrandChipItem(
     val id: UUID,
 ) {
 
-    constructor(response: BrandResponse) : this(
+    constructor(response: BrandResponse): this(
         response.name, response.id
     )
 }

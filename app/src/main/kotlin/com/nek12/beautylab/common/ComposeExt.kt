@@ -54,7 +54,7 @@ fun Color.toComposeColor() = androidx.compose.ui.graphics.Color(value)
 
 @OptIn(ExperimentalTypeInference::class)
 @Composable
-inline fun <A : MVIAction, I : MVIIntent> ScreenPreview(
+inline fun <A: MVIAction, I: MVIIntent> ScreenPreview(
     darkMode: Boolean = false,
     @BuilderInference
     crossinline content: @Composable MVIIntentScope<I, A>.() -> Unit,
@@ -79,7 +79,7 @@ data class FiltersPayload(
     val createdBefore: Instant = Instant.now(),
     val createdAfter: Instant? = null,
     val minAmountAvailable: Long = 0,
-) : Parcelable {
+): Parcelable {
 
     fun toRequest() = GetProductsFilteredRequest(
         brandId,

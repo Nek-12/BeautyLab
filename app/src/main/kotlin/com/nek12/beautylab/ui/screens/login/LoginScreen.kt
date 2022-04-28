@@ -28,7 +28,9 @@ import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
 import com.nek12.beautylab.ui.screens.destinations.SignUpScreenDestination
-import com.nek12.beautylab.ui.screens.login.LoginAction.*
+import com.nek12.beautylab.ui.screens.login.LoginAction.GoBack
+import com.nek12.beautylab.ui.screens.login.LoginAction.GoToSignUp
+import com.nek12.beautylab.ui.screens.login.LoginAction.ShowSnackbar
 import com.nek12.beautylab.ui.widgets.BLIcon
 import com.nek12.beautylab.ui.widgets.BLTextInput
 import com.nek12.beautylab.ui.widgets.BLTopBar
@@ -66,12 +68,14 @@ fun LoginScreen(
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(padding)) {
+            modifier = Modifier.padding(padding)
+        ) {
             when (state) {
                 is LoginState.AcceptingInput -> {
-                    Box(Modifier
-                        .fillMaxWidth()
-                        .heightIn(300.dp),
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .heightIn(300.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         BLIcon(asset = GMRIcon.gmr_spa, size = 64.dp)
@@ -90,11 +94,13 @@ fun LoginScreen(
                         label = R.string.password.string(),
                         modifier = Modifier.fillMaxWidth(),
                     )
-                    Row(Modifier
-                        .padding(vertical = 32.dp)
-                        .fillMaxWidth(),
+                    Row(
+                        Modifier
+                            .padding(vertical = 32.dp)
+                            .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceAround) {
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
                         Button({ send(LoginIntent.SignUpClicked) }) {
                             Text(R.string.sign_up.string())
                         }

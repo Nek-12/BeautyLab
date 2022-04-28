@@ -57,10 +57,10 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 private fun ProductPager(items: List<ProductCardItem>, onClick: (ProductCardItem) -> Unit) {
     LazyRow(
-            contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+        contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         items(items, key = { it.id }) { item ->
             ProductCardItem(item, onClick = { onClick(item) })
@@ -112,10 +112,10 @@ fun HomeScreen(
             when (state) {
                 is DisplayingContent -> {
                     Column(
-                            Modifier
-                                .fillMaxSize()
-                                .padding(4.dp)
-                                .verticalScroll(rememberScrollState()),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(4.dp)
+                            .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.Start,
                     ) {

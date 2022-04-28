@@ -15,9 +15,10 @@ import java.util.*
 
 
 @Immutable
-sealed class HomeState : MVIState {
-    object Loading : HomeState()
-    data class Error(val text: Text) : HomeState()
+sealed class HomeState: MVIState {
+
+    object Loading: HomeState()
+    data class Error(val text: Text): HomeState()
 
     data class DisplayingContent(
         val popularProducts: List<ProductCardItem>,
@@ -27,9 +28,9 @@ sealed class HomeState : MVIState {
         val brands: List<BrandChipItem>,
         val userName: String,
         val userBalance: Double,
-    ) : HomeState() {
+    ): HomeState() {
 
-        constructor(response: MobileViewResponse) : this(
+        constructor(response: MobileViewResponse): this(
             response.popularProducts.cards(),
             response.newProducts.cards(),
             response.mostDiscountedProducts.cards(),
@@ -42,17 +43,19 @@ sealed class HomeState : MVIState {
 }
 
 @Immutable
-sealed class HomeIntent : MVIIntent {
-    data class ClickedProduct(val item: ProductCardItem) : HomeIntent()
-    data class ClickedCategory(val item: CategoryChipItem) : HomeIntent()
-    data class ClickedBrand(val item: BrandChipItem) : HomeIntent()
-    object ClickedRetry : HomeIntent()
+sealed class HomeIntent: MVIIntent {
+
+    data class ClickedProduct(val item: ProductCardItem): HomeIntent()
+    data class ClickedCategory(val item: CategoryChipItem): HomeIntent()
+    data class ClickedBrand(val item: BrandChipItem): HomeIntent()
+    object ClickedRetry: HomeIntent()
 }
 
 @Immutable
-sealed class HomeAction : MVIAction {
-    data class GoToProductList(val filters: FiltersPayload) : HomeAction()
-    object GoToLogIn : HomeAction()
-    object GoToProfile : HomeAction()
-    data class GoToProductDetails(val id: UUID) : HomeAction()
+sealed class HomeAction: MVIAction {
+
+    data class GoToProductList(val filters: FiltersPayload): HomeAction()
+    object GoToLogIn: HomeAction()
+    object GoToProfile: HomeAction()
+    data class GoToProductDetails(val id: UUID): HomeAction()
 }

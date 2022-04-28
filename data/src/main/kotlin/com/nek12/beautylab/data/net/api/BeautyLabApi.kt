@@ -15,7 +15,7 @@ import com.nek12.beautylab.data.net.BaseApi
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class BeautyLabApi(client: HttpClient) : BaseApi(client) {
+class BeautyLabApi(client: HttpClient): BaseApi(client) {
 
     suspend fun signUp(request: SignupRequest): ApiResult<EditUserResponse> =
         post("auth/signup/", request)

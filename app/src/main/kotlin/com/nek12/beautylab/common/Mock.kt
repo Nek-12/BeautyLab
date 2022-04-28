@@ -12,16 +12,16 @@ import java.util.*
 object Mock {
 
     val category = ProductCategoryResponse(
-            "Category", "Beauty", UUID.randomUUID(),
+        "Category", "Beauty", UUID.randomUUID(),
     )
 
     val brand = BrandResponse(
-            UUID.randomUUID(), "Brand", Country.values().random()
+        UUID.randomUUID(), "Brand", Country.values().random()
     )
 
     val product = GetProductResponse(
-            "Product Name Long But Less than 64 symbols limit",
-            """
+        "Product Name Long But Less than 64 symbols limit",
+        """
             Scented candles Jiovanne with Orange flavor is one of our best products. It makes you lose all hope of knowing what is right for you and a whole new look and feel. It's also a great way to spend your waking hour, and it really goes with the colors for dinner or in a coffee shop. Our brandy or whiskey is a no-brainer.
 
             José-Clément
@@ -30,16 +30,16 @@ object Mock {
 
             Odessa is the French version of their Ardennes. This is the company's only real traditional style, in fact that's how I often spend my waking hours, but they also offer a slightly different look for the occasional coffee. You see, unlike many of our brands, you don't wear the brand name.
         """.trimIndent(),
-            null,
-            12384,
-            "Property 1, prop 2, prop 3",
-            833.004,
-            234.76,
-            category,
-            brand,
-            Color.values().random(),
-            Instant.now(),
-            UUID.randomUUID(),
+        null,
+        12384,
+        "Property 1, prop 2, prop 3",
+        833.004,
+        234.76,
+        category,
+        brand,
+        Color.values().random(),
+        Instant.now(),
+        UUID.randomUUID(),
     )
 
 }

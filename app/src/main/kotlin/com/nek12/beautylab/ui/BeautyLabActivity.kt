@@ -9,7 +9,7 @@ import androidx.core.view.WindowCompat
 import com.nek12.beautylab.ui.theme.BeautyLabTheme
 import org.koin.core.component.KoinComponent
 
-class BeautyLabActivity : ComponentActivity(), KoinComponent {
+class BeautyLabActivity: ComponentActivity(), KoinComponent {
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {

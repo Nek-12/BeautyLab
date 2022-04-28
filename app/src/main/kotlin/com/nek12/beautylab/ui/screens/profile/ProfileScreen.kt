@@ -5,8 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
-import com.nek12.beautylab.ui.screens.profile.ProfileAction.*
-import com.nek12.beautylab.ui.screens.profile.ProfileState.*
+import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoBack
+import com.nek12.beautylab.ui.screens.profile.ProfileState.Empty
+import com.nek12.beautylab.ui.screens.profile.ProfileState.Error
+import com.nek12.beautylab.ui.screens.profile.ProfileState.Loading
 import com.nek12.beautylab.ui.widgets.BLEmptyView
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.flowMVI.android.compose.MVIComposable

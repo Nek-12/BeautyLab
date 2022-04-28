@@ -17,8 +17,10 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.NewsCardItem
-import com.nek12.beautylab.ui.screens.news.NewsAction.*
-import com.nek12.beautylab.ui.screens.news.NewsState.*
+import com.nek12.beautylab.ui.screens.news.NewsAction.GoBack
+import com.nek12.beautylab.ui.screens.news.NewsState.DisplayingNews
+import com.nek12.beautylab.ui.screens.news.NewsState.Error
+import com.nek12.beautylab.ui.screens.news.NewsState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLTopBar

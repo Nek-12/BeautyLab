@@ -11,42 +11,42 @@ import java.time.ZonedDateTime
 import java.util.*
 
 @Immutable
-sealed class ProductDetailsState : MVIState {
+sealed class ProductDetailsState: MVIState {
 
     object Loading: ProductDetailsState()
     object Empty: ProductDetailsState()
     data class Error(val e: Throwable?): ProductDetailsState()
     data class DisplayingProduct(
-            val isFavorite: Boolean,
-            val title: String,
-            val description: String,
-            val imageUrl: String?,
-            val amountAvailable: Long,
-            val properties: String?,
-            val price: Double,
-            val priceWithDiscount: Double,
-            val categoryName: String,
-            val brandName: String,
-            val color: Color?,
-            val createdAt: ZonedDateTime,
-            val id: UUID,
-            val amountSelected: Int = 1,
+        val isFavorite: Boolean,
+        val title: String,
+        val description: String,
+        val imageUrl: String?,
+        val amountAvailable: Long,
+        val properties: String?,
+        val price: Double,
+        val priceWithDiscount: Double,
+        val categoryName: String,
+        val brandName: String,
+        val color: Color?,
+        val createdAt: ZonedDateTime,
+        val id: UUID,
+        val amountSelected: Int = 1,
     ): ProductDetailsState() {
 
         constructor(isFavorite: Boolean, response: GetProductResponse): this(
-                isFavorite,
-                response.name,
-                response.description,
-                response.imageUrl,
-                response.amountAvailable,
-                response.properties,
-                response.price,
-                response.priceWithDiscount,
-                response.category.name,
-                response.brand.name,
-                response.color?.value?.let { Color(it) },
-                response.createdAt.toZDT(),
-                response.id,
+            isFavorite,
+            response.name,
+            response.description,
+            response.imageUrl,
+            response.amountAvailable,
+            response.properties,
+            response.price,
+            response.priceWithDiscount,
+            response.category.name,
+            response.brand.name,
+            response.color?.value?.let { Color(it) },
+            response.createdAt.toZDT(),
+            response.id,
         )
 
 
@@ -56,10 +56,10 @@ sealed class ProductDetailsState : MVIState {
 }
 
 @Immutable
-sealed class ProductDetailsIntent : MVIIntent
+sealed class ProductDetailsIntent: MVIIntent
 
 @Immutable
-sealed class ProductDetailsAction : MVIAction {
+sealed class ProductDetailsAction: MVIAction {
 
-    object GoBack : ProductDetailsAction()
+    object GoBack: ProductDetailsAction()
 }

@@ -9,20 +9,20 @@ import com.nek12.flowMVI.MVIState
 import kotlinx.coroutines.flow.Flow
 
 @Immutable
-sealed class NewsState : MVIState {
+sealed class NewsState: MVIState {
 
-    object Loading : NewsState()
-    data class Error(val e: Throwable?) : NewsState()
+    object Loading: NewsState()
+    data class Error(val e: Throwable?): NewsState()
     data class DisplayingNews(
         val data: Flow<PagingData<NewsCardItem>>,
-    ) : NewsState()
+    ): NewsState()
 }
 
 @Immutable
-sealed class NewsIntent : MVIIntent
+sealed class NewsIntent: MVIIntent
 
 @Immutable
-sealed class NewsAction : MVIAction {
+sealed class NewsAction: MVIAction {
 
-    object GoBack : NewsAction()
+    object GoBack: NewsAction()
 }

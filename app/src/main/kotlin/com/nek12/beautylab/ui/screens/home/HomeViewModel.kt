@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 class HomeViewModel(
     private val repo: BeautyLabRepo,
     private val authManager: AuthManager,
-) : MVIViewModel<HomeState, HomeIntent, HomeAction>() {
+): MVIViewModel<HomeState, HomeIntent, HomeAction>() {
 
     override val initialState get() = HomeState.Loading
     override fun recover(from: Exception) = HomeState.Error(from.genericMessage)
@@ -23,15 +23,23 @@ class HomeViewModel(
 
     override suspend fun reduce(intent: HomeIntent): HomeState = when (intent) {
         is HomeIntent.ClickedBrand -> withState<HomeState.DisplayingContent> {
-            send(HomeAction.GoToProductList(FiltersPayload(
-                brandId = intent.item.id
-            )))
+            send(
+                HomeAction.GoToProductList(
+                    FiltersPayload(
+                        brandId = intent.item.id
+                    )
+                )
+            )
             currentState
         }
         is HomeIntent.ClickedCategory -> withState<HomeState.DisplayingContent> {
-            send(HomeAction.GoToProductList(FiltersPayload(
-                categoryId = intent.item.id
-            )))
+            send(
+                HomeAction.GoToProductList(
+                    FiltersPayload(
+                        categoryId = intent.item.id
+                    )
+                )
+            )
             currentState
         }
         is HomeIntent.ClickedProduct -> withState<HomeState.DisplayingContent> {

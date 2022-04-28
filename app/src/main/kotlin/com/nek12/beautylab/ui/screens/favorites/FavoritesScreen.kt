@@ -20,7 +20,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 @Destination
 fun FavoritesScreen(
-        navigator: DestinationsNavigator,
+    navigator: DestinationsNavigator,
 ) = MVIComposable(getViewModel<FavoritesViewModel>()) { state ->
 
     consume { action ->

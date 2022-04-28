@@ -6,18 +6,18 @@ import com.nek12.flowMVI.MVIIntent
 import com.nek12.flowMVI.MVIState
 
 @Immutable
-sealed class ProfileState : MVIState {
+sealed class ProfileState: MVIState {
 
-    object Loading : ProfileState()
-    object Empty : ProfileState()
-    data class Error(val e: Throwable?) : ProfileState()
+    object Loading: ProfileState()
+    object Empty: ProfileState()
+    data class Error(val e: Throwable?): ProfileState()
 }
 
 @Immutable
-sealed class ProfileIntent : MVIIntent
+sealed class ProfileIntent: MVIIntent
 
 @Immutable
-sealed class ProfileAction : MVIAction {
+sealed class ProfileAction: MVIAction {
 
-    object GoBack : ProfileAction()
+    object GoBack: ProfileAction()
 }

@@ -4,5 +4,5 @@ import com.nek12.beautylab.core.model.net.product.category.ProductCategoryRespon
 import java.util.*
 
 data class CategoryChipItem(val name: String, val id: UUID) {
-    constructor(response: ProductCategoryResponse) : this(response.name, response.id)
+    constructor(response: ProductCategoryResponse): this(response.name, response.id)
 }

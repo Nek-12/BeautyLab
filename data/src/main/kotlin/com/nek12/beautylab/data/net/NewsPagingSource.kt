@@ -6,7 +6,7 @@ import com.nek12.beautylab.data.net.api.BeautyLabApi
 
 class NewsPagingSource(
     val api: BeautyLabApi,
-) : SequentialPagingSource<GetNewsResponse>() {
+): SequentialPagingSource<GetNewsResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GetNewsResponse> = api
         .news(params.key, params.loadSize)

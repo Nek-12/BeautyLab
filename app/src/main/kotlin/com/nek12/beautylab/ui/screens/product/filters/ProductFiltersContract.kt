@@ -17,10 +17,10 @@ import java.time.Instant
 import java.time.LocalDate
 
 @Immutable
-sealed class ProductFiltersState : MVIState {
+sealed class ProductFiltersState: MVIState {
 
-    data class Error(val e: Throwable?) : ProductFiltersState()
-    object Loading : ProductFiltersState()
+    data class Error(val e: Throwable?): ProductFiltersState()
+    object Loading: ProductFiltersState()
     data class SelectingFilters(
         val brands: List<BrandChipItem>,
         val categories: List<CategoryChipItem>,
@@ -33,7 +33,7 @@ sealed class ProductFiltersState : MVIState {
         val maxPrice: Input = Input.Empty(),
         val createdAfter: Instant? = null,
         val minAmountAvailable: Float = 0f,
-    ) : ProductFiltersState() {
+    ): ProductFiltersState() {
 
         val selectedBrand get() = selectedBrandIndex?.let { brands[it] }
         val selectedCategory get() = selectedCategoryIndex?.let { categories[it] }
@@ -58,7 +58,7 @@ sealed class ProductFiltersState : MVIState {
             filters: FiltersPayload,
             brands: List<BrandResponse>,
             categories: List<ProductCategoryResponse>,
-        ) : this(
+        ): this(
             brands.map { BrandChipItem(it) },
             categories.map { CategoryChipItem(it) },
             brands.indexOfFirstOrNull { it.id == filters.brandId },
@@ -82,25 +82,25 @@ sealed class ProductFiltersState : MVIState {
 }
 
 @Immutable
-sealed class ProductFiltersIntent : MVIIntent {
+sealed class ProductFiltersIntent: MVIIntent {
 
-    data class ClickedBrand(val item: BrandChipItem) : ProductFiltersIntent()
-    data class ClickedCategory(val item: CategoryChipItem) : ProductFiltersIntent()
-    data class SelectedSort(val sort: ProductSort) : ProductFiltersIntent()
-    data class SwitchedAscending(val isAscending: Boolean) : ProductFiltersIntent()
-    data class ChangedDiscount(val discount: ClosedFloatingPointRange<Float>) : ProductFiltersIntent()
-    data class ChangedMinPrice(val input: String) : ProductFiltersIntent()
-    data class ChangedMaxPrice(val input: String) : ProductFiltersIntent()
-    object ClickedSelectDateCreated : ProductFiltersIntent()
-    data class SelectedDateCreated(val date: LocalDate) : ProductFiltersIntent()
-    data class ChangedMinAmountAvailable(val amount: Float) : ProductFiltersIntent()
-    object ClickedOk : ProductFiltersIntent()
-    object ClickedReset : ProductFiltersIntent()
+    data class ClickedBrand(val item: BrandChipItem): ProductFiltersIntent()
+    data class ClickedCategory(val item: CategoryChipItem): ProductFiltersIntent()
+    data class SelectedSort(val sort: ProductSort): ProductFiltersIntent()
+    data class SwitchedAscending(val isAscending: Boolean): ProductFiltersIntent()
+    data class ChangedDiscount(val discount: ClosedFloatingPointRange<Float>): ProductFiltersIntent()
+    data class ChangedMinPrice(val input: String): ProductFiltersIntent()
+    data class ChangedMaxPrice(val input: String): ProductFiltersIntent()
+    object ClickedSelectDateCreated: ProductFiltersIntent()
+    data class SelectedDateCreated(val date: LocalDate): ProductFiltersIntent()
+    data class ChangedMinAmountAvailable(val amount: Float): ProductFiltersIntent()
+    object ClickedOk: ProductFiltersIntent()
+    object ClickedReset: ProductFiltersIntent()
 }
 
 @Immutable
-sealed class ProductFiltersAction : MVIAction {
+sealed class ProductFiltersAction: MVIAction {
 
-    data class GoBack(val filters: FiltersPayload) : ProductFiltersAction()
-    object OpenDateCreatedPicker : ProductFiltersAction()
+    data class GoBack(val filters: FiltersPayload): ProductFiltersAction()
+    object OpenDateCreatedPicker: ProductFiltersAction()
 }

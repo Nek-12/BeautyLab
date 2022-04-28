@@ -10,12 +10,12 @@ import logcat.LogPriority
 import logcat.logcat
 import java.io.IOException
 
-sealed class ApiError : java.io.IOException() {
-    object NoInternet : ApiError()
-    object Unauthorized : ApiError()
-    object NotFound : ApiError()
-    data class SerializationError(override val message: String?) : ApiError()
-    data class Unknown(override val message: String?) : ApiError()
+sealed class ApiError: java.io.IOException() {
+    object NoInternet: ApiError()
+    object Unauthorized: ApiError()
+    object NotFound: ApiError()
+    data class SerializationError(override val message: String?): ApiError()
+    data class Unknown(override val message: String?): ApiError()
 
 }
 

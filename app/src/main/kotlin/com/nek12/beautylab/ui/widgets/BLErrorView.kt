@@ -23,7 +23,8 @@ fun BLErrorView(
     modifier: Modifier = Modifier,
     onRetry: (() -> Unit)? = null,
 ) {
-    Column(modifier.fillMaxWidth(),
+    Column(
+        modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

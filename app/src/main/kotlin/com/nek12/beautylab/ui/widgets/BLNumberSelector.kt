@@ -17,45 +17,45 @@ import com.nek12.beautylab.ui.theme.BeautyLabTheme
 
 @Composable
 fun BLNumberSelector(
-        number: Int,
-        onPlus: () -> Unit,
-        onMinus: () -> Unit,
-        modifier: Modifier = Modifier,
-        plusEnabled: Boolean = true,
-        minusEnabled: Boolean = true,
-        buttonSizes: Dp = 32.dp,
-        onClickText: () -> Unit = {},
+    number: Int,
+    onPlus: () -> Unit,
+    onMinus: () -> Unit,
+    modifier: Modifier = Modifier,
+    plusEnabled: Boolean = true,
+    minusEnabled: Boolean = true,
+    buttonSizes: Dp = 32.dp,
+    onClickText: () -> Unit = {},
 ) {
     val plusColor = if (plusEnabled) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface
     val minusColor = if (minusEnabled) MaterialTheme.colors.error else MaterialTheme.colors.onSurface
 
     Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround,
-            modifier = modifier
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = modifier
     ) {
         BLCircleIcon(
-                icon = GMRIcon.gmr_remove,
-                color = minusColor,
-                size = buttonSizes,
-                onClick = onMinus,
-                modifier = Modifier.padding(1.dp)
+            icon = GMRIcon.gmr_remove,
+            color = minusColor,
+            size = buttonSizes,
+            onClick = onMinus,
+            modifier = Modifier.padding(1.dp)
         )
 
         Text(
-                number.toString(),
-                modifier = Modifier
-                    .clickable(onClick = onClickText)
-                    .padding(12.dp),
-                style = MaterialTheme.typography.body1,
+            number.toString(),
+            modifier = Modifier
+                .clickable(onClick = onClickText)
+                .padding(12.dp),
+            style = MaterialTheme.typography.body1,
         )
 
         BLCircleIcon(
-                icon = GMRIcon.gmr_add,
-                color = plusColor,
-                size = buttonSizes,
-                onClick = onPlus,
-                modifier = Modifier.padding(1.dp)
+            icon = GMRIcon.gmr_add,
+            color = plusColor,
+            size = buttonSizes,
+            onClick = onPlus,
+            modifier = Modifier.padding(1.dp)
         )
     }
 }
@@ -66,12 +66,12 @@ fun BLNumberSelector(
 private fun BLNumberSelectorPreview() {
     BeautyLabTheme(true) {
         BLNumberSelector(
-                number = 17,
-                onPlus = {},
-                onMinus = {},
-                modifier = Modifier,
-                plusEnabled = true,
-                minusEnabled = true
+            number = 17,
+            onPlus = {},
+            onMinus = {},
+            modifier = Modifier,
+            plusEnabled = true,
+            minusEnabled = true
         )
     }
 }

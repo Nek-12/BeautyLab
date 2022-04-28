@@ -11,27 +11,27 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 @Immutable
-sealed class ProductListState : MVIState {
+sealed class ProductListState: MVIState {
 
-    object Loading : ProductListState()
-    data class Error(val e: Throwable?) : ProductListState()
+    object Loading: ProductListState()
+    data class Error(val e: Throwable?): ProductListState()
 
     //todo: should test if it does not break composition
-    data class DisplayingContent(val data: Flow<PagingData<ProductCardItem>>) : ProductListState()
+    data class DisplayingContent(val data: Flow<PagingData<ProductCardItem>>): ProductListState()
 }
 
 @Immutable
-sealed class ProductListIntent : MVIIntent {
+sealed class ProductListIntent: MVIIntent {
 
-    data class ClickedProduct(val item: ProductCardItem) : ProductListIntent()
-    object ClickedFilters : ProductListIntent()
-    data class SelectedFilters(val filters: FiltersPayload) : ProductListIntent()
+    data class ClickedProduct(val item: ProductCardItem): ProductListIntent()
+    object ClickedFilters: ProductListIntent()
+    data class SelectedFilters(val filters: FiltersPayload): ProductListIntent()
 }
 
 @Immutable
-sealed class ProductListAction : MVIAction {
+sealed class ProductListAction: MVIAction {
 
-    object GoBack : ProductListAction()
-    data class GoToProductDetails(val id: UUID) : ProductListAction()
-    data class GoToFilters(val filters: FiltersPayload) : ProductListAction()
+    object GoBack: ProductListAction()
+    data class GoToProductDetails(val id: UUID): ProductListAction()
+    data class GoToFilters(val filters: FiltersPayload): ProductListAction()
 }

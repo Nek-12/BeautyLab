@@ -6,17 +6,25 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.input.Input
-import com.nek12.beautylab.common.input.Input.*
+import com.nek12.beautylab.common.input.Input.Empty
+import com.nek12.beautylab.common.input.Input.Invalid
 import com.nek12.beautylab.common.input.ValidationError
 import com.nek12.beautylab.data.repo.BeautyLabRepo
-import com.nek12.beautylab.ui.screens.signup.SignUpAction.*
-import com.nek12.beautylab.ui.screens.signup.SignUpIntent.*
-import com.nek12.beautylab.ui.screens.signup.SignUpState.*
+import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
+import com.nek12.beautylab.ui.screens.signup.SignUpAction.ShowSnackbar
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.GoBackClicked
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.NameChanged
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.OkClicked
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.PasswordChanged
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.PasswordConfirmationChanged
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.UsernameChanged
+import com.nek12.beautylab.ui.screens.signup.SignUpState.AcceptingInput
+import com.nek12.beautylab.ui.screens.signup.SignUpState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
 
 class SignUpViewModel(
     private val repo: BeautyLabRepo,
-) : MVIViewModel<SignUpState, SignUpIntent, SignUpAction>() {
+): MVIViewModel<SignUpState, SignUpIntent, SignUpAction>() {
 
     override val initialState get() = AcceptingInput()
 

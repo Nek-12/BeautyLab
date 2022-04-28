@@ -9,9 +9,9 @@ sealed class Input {
 
     abstract val value: String
 
-    data class Invalid(override val value: String, val errors: Nel<ValidationError>) : Input()
-    data class Empty(override val value: String = "") : Input()
-    data class Valid(override val value: String) : Input()
+    data class Invalid(override val value: String, val errors: Nel<ValidationError>): Input()
+    data class Empty(override val value: String = ""): Input()
+    data class Valid(override val value: String): Input()
 
     fun orNull(): String? = if (this is Valid) value else null
 

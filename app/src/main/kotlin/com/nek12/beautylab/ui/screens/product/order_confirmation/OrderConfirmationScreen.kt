@@ -20,7 +20,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 @Destination
 fun OrderConfirmationScreen(
-        navigator: DestinationsNavigator,
+    navigator: DestinationsNavigator,
 ) = MVIComposable(getViewModel<OrderConfirmationViewModel>()) { state ->
 
     consume { action ->

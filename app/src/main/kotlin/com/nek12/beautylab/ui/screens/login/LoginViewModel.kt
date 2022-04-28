@@ -9,14 +9,18 @@ import com.nek12.beautylab.common.input.Input
 import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.data.util.ApiError
-import com.nek12.beautylab.ui.screens.login.LoginIntent.*
-import com.nek12.beautylab.ui.screens.login.LoginState.*
+import com.nek12.beautylab.ui.screens.login.LoginIntent.OkClicked
+import com.nek12.beautylab.ui.screens.login.LoginIntent.PasswordChanged
+import com.nek12.beautylab.ui.screens.login.LoginIntent.SignUpClicked
+import com.nek12.beautylab.ui.screens.login.LoginIntent.UsernameChanged
+import com.nek12.beautylab.ui.screens.login.LoginState.AcceptingInput
+import com.nek12.beautylab.ui.screens.login.LoginState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
 
 class LoginViewModel(
     private val repo: BeautyLabRepo,
     private val authManager: AuthManager,
-) : MVIViewModel<LoginState, LoginIntent, LoginAction>() {
+): MVIViewModel<LoginState, LoginIntent, LoginAction>() {
 
     override val initialState get() = AcceptingInput()
 
@@ -57,11 +61,13 @@ class LoginViewModel(
         repo.logIn(username, password).fold(
             onSuccess = { send(LoginAction.GoBack) },
             onError = {
-                send(LoginAction.ShowSnackbar(
-                    if (it is ApiError.NotFound) {
-                        Text.Resource(R.string.invalid_credentials)
-                    } else it.genericMessage
-                ))
+                send(
+                    LoginAction.ShowSnackbar(
+                        if (it is ApiError.NotFound) {
+                            Text.Resource(R.string.invalid_credentials)
+                        } else it.genericMessage
+                    )
+                )
             }
         )
 

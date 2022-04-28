@@ -5,8 +5,21 @@ import com.nek12.androidutils.extensions.core.orThrow
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.data.repo.BeautyLabRepo
-import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.*
-import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.*
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ChangedDiscount
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ChangedMaxPrice
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ChangedMinAmountAvailable
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ChangedMinPrice
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ClickedBrand
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ClickedOk
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ClickedReset
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.ClickedSelectDateCreated
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.SelectedDateCreated
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.SelectedSort
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersIntent.SwitchedAscending
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.Error
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.Loading
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.SelectingFilters
 import com.nek12.flowMVI.android.MVIViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -15,7 +28,7 @@ import java.time.ZoneOffset
 class ProductFiltersViewModel(
     private val initialFilters: FiltersPayload?,
     private val repo: BeautyLabRepo,
-) : MVIViewModel<ProductFiltersState, ProductFiltersIntent, ProductFiltersAction>() {
+): MVIViewModel<ProductFiltersState, ProductFiltersIntent, ProductFiltersAction>() {
 
     override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)

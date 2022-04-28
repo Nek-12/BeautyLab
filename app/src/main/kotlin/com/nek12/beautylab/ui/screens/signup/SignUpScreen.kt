@@ -25,8 +25,10 @@ import com.nek12.beautylab.R
 import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
-import com.nek12.beautylab.ui.screens.signup.SignUpAction.*
-import com.nek12.beautylab.ui.screens.signup.SignUpState.*
+import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
+import com.nek12.beautylab.ui.screens.signup.SignUpAction.ShowSnackbar
+import com.nek12.beautylab.ui.screens.signup.SignUpState.AcceptingInput
+import com.nek12.beautylab.ui.screens.signup.SignUpState.Loading
 import com.nek12.beautylab.ui.widgets.BLIcon
 import com.nek12.beautylab.ui.widgets.BLTextInput
 import com.nek12.beautylab.ui.widgets.BLTopBar
@@ -59,12 +61,14 @@ fun SignUpScreen(
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(padding)) {
+            modifier = Modifier.padding(padding)
+        ) {
             when (state) {
                 is AcceptingInput -> {
-                    Box(Modifier
-                        .fillMaxWidth()
-                        .heightIn(300.dp),
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .heightIn(300.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         BLIcon(asset = GMRIcon.gmr_spa, size = 64.dp)

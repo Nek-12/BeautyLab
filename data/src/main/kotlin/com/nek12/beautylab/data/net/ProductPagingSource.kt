@@ -13,7 +13,7 @@ class ProductPagingSource(
     private val direction: SortDirection,
     private val request: GetProductsFilteredRequest,
     private val api: BeautyLabApi,
-) : SequentialPagingSource<GetProductResponse>() {
+): SequentialPagingSource<GetProductResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GetProductResponse> {
         return api.products(request, params.key, params.loadSize, sort.value, direction.value).fold(

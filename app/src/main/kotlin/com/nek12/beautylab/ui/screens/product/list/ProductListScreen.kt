@@ -28,8 +28,12 @@ import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.ProductCardItem
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductFiltersScreenDestination
-import com.nek12.beautylab.ui.screens.product.list.ProductListAction.*
-import com.nek12.beautylab.ui.screens.product.list.ProductListState.*
+import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoBack
+import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoToFilters
+import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoToProductDetails
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.DisplayingContent
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.Error
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLEmptyView
 import com.nek12.beautylab.ui.widgets.BLErrorView
@@ -76,7 +80,11 @@ private fun MVIIntentScope<ProductListIntent, ProductListAction>.ProductListCont
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = { BLBottomBar(navController) },
-        floatingActionButton = { BLFab(GMRIcon.gmr_filter_alt, onClick = { send(ProductListIntent.ClickedFilters) }) }
+        floatingActionButton = {
+            BLFab(
+                GMRIcon.gmr_filter_alt,
+                onClick = { send(ProductListIntent.ClickedFilters) })
+        }
     ) { padding ->
 
         Box(

@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.nek12.beautylab.core.model.net.PageResponse
 
-abstract class SequentialPagingSource<T : Any> : PagingSource<Int, T>() {
+abstract class SequentialPagingSource<T: Any>: PagingSource<Int, T>() {
 
     override fun getRefreshKey(state: PagingState<Int, T>): Int? {
         return state.anchorPosition?.let { anchorPosition ->

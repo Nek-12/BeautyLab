@@ -74,19 +74,19 @@ fun ProductDetailsScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDetailsContent(
-        state: ProductDetailsState,
-        scaffoldState: ScaffoldState,
+    state: ProductDetailsState,
+    scaffoldState: ScaffoldState,
 ) {
     Scaffold(
-            scaffoldState = scaffoldState,
-            floatingActionButton = { BLFab(icon = GMRIcon.gmr_shopping_cart, onClick = { /*TODO*/ }) }
+        scaffoldState = scaffoldState,
+        floatingActionButton = { BLFab(icon = GMRIcon.gmr_shopping_cart, onClick = { /*TODO*/ }) }
     ) { padding ->
         Box(
-                Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .heightIn(min = 400.dp),
-                contentAlignment = Alignment.Center
+            Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .heightIn(min = 400.dp),
+            contentAlignment = Alignment.Center
         ) {
             when (state) {
                 is Empty -> BLEmptyView()
@@ -94,107 +94,107 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
                 is Loading -> CircularProgressIndicator()
                 is DisplayingProduct -> {
                     Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .verticalScroll(rememberScrollState())
-                                .padding(bottom = 64.dp),
-                            verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState())
+                            .padding(bottom = 64.dp),
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
-                                text = state.title,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(4.dp),
-                                style = MaterialTheme.typography.h5,
-                                textAlign = TextAlign.Center,
-                                softWrap = true,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis,
+                            text = state.title,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(4.dp),
+                            style = MaterialTheme.typography.h5,
+                            textAlign = TextAlign.Center,
+                            softWrap = true,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
                         )
 
                         Card(
-                                modifier = Modifier.padding(8.dp)
+                            modifier = Modifier.padding(8.dp)
                         ) {
                             Box(Modifier, contentAlignment = Alignment.Center) {
                                 AsyncImage(
-                                        model = state.imageUrl,
-                                        contentDescription = R.string.product_image_cd.string(),
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .heightIn(max = 240.dp, min = 160.dp),
-                                        contentScale = ContentScale.Crop,
+                                    model = state.imageUrl,
+                                    contentDescription = R.string.product_image_cd.string(),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .heightIn(max = 240.dp, min = 160.dp),
+                                    contentScale = ContentScale.Crop,
                                 )
                             }
 
                             val color =
-                                    if (state.isFavorite) MaterialTheme.colors.secondary else MaterialTheme.colors.onSurface
+                                if (state.isFavorite) MaterialTheme.colors.secondary else MaterialTheme.colors.onSurface
                             val icon = if (state.isFavorite) GMRIcon.gmr_favorite else GMRIcon.gmr_favorite_outline
                             BLCircleIcon(
-                                    icon = icon,
-                                    color = color,
-                                    size = 52.dp,
-                                    onClick = { /* TODO */ },
-                                    modifier = Modifier
-                                        .padding(24.dp)
-                                        .then(with(this@Box) { Modifier.align(Alignment.BottomEnd) })
+                                icon = icon,
+                                color = color,
+                                size = 52.dp,
+                                onClick = { /* TODO */ },
+                                modifier = Modifier
+                                    .padding(24.dp)
+                                    .then(with(this@Box) { Modifier.align(Alignment.BottomEnd) })
                             )
                         }
 
                         Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.Top
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Top
                         ) {
 
                             //left block
                             Column(Modifier.weight(0.6f)) {
                                 //price
                                 Text(
-                                        text = annotatedPrice(
-                                                price = state.price,
-                                                priceWithDiscount = state.priceWithDiscount
-                                        ),
-                                        Modifier
-                                            .fillMaxWidth()
-                                            .padding(12.dp),
-                                        style = MaterialTheme.typography.h6,
-                                        softWrap = false,
-                                        textAlign = TextAlign.Start,
+                                    text = annotatedPrice(
+                                        price = state.price,
+                                        priceWithDiscount = state.priceWithDiscount
+                                    ),
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(12.dp),
+                                    style = MaterialTheme.typography.h6,
+                                    softWrap = false,
+                                    textAlign = TextAlign.Start,
                                 )
 
                                 //amount
                                 Text(
-                                        text = R.string.amount_template.string(state.amountAvailable),
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = 12.dp, vertical = 4.dp),
-                                        style = MaterialTheme.typography.body1,
-                                        softWrap = true,
+                                    text = R.string.amount_template.string(state.amountAvailable),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 12.dp, vertical = 4.dp),
+                                    style = MaterialTheme.typography.body1,
+                                    softWrap = true,
                                 )
                             }
 
                             //right block
                             Column(
-                                    modifier = Modifier
-                                        .weight(0.5f)
-                                        .fillMaxWidth(),
-                                    horizontalAlignment = Alignment.End
+                                modifier = Modifier
+                                    .weight(0.5f)
+                                    .fillMaxWidth(),
+                                horizontalAlignment = Alignment.End
                             ) {
                                 //todo: clickable chips
                                 Chip({}, modifier = Modifier.padding(horizontal = 8.dp)) {
                                     Text(
-                                            state.brandName,
-                                            modifier = Modifier.fillMaxWidth(),
-                                            textAlign = TextAlign.Center
+                                        state.brandName,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        textAlign = TextAlign.Center
                                     )
                                 }
 
                                 Chip({}, modifier = Modifier.padding(horizontal = 8.dp)) {
                                     Text(
-                                            state.categoryName,
-                                            modifier = Modifier.fillMaxWidth(),
-                                            textAlign = TextAlign.Center
+                                        state.categoryName,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        textAlign = TextAlign.Center
                                     )
                                 }
                             }
@@ -205,28 +205,28 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
 
                         //description
                         Text(
-                                text = R.string.description.string(),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(4.dp),
-                                style = MaterialTheme.typography.h5,
-                                textAlign = TextAlign.Start,
-                                softWrap = false,
-                                overflow = TextOverflow.Ellipsis,
+                            text = R.string.description.string(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(4.dp),
+                            style = MaterialTheme.typography.h5,
+                            textAlign = TextAlign.Start,
+                            softWrap = false,
+                            overflow = TextOverflow.Ellipsis,
                         )
 
                         Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(4.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(4.dp)
                         ) {
                             Text(
-                                    text = state.description,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(4.dp),
-                                    style = MaterialTheme.typography.body1,
-                                    textAlign = TextAlign.Start,
+                                text = state.description,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(4.dp),
+                                style = MaterialTheme.typography.body1,
+                                textAlign = TextAlign.Start,
                             )
                         }
 
@@ -235,22 +235,22 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
                         //properties
                         state.properties?.let {
                             Text(
-                                    text = R.string.properties.string(),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(4.dp),
-                                    style = MaterialTheme.typography.h5,
-                                    textAlign = TextAlign.Start,
-                                    softWrap = false,
+                                text = R.string.properties.string(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(4.dp),
+                                style = MaterialTheme.typography.h5,
+                                textAlign = TextAlign.Start,
+                                softWrap = false,
                             )
 
                             Text(
-                                    text = state.properties,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(4.dp),
-                                    style = MaterialTheme.typography.body1,
-                                    textAlign = TextAlign.Start,
+                                text = state.properties,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(4.dp),
+                                style = MaterialTheme.typography.body1,
+                                textAlign = TextAlign.Start,
                             )
                         }
                     }
@@ -266,7 +266,7 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
 private fun ProductDetailsPreview() = ScreenPreview(false) {
 
     ProductDetailsContent(
-            state = DisplayingProduct(true, Mock.product).copy(amountSelected = 14),
-            rememberScaffoldState()
+        state = DisplayingProduct(true, Mock.product).copy(amountSelected = 14),
+        rememberScaffoldState()
     )
 }

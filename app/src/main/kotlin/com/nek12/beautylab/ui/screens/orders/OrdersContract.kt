@@ -6,18 +6,18 @@ import com.nek12.flowMVI.MVIIntent
 import com.nek12.flowMVI.MVIState
 
 @Immutable
-sealed class OrdersState : MVIState {
+sealed class OrdersState: MVIState {
 
-    object Loading : OrdersState()
-    object Empty : OrdersState()
-    data class Error(val e: Throwable?) : OrdersState()
+    object Loading: OrdersState()
+    object Empty: OrdersState()
+    data class Error(val e: Throwable?): OrdersState()
 }
 
 @Immutable
-sealed class OrdersIntent : MVIIntent
+sealed class OrdersIntent: MVIIntent
 
 @Immutable
-sealed class OrdersAction : MVIAction {
+sealed class OrdersAction: MVIAction {
 
-    object GoBack : OrdersAction()
+    object GoBack: OrdersAction()
 }

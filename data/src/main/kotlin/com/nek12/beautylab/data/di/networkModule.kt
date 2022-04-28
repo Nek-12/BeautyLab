@@ -36,7 +36,7 @@ private fun provideHttpClient(json: Json, authManager: AuthManager) = HttpClient
     expectSuccess = true
 
     install(Logging) {
-        logger = object : Logger {
+        logger = object: Logger {
             override fun log(message: String) {
                 logcat(LogPriority.VERBOSE) { message }
             }

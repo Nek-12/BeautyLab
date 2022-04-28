@@ -11,7 +11,7 @@ interface CoroutineDispatchers {
     val unconfined: CoroutineDispatcher
 }
 
-object RuntimeCoroutineDispatchers : CoroutineDispatchers {
+object RuntimeCoroutineDispatchers: CoroutineDispatchers {
 
     override val io = Dispatchers.IO
     override val main = Dispatchers.Main
@@ -19,7 +19,7 @@ object RuntimeCoroutineDispatchers : CoroutineDispatchers {
     override val unconfined = Dispatchers.Unconfined
 }
 
-object TestCoroutineDispatchers : CoroutineDispatchers {
+object TestCoroutineDispatchers: CoroutineDispatchers {
 
     override val io = Dispatchers.Unconfined
     override val main = Dispatchers.Unconfined

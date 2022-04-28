@@ -35,8 +35,11 @@ import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.common.representation
 import com.nek12.beautylab.core.model.net.product.ProductSort
-import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersAction.*
-import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.*
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersAction.GoBack
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersAction.OpenDateCreatedPicker
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.Error
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.Loading
+import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.SelectingFilters
 import com.nek12.beautylab.ui.widgets.BLCaption
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLFab
@@ -133,24 +136,30 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                     )
                     BLSpacer()
 
-                    Row(horizontalArrangement = Arrangement.SpaceBetween,
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()) {
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Text(R.string.is_sort_ascending.string())
                         Switch(state.isAscending, { send(ProductFiltersIntent.SwitchedAscending(it)) })
                     }
 
                     BLCaption(R.string.discount_template.string(state.discountFrom, state.discountTo))
-                    RangeSlider(modifier = Modifier.fillMaxWidth(),
+                    RangeSlider(
+                        modifier = Modifier.fillMaxWidth(),
                         values = state.discountRange,
                         onValueChange = { send(ProductFiltersIntent.ChangedDiscount(it)) },
-                        valueRange = 0f..1f)
+                        valueRange = 0f..1f
+                    )
                     BLSpacer()
 
                     BLCaption(R.string.price)
-                    Row(horizontalArrangement = Arrangement.Center,
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()) {
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         BLTextInput(
                             input = state.minPrice,
                             modifier = Modifier
@@ -159,18 +168,23 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                                 .weight(0.5f, true),
                             onTextChange = { send(ProductFiltersIntent.ChangedMinPrice(it)) },
                             label = R.string.min_price.string(),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next),
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Next
+                            ),
                         )
 
-                        BLTextInput(input = state.maxPrice, modifier = Modifier
-                            .padding(4.dp)
-                            .requiredHeightIn(min = 64.dp)
-                            .weight(0.5f, true),
+                        BLTextInput(
+                            input = state.maxPrice, modifier = Modifier
+                                .padding(4.dp)
+                                .requiredHeightIn(min = 64.dp)
+                                .weight(0.5f, true),
                             onTextChange = { send(ProductFiltersIntent.ChangedMaxPrice(it)) },
                             label = R.string.max_price.string(),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Done)
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Done
+                            )
                         )
 
                     }
@@ -178,7 +192,8 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
 
 
                     BLCaption(R.string.mininum_amount_available)
-                    SliderWithLabel(value = state.minAmountAvailable,
+                    SliderWithLabel(
+                        value = state.minAmountAvailable,
                         onValueChange = { send(ProductFiltersIntent.ChangedMinAmountAvailable(it)) },
                         modifier = Modifier.fillMaxWidth(),
                         valueRange = ProductFiltersState.PRODUCT_AMOUNT_RANGE,
@@ -196,12 +211,14 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        BLFab(icon = GMRIcon.gmr_clear,
+                        BLFab(
+                            icon = GMRIcon.gmr_clear,
                             onClick = { send(ProductFiltersIntent.ClickedReset) },
                             backgroundColor = MaterialTheme.colors.error
                         )
 
-                        BLFab(icon = GMRIcon.gmr_check,
+                        BLFab(
+                            icon = GMRIcon.gmr_check,
                             onClick = { send(ProductFiltersIntent.ClickedOk) },
                             backgroundColor = MaterialTheme.colors.primary
                         )

@@ -5,7 +5,9 @@ import androidx.paging.map
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.ui.items.ProductCardItem
-import com.nek12.beautylab.ui.screens.product.list.ProductListState.*
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.DisplayingContent
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.Error
+import com.nek12.beautylab.ui.screens.product.list.ProductListState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -13,7 +15,7 @@ import kotlinx.coroutines.flow.map
 class ProductListViewModel(
     initialFilters: FiltersPayload?,
     private val repo: BeautyLabRepo,
-) : MVIViewModel<ProductListState, ProductListIntent, ProductListAction>() {
+): MVIViewModel<ProductListState, ProductListIntent, ProductListAction>() {
 
     private var currentFilters: FiltersPayload = initialFilters ?: FiltersPayload()
     override val initialState get() = Loading

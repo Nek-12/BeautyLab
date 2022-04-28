@@ -10,7 +10,7 @@ import logcat.LogPriority
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class BeautyLabApplication : Application() {
+class BeautyLabApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
