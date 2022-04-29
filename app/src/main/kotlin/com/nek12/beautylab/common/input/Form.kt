@@ -16,7 +16,7 @@ sealed class Form(
 ) {
 
     fun validate(input: String, strategy: Strategy = Strategy.FailFast): Input =
-        rules(input.trim(), strategy).fold(
+        rules(input.trimStart(), strategy).fold(
             ifLeft = { Input.Invalid(input, it) },
             ifRight = { Input.Valid(it) },
         )
@@ -39,7 +39,7 @@ sealed class Form(
         }
     }
 
-    data class Description(val range: IntRange = DEFAULT_LENGTH_RANGE): Form(
+    data class Comment(val range: IntRange = DEFAULT_LENGTH_RANGE): Form(
         LengthRange(range),
     ) {
 
