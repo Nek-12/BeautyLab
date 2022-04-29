@@ -18,17 +18,18 @@ fun BLTopBar(
     TopAppBar(
         modifier = modifier,
         contentColor = MaterialTheme.colors.primary,
-        backgroundColor = Color.Transparent
-    ) {
-        Text(
-            title,
-            style = MaterialTheme.typography.h5,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            softWrap = true,
-            maxLines = 2
-        )
-    }
+        backgroundColor = Color.Transparent,
+        title = {
+            Text(
+                title,
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                softWrap = true,
+                maxLines = 2
+            )
+        }
+    )
 }
 
 

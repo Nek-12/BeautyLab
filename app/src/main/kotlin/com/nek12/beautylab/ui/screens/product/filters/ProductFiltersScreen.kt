@@ -153,7 +153,6 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                         onValueChange = { send(ProductFiltersIntent.ChangedDiscount(it)) },
                         valueRange = 0f..1f
                     )
-                    BLSpacer()
 
                     BLCaption(R.string.price)
                     Row(
@@ -222,6 +221,7 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                             backgroundColor = MaterialTheme.colors.primary
                         )
                     }
+                    BLSpacer()
                 }
             }
         }

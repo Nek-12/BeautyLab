@@ -248,11 +248,11 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
                                 textAlign = TextAlign.Start,
                             )
                         }
-
-                        Divider(Modifier.padding(vertical = 4.dp))
-
                         //properties
                         state.properties?.let {
+
+                            Divider(Modifier.padding(vertical = 4.dp))
+
                             Text(
                                 text = R.string.properties.string(),
                                 modifier = Modifier

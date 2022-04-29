@@ -42,7 +42,7 @@
     <string name="popular_products_title">Top Selling</string>
     <string name="new_products_title">Grab While it\'s Hot</string>
     <string name="discounted_products_title">On Sale</string>
-    <string name="error_occurred">We\'re sorry - an error occurred</string>
+    <string name="error_occurred">Whoops! There has been an error</string>
     <string name="error_details_template">Details: %s</string>
     <string name="retry">Retry</string>
     <string name="explore_brands">Explore Brands We Sell</string>

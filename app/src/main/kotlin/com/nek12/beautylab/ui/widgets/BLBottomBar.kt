@@ -2,6 +2,7 @@ package com.nek12.beautylab.ui.widgets
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +29,12 @@ fun BLBottomBar(
                         launchSingleTop = true
                     }
                 },
-                icon = { BLIcon(destination.icon, contentDescription = destination.label.string()) },
+                icon = {
+                    BLIcon(
+                        destination.icon, contentDescription = destination.label.string(),
+                        tint = LocalContentColor.current
+                    )
+                },
                 label = { Text(destination.label.string()) },
             )
         }
