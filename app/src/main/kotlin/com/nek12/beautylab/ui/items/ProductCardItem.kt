@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Chip
@@ -15,6 +16,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,10 +36,13 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
+import com.nek12.beautylab.common.Mock
 import com.nek12.beautylab.common.toComposeColor
 import com.nek12.beautylab.core.model.net.product.GetProductResponse
+import com.nek12.beautylab.ui.theme.BeautyLabTheme
 import java.util.*
 
+@Immutable
 data class ProductCardItem(
     val title: String,
     val imageUrl: Uri?,
@@ -104,7 +109,9 @@ fun ProductCardItem(
                 Text(
                     item.title,
                     style = MaterialTheme.typography.subtitle1,
-                    modifier = Modifier.padding(4.dp),
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .widthIn(max = 260.dp),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -153,5 +160,7 @@ fun annotatedPrice(price: Double, priceWithDiscount: Double): AnnotatedString {
 @Composable
 @Preview(name = "ProductAdCardItem", showSystemUi = false, showBackground = true)
 private fun ProductAdCardItemPreview() {
-
+    BeautyLabTheme {
+        ProductCardItem(Mock.product)
+    }
 }
