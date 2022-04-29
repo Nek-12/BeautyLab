@@ -17,7 +17,7 @@ import com.nek12.beautylab.ui.theme.BeautyLabTheme
 
 @Composable
 fun BLNumberSelector(
-    number: Int,
+    number: Number,
     onPlus: () -> Unit,
     onMinus: () -> Unit,
     modifier: Modifier = Modifier,
@@ -38,8 +38,9 @@ fun BLNumberSelector(
             icon = GMRIcon.gmr_remove,
             color = minusColor,
             size = buttonSizes,
-            onClick = onMinus,
-            modifier = Modifier.padding(1.dp)
+            modifier = Modifier
+                .padding(1.dp)
+                .clickable(enabled = minusEnabled, onClick = onMinus)
         )
 
         Text(
@@ -54,8 +55,9 @@ fun BLNumberSelector(
             icon = GMRIcon.gmr_add,
             color = plusColor,
             size = buttonSizes,
-            onClick = onPlus,
-            modifier = Modifier.padding(1.dp)
+            modifier = Modifier
+                .padding(1.dp)
+                .clickable(enabled = plusEnabled, onClick = onPlus)
         )
     }
 }
