@@ -15,6 +15,7 @@ import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.net.NewsPagingSource
 import com.nek12.beautylab.data.net.ProductPagingSource
 import com.nek12.beautylab.data.net.api.BeautyLabApi
+import java.util.*
 
 class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: AuthManager) {
 
@@ -36,9 +37,19 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
         pagingSourceFactory = { ProductPagingSource(sort, direction, request, api) },
     ).flow
 
-    suspend fun getBrands() = api.getBrands()
+    suspend fun getBrands() = api.brands()
 
-    suspend fun getCategories() = api.getCategories()
+    suspend fun getCategories() = api.categories()
+
+    suspend fun getProduct(id: UUID) = api.product(id)
+
+    suspend fun getFavorite(productId: UUID) = api.favorites().map { list ->
+        list.firstOrNull { it.product.id == productId }
+    }
+
+    suspend fun addFavorite(productId: UUID) = api.addFavorite(productId)
+
+    suspend fun removeFavorite(favoriteId: UUID) = api.deleteFavorite(favoriteId)
 
     fun getNews() = Pager(
         config = PagingConfig(BeautyLabApi.PAGE_SIZE),

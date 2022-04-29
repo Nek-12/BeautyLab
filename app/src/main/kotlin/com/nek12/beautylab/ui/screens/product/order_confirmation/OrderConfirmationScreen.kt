@@ -16,10 +16,12 @@ import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
+import java.util.*
 
 @Composable
 @Destination
 fun OrderConfirmationScreen(
+    productId: UUID,
     navigator: DestinationsNavigator,
 ) = MVIComposable(getViewModel<OrderConfirmationViewModel>()) { state ->
 

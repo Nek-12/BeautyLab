@@ -36,7 +36,15 @@ import com.nek12.beautylab.common.Mock
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.annotatedPrice
+import com.nek12.beautylab.ui.screens.destinations.OrderConfirmationScreenDestination
+import com.nek12.beautylab.ui.screens.destinations.ProductListScreenDestination
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsAction.GoBack
+import com.nek12.beautylab.ui.screens.product.details.ProductDetailsAction.GoToOrderConfirmation
+import com.nek12.beautylab.ui.screens.product.details.ProductDetailsAction.GoToProductsList
+import com.nek12.beautylab.ui.screens.product.details.ProductDetailsIntent.ClickedBrand
+import com.nek12.beautylab.ui.screens.product.details.ProductDetailsIntent.ClickedBuy
+import com.nek12.beautylab.ui.screens.product.details.ProductDetailsIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.product.details.ProductDetailsIntent.ClickedFavorite
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.DisplayingProduct
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.Empty
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.Error
@@ -65,6 +73,8 @@ fun ProductDetailsScreen(
     consume { action ->
         when (action) {
             is GoBack -> navigator.navigateUp()
+            is GoToOrderConfirmation -> navigator.navigate(OrderConfirmationScreenDestination(action.id))
+            is GoToProductsList -> navigator.navigate(ProductListScreenDestination(action.filters))
         }
     }
 
@@ -79,14 +89,14 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
 ) {
     Scaffold(
         scaffoldState = scaffoldState,
-        floatingActionButton = { BLFab(icon = GMRIcon.gmr_shopping_cart, onClick = { /*TODO*/ }) }
+        floatingActionButton = { BLFab(icon = GMRIcon.gmr_shopping_cart, onClick = { send(ClickedBuy) }) }
     ) { padding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .heightIn(min = 400.dp),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             when (state) {
                 is Empty -> BLEmptyView()
@@ -95,11 +105,11 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
                 is DisplayingProduct -> {
                     Column(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxSize()
                             .verticalScroll(rememberScrollState())
                             .padding(bottom = 64.dp),
                         verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                        horizontalAlignment = Alignment.Start,
                     ) {
                         Text(
                             text = state.title,
@@ -116,29 +126,33 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
                         Card(
                             modifier = Modifier.padding(8.dp)
                         ) {
-                            Box(Modifier, contentAlignment = Alignment.Center) {
-                                AsyncImage(
-                                    model = state.imageUrl,
-                                    contentDescription = R.string.product_image_cd.string(),
+                            AsyncImage(
+                                model = state.imageUrl,
+                                contentDescription = R.string.product_image_cd.string(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 240.dp, min = 160.dp),
+                                contentScale = ContentScale.Crop,
+                            )
+
+                            if (state.isFavoriteLoading) {
+                                CircularProgressIndicator()
+                            } else {
+                                val color =
+                                    if (state.isFavorite) MaterialTheme.colors.error else MaterialTheme.colors.primary
+                                val icon =
+                                    if (state.isFavorite) GMRIcon.gmr_favorite else GMRIcon.gmr_favorite_outline
+                                BLCircleIcon(
+                                    icon = icon,
+                                    color = color,
+                                    size = 44.dp,
+                                    onClick = { send(ClickedFavorite) },
                                     modifier = Modifier
-                                        .fillMaxWidth()
-                                        .heightIn(max = 240.dp, min = 160.dp),
-                                    contentScale = ContentScale.Crop,
+                                        .padding(12.dp)
+                                        .then(with(this@Box) { Modifier.align(Alignment.BottomEnd) })
+
                                 )
                             }
-
-                            val color =
-                                if (state.isFavorite) MaterialTheme.colors.secondary else MaterialTheme.colors.onSurface
-                            val icon = if (state.isFavorite) GMRIcon.gmr_favorite else GMRIcon.gmr_favorite_outline
-                            BLCircleIcon(
-                                icon = icon,
-                                color = color,
-                                size = 52.dp,
-                                onClick = { /* TODO */ },
-                                modifier = Modifier
-                                    .padding(24.dp)
-                                    .then(with(this@Box) { Modifier.align(Alignment.BottomEnd) })
-                            )
                         }
 
                         Row(
@@ -181,18 +195,23 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
                                     .fillMaxWidth(),
                                 horizontalAlignment = Alignment.End
                             ) {
-                                //todo: clickable chips
-                                Chip({}, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                Chip(
+                                    onClick = { send(ClickedBrand) },
+                                    modifier = Modifier.padding(horizontal = 8.dp)
+                                ) {
                                     Text(
-                                        state.brandName,
+                                        state.brand.name,
                                         modifier = Modifier.fillMaxWidth(),
                                         textAlign = TextAlign.Center
                                     )
                                 }
 
-                                Chip({}, modifier = Modifier.padding(horizontal = 8.dp)) {
+                                Chip(
+                                    onClick = { send(ClickedCategory) },
+                                    modifier = Modifier.padding(horizontal = 8.dp)
+                                ) {
                                     Text(
-                                        state.categoryName,
+                                        state.category.name,
                                         modifier = Modifier.fillMaxWidth(),
                                         textAlign = TextAlign.Center
                                     )
@@ -266,7 +285,7 @@ private fun MVIIntentScope<ProductDetailsIntent, ProductDetailsAction>.ProductDe
 private fun ProductDetailsPreview() = ScreenPreview(false) {
 
     ProductDetailsContent(
-        state = DisplayingProduct(true, Mock.product).copy(amountSelected = 14),
+        state = DisplayingProduct(UUID.randomUUID(), Mock.product).copy(amountSelected = 14),
         rememberScaffoldState()
     )
 }
