@@ -54,13 +54,13 @@ abstract class BaseApi(protected val client: HttpClient) {
         url: String,
         body: R? = null,
         builder: HttpRequestBuilder.() -> Unit = {},
-    ) = call<T, R>(url, HttpMethod.Patch, body, builder)
+    ) = call<T, R>(url, HttpMethod.Delete, body, builder)
 
     protected suspend inline fun <reified T, reified R> patch(
         url: String,
         body: R? = null,
         builder: HttpRequestBuilder.() -> Unit = {},
-    ) = call<T, R>(url, HttpMethod.Delete, body, builder)
+    ) = call<T, R>(url, HttpMethod.Patch, body, builder)
 
 
 //TODO: Flow call
