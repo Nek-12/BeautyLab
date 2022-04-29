@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -28,9 +27,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
+import com.nek12.androidutils.extensions.core.copies
 import com.nek12.beautylab.R
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.common.GMRIcon
+import com.nek12.beautylab.common.Mock
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.common.representation
@@ -137,7 +138,7 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                     BLSpacer()
 
                     Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -164,7 +165,6 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                             input = state.minPrice,
                             modifier = Modifier
                                 .padding(4.dp)
-                                .requiredHeightIn(min = 64.dp)
                                 .weight(0.5f, true),
                             onTextChange = { send(ProductFiltersIntent.ChangedMinPrice(it)) },
                             label = R.string.min_price.string(),
@@ -177,7 +177,6 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
                         BLTextInput(
                             input = state.maxPrice, modifier = Modifier
                                 .padding(4.dp)
-                                .requiredHeightIn(min = 64.dp)
                                 .weight(0.5f, true),
                             onTextChange = { send(ProductFiltersIntent.ChangedMaxPrice(it)) },
                             label = R.string.max_price.string(),
@@ -233,6 +232,15 @@ private fun MVIIntentScope<ProductFiltersIntent, ProductFiltersAction>.ProductFi
 @Preview(name = "ProductFilters", showSystemUi = true, showBackground = true)
 private fun ProductFiltersPreview() = ScreenPreview {
     Column {
-        ProductFiltersContent(state = Error(Exception()))
+        ProductFiltersContent(
+            state = SelectingFilters(
+
+                filters = FiltersPayload(
+
+                ),
+                brands = Mock.brand.copies(10),
+                categories = Mock.category.copies(10)
+            )
+        )
     }
 }

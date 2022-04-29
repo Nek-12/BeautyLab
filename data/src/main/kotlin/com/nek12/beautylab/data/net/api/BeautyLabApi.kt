@@ -9,6 +9,8 @@ import com.nek12.beautylab.core.model.net.news.GetNewsResponse
 import com.nek12.beautylab.core.model.net.product.GetProductResponse
 import com.nek12.beautylab.core.model.net.product.GetProductsFilteredRequest
 import com.nek12.beautylab.core.model.net.product.category.ProductCategoryResponse
+import com.nek12.beautylab.core.model.net.transaction.CreateTransactionRequest
+import com.nek12.beautylab.core.model.net.transaction.GetTransactionResponse
 import com.nek12.beautylab.core.model.net.user.EditUserResponse
 import com.nek12.beautylab.core.model.net.user.LoginRequest
 import com.nek12.beautylab.core.model.net.user.SignupRequest
@@ -47,7 +49,10 @@ class BeautyLabApi(client: HttpClient): BaseApi(client) {
 
     suspend fun addFavorite(productId: UUID) = post<FavoriteItemResponse, Any>("favorite/add/$productId")
 
-    suspend fun deleteFavorite(favoriteId: UUID) = delete<Unit, Any>("/favorite/{id}")
+    suspend fun deleteFavorite(favoriteId: UUID) = delete<Unit, Any>("favorite/$favoriteId")
+
+    suspend fun createTransaction(request: CreateTransactionRequest) =
+        post<GetTransactionResponse, CreateTransactionRequest>("transaction/create", request)
 
     suspend fun news(
         page: Int? = null,

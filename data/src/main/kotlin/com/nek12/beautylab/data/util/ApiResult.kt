@@ -14,6 +14,7 @@ sealed class ApiError: java.io.IOException() {
     object NoInternet: ApiError()
     object Unauthorized: ApiError()
     object NotFound: ApiError()
+    data class Invalid(override val message: String?): ApiError()
     data class SerializationError(override val message: String?): ApiError()
     data class Unknown(override val message: String?): ApiError()
 
@@ -23,6 +24,7 @@ fun <T> ApiResult<T>.apiErrors() = mapError {
     when (it) {
         is ClientRequestException -> {
             when (it.response.status.value) {
+                400 -> ApiError.Invalid(it.message)
                 401, 403 -> ApiError.Unauthorized
                 404 -> ApiError.NotFound
                 else -> ApiError.Unknown(it.message)

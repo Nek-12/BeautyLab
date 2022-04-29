@@ -54,8 +54,7 @@ sealed class ProductDetailsState: MVIState {
         )
 
         val isFavorite get() = favoriteId != null
-        val canAdd get() = amountSelected <= amountAvailable
-        val canRemove get() = amountSelected > 1
+
     }
 }
 

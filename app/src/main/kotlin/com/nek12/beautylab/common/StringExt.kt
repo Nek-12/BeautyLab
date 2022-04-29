@@ -14,8 +14,9 @@ import java.time.format.DateTimeFormatter
 inline val <reified T: Throwable?> T.genericMessage: Text
     inline get() = when (this) {
         is ApiError.NoInternet -> Resource(R.string.no_internet_error)
-        is ApiError.SerializationError, is ApiError.Unknown -> Resource(R.string.internal_error, message ?: toString())
+        is ApiError.Invalid -> Resource(R.string.invalid_data_error, message ?: toString())
         is ApiError.Unauthorized -> Resource(R.string.log_in_again)
+        is ApiError.SerializationError, is ApiError.Unknown -> Resource(R.string.internal_error, message ?: toString())
         else -> Resource(R.string.unknown_error_template, this?.localizedMessage ?: this?.message ?: "")
     }
 

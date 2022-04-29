@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
@@ -39,6 +40,7 @@ fun BLTextInput(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(
         imeAction = ImeAction.Done
     ),
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(),
@@ -48,7 +50,7 @@ fun BLTextInput(
         OutlinedTextField(
             value = input.value,
             onValueChange = onTextChange,
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
@@ -58,6 +60,7 @@ fun BLTextInput(
             isError = input is Input.Invalid,
             readOnly = readOnly,
             colors = colors,
+            keyboardActions = keyboardActions,
             keyboardOptions = keyboardOptions,
             maxLines = maxLines,
         )

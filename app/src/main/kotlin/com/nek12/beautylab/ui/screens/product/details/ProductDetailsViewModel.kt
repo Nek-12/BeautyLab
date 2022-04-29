@@ -1,6 +1,7 @@
 package com.nek12.beautylab.ui.screens.product.details
 
-import com.nek12.androidutils.extensions.core.orNull
+import com.nek12.androidutils.extensions.core.map
+import com.nek12.androidutils.extensions.core.or
 import com.nek12.androidutils.extensions.core.orThrow
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.data.repo.BeautyLabRepo
@@ -50,12 +51,11 @@ class ProductDetailsViewModel(
 
     private fun toggleFavorite(id: UUID?) = launchForState {
 
-        val newId = if (id != null) { //has favorite, remove it
-            repo.removeFavorite(id)
-            null
+        val newId: UUID? = if (id != null) { //has favorite, remove it
+            repo.removeFavorite(id).map { null }.or(id)
         } else {
-            repo.addFavorite(productId)
-        }?.orNull()?.id ?: id
+            repo.addFavorite(productId).map { it.id }.or(id)
+        }
 
         withState<DisplayingProduct> {
             copy(favoriteId = newId)

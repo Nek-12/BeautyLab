@@ -8,6 +8,7 @@ import com.nek12.androidutils.extensions.core.onSuccess
 import com.nek12.beautylab.core.model.net.SortDirection
 import com.nek12.beautylab.core.model.net.product.GetProductsFilteredRequest
 import com.nek12.beautylab.core.model.net.product.ProductSort
+import com.nek12.beautylab.core.model.net.transaction.CreateTransactionRequest
 import com.nek12.beautylab.core.model.net.user.AuthTokensResponse
 import com.nek12.beautylab.core.model.net.user.LoginRequest
 import com.nek12.beautylab.core.model.net.user.SignupRequest
@@ -50,6 +51,9 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
     suspend fun addFavorite(productId: UUID) = api.addFavorite(productId)
 
     suspend fun removeFavorite(favoriteId: UUID) = api.deleteFavorite(favoriteId)
+
+    suspend fun placeOrder(productId: UUID, desiredAmount: Long, comment: String? = null) =
+        api.createTransaction(CreateTransactionRequest(productId, desiredAmount, comment))
 
     fun getNews() = Pager(
         config = PagingConfig(BeautyLabApi.PAGE_SIZE),

@@ -33,7 +33,7 @@
     <string name="does_not_match_field_template">Value does not match %s</string>
     <string name="invalid_credentials">Invalid credentials or user not found</string>
     <string name="descending">Descending</string>
-    <string name="sort_template">By %s %s</string>
+    <string name="sort_template">By %1$s %2$s</string>
     <string name="ascending">Ascending</string>
     <string name="sort_date">Date added</string>
     <string name="sort_price">Price</string>
@@ -70,4 +70,15 @@
     <string name="description">Description</string>
     <string name="buy">Buy</string>
     <string name="properties">Properties</string>
+    <string name="order_success_description">Success! You can now see the status of your order in the \"Me\" section of the app.</string>
+    <string name="i_understand">I understand</string>
+    <string name="select_amount">How many?</string>
+    <string name="confirm_order_title">Confirm your order</string>
+    <string name="comment">Comment</string>
+    <string name="order_comment_example">Please pack well...</string>
+    <string name="order_comment_hint">Leave a comment for the seller to see</string>
+    <string name="invalid_data_error">The data you sent was invalid. Details: %s</string>
+    <string name="order_error_dismiss">I\'ll try again</string>
+    <string name="order_failure_message_template">What went wrong: %s</string>
+    <string name="order_failure_title">We couldn\'t place your order</string>
 </resources>
