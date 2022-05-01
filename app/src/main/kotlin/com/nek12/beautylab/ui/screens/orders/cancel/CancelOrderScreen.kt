@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -65,7 +66,7 @@ private fun MVIIntentScope<CancelOrderIntent, CancelOrderAction>.CancelOrderCont
             .padding(8.dp), contentAlignment = Alignment.Center
     ) {
         when (state) {
-            is Loading -> Unit
+            is Loading -> CircularProgressIndicator()
             is CancellingOrder -> {
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     TransactionItem(state.order, {}, {}, isActionVisible = false)

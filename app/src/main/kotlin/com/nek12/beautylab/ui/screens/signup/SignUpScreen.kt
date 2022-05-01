@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
 import com.nek12.beautylab.common.GMRIcon
+import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
@@ -33,6 +35,7 @@ import com.nek12.beautylab.ui.widgets.BLIcon
 import com.nek12.beautylab.ui.widgets.BLTextInput
 import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.flowMVI.android.compose.MVIComposable
+import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
@@ -54,17 +57,26 @@ fun SignUpScreen(
         }
     }
 
+    SignUpScreenContent(state, scaffoldState)
+
+}
+
+@Composable
+fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUpState, scaffoldState: ScaffoldState) {
     Scaffold(
         topBar = { BLTopBar(R.string.app_name) },
         scaffoldState = scaffoldState,
     ) { padding ->
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(padding)
-        ) {
-            when (state) {
-                is AcceptingInput -> {
+
+        when (state) {
+            is AcceptingInput -> {
+                Column(
+                    verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .padding(padding)
+                        .padding(bottom = 72.dp, start = 12.dp, end = 12.dp)
+                ) {
                     Box(
                         Modifier
                             .fillMaxWidth()
@@ -113,9 +125,9 @@ fun SignUpScreen(
                         }
                     }
                 }
-                Loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
+            }
+            Loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
             }
         }
     }
@@ -124,5 +136,6 @@ fun SignUpScreen(
 
 @Composable
 @Preview(name = "LoginScreen", showSystemUi = false, showBackground = true)
-private fun LoginScreenPreview() {
+private fun LoginScreenPreview() = ScreenPreview {
+    SignUpScreenContent(state = AcceptingInput(), scaffoldState = rememberScaffoldState())
 }

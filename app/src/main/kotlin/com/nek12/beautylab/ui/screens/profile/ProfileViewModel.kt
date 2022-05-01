@@ -1,11 +1,14 @@
 package com.nek12.beautylab.ui.screens.profile
 
 import com.nek12.androidutils.extensions.core.orThrow
+import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToCancelOrder
+import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToLogIn
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToOrderHistory
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToProductDetails
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedCancelOrder
+import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedOrder
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedSeeHistory
 import com.nek12.beautylab.ui.screens.profile.ProfileState.DisplayingProfile
@@ -16,6 +19,7 @@ import kotlinx.coroutines.async
 
 class ProfileViewModel(
     val repo: BeautyLabRepo,
+    val authManager: AuthManager,
 ): MVIViewModel<ProfileState, ProfileIntent, ProfileAction>() {
 
     override val initialState get() = Loading
@@ -38,6 +42,11 @@ class ProfileViewModel(
             intent.item.productId?.let {
                 send(GoToProductDetails(it))
             }
+            currentState
+        }
+        is ClickedLogout -> {
+            authManager.reset()
+            send(GoToLogIn)
             currentState
         }
     }

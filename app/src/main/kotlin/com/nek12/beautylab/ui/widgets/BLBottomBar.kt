@@ -10,9 +10,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.ui.BottomBarDestination
+import com.nek12.beautylab.ui.screens.NavGraphs
 import com.nek12.beautylab.ui.screens.appDestination
 import com.nek12.beautylab.ui.screens.destinations.Destination
 import com.ramcosta.composedestinations.navigation.navigateTo
+import com.ramcosta.composedestinations.navigation.popUpTo
 
 @Composable
 fun BLBottomBar(
@@ -26,7 +28,11 @@ fun BLBottomBar(
                 selected = currentDestination == destination.direction,
                 onClick = {
                     navController.navigateTo(destination.direction) {
+                        popUpTo(NavGraphs.root.startRoute) {
+                            saveState = false
+                        }
                         launchSingleTop = true
+                        restoreState = false //todo: disabled until screens implement reloading mechanisms
                     }
                 },
                 icon = {

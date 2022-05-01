@@ -18,6 +18,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,8 +38,10 @@ import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductList
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProfile
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedBrand
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedProduct
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedRetry
+import com.nek12.beautylab.ui.screens.home.HomeIntent.EnteredHome
 import com.nek12.beautylab.ui.screens.home.HomeState.DisplayingContent
 import com.nek12.beautylab.ui.screens.home.HomeState.Error
 import com.nek12.beautylab.ui.screens.home.HomeState.Loading
@@ -98,6 +101,10 @@ fun HomeScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        send(EnteredHome)
+    }
+
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -119,7 +126,13 @@ fun HomeScreen(
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.Start,
                     ) {
-                        BLUserProfileCard(state.userName, state.userBalance, Modifier.padding(8.dp))
+                        BLUserProfileCard(
+                            name = state.userName,
+                            balance = state.userBalance,
+                            modifier = Modifier.padding(8.dp),
+                            onClickLogout = { send(ClickedLogout) }
+                        )
+
                         BLSpacer()
 
                         Text(R.string.popular_products_title.string(), style = MaterialTheme.typography.h5)

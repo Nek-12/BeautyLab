@@ -26,7 +26,7 @@ val appModule = module {
     viewModel { params -> CancelOrderViewModel(params.get(), get()) }
     viewModel { params -> ProductListViewModel(params.getOrNull(), get()) }
     viewModel { params -> ProductDetailsViewModel(params.get(), get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
     viewModel { params -> ProductFiltersViewModel(params.getOrNull(), get()) }
     viewModel { params -> OrderConfirmationViewModel(params.get(), get()) }
 }

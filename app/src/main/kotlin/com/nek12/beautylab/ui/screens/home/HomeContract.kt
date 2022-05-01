@@ -49,6 +49,8 @@ sealed class HomeIntent: MVIIntent {
     data class ClickedCategory(val item: CategoryChipItem): HomeIntent()
     data class ClickedBrand(val item: BrandChipItem): HomeIntent()
     object ClickedRetry: HomeIntent()
+    object ClickedLogout: HomeIntent()
+    object EnteredHome: HomeIntent()
 }
 
 @Immutable

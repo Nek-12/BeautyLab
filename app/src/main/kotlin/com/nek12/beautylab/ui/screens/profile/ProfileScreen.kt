@@ -35,13 +35,16 @@ import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.TransactionItem
 import com.nek12.beautylab.ui.screens.destinations.CancelOrderScreenDestination
+import com.nek12.beautylab.ui.screens.destinations.LoginScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.OrderHistoryScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoBack
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToCancelOrder
+import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToLogIn
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToOrderHistory
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToProductDetails
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedCancelOrder
+import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedOrder
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedSeeHistory
 import com.nek12.beautylab.ui.screens.profile.ProfileState.DisplayingProfile
@@ -74,6 +77,9 @@ fun ProfileScreen(
             is GoToCancelOrder -> navController.navigateTo(CancelOrderScreenDestination(action.id))
             is GoToOrderHistory -> navController.navigateTo(OrderHistoryScreenDestination)
             is GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.productId))
+            is GoToLogIn -> navController.navigateTo(LoginScreenDestination) {
+                popUpTo(LoginScreenDestination.route)
+            }
         }
     }
 
@@ -109,7 +115,8 @@ private fun MVIIntentScope<ProfileIntent, ProfileAction>.ProfileContent(
                             balance = state.bonusBalance,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(12.dp)
+                                .padding(12.dp),
+                            onClickLogout = { send(ClickedLogout) }
                         )
 
                         Card(

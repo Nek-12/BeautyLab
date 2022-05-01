@@ -14,7 +14,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.nek12.androidutils.compose.string
-import com.nek12.beautylab.R
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.NewsCardItem
@@ -24,7 +23,6 @@ import com.nek12.beautylab.ui.screens.news.NewsState.Error
 import com.nek12.beautylab.ui.screens.news.NewsState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
-import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
@@ -61,7 +59,7 @@ private fun MVIIntentScope<NewsIntent, NewsAction>.NewsContent(
 
             Scaffold(
                 scaffoldState = scaffoldState,
-                topBar = { BLTopBar(R.string.news) },
+                // topBar = { BLTopBar(R.string.news) },
                 bottomBar = { BLBottomBar(navController) }
             ) {
                 LazyColumn(Modifier.padding(it)) {

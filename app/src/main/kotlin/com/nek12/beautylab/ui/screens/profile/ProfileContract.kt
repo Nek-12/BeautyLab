@@ -32,6 +32,7 @@ sealed class ProfileState: MVIState {
 @Immutable
 sealed class ProfileIntent: MVIIntent {
 
+    object ClickedLogout: ProfileIntent()
     object ClickedSeeHistory: ProfileIntent()
     data class ClickedCancelOrder(val item: TransactionItem): ProfileIntent()
     data class ClickedOrder(val item: TransactionItem): ProfileIntent()
@@ -44,4 +45,5 @@ sealed class ProfileAction: MVIAction {
     data class GoToProductDetails(val productId: UUID): ProfileAction()
     object GoToOrderHistory: ProfileAction()
     object GoBack: ProfileAction()
+    object GoToLogIn: ProfileAction()
 }

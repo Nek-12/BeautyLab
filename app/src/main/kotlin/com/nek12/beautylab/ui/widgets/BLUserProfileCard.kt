@@ -24,34 +24,35 @@ import com.nek12.beautylab.ui.theme.BeautyLabTheme
 fun BLUserProfileCard(
     name: String,
     balance: Double,
+    onClickLogout: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(modifier = modifier) {
         Row(
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
 
             BLCircleIcon(
                 icon = GMRIcon.gmr_person,
                 color = MaterialTheme.colors.primary,
                 size = 80.dp,
-                modifier = Modifier.padding(12.dp)
+                modifier = Modifier.padding(8.dp)
             )
 
 
             Column(
-                Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
             ) {
                 Text(
                     text = R.string.welcome_template.string(name),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp),
-                    style = MaterialTheme.typography.h5,
+                    modifier = Modifier.padding(4.dp),
+                    style = MaterialTheme.typography.h6,
                     textAlign = TextAlign.Center,
                     softWrap = false,
                     overflow = TextOverflow.Ellipsis,
@@ -60,14 +61,23 @@ fun BLUserProfileCard(
 
                 Text(
                     text = R.string.bonus_balance_template.string(balance),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp),
+                    modifier = Modifier.padding(4.dp),
                     style = MaterialTheme.typography.body1,
                     textAlign = TextAlign.Center,
                     softWrap = false,
                     overflow = TextOverflow.Ellipsis,
                 )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                ) {
+                    BLCircleIcon(
+                        icon = GMRIcon.gmr_exit_to_app,
+                        color = MaterialTheme.colors.primary,
+                        onClick = onClickLogout
+                    )
+                }
             }
         }
     }
@@ -78,6 +88,6 @@ fun BLUserProfileCard(
 @Preview(name = "BLUserProfileCard", showSystemUi = false, showBackground = true)
 private fun BLUserProfileCardPreview() {
     BeautyLabTheme(false) {
-        BLUserProfileCard(name = "Nek.12", balance = 17900.00)
+        BLUserProfileCard(name = "User with very long name and surname and whatnot", balance = 17900.00, {})
     }
 }

@@ -6,6 +6,17 @@ import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.data.util.ApiError
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToLogIn
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductDetails
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductList
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedBrand
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedLogout
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedProduct
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedRetry
+import com.nek12.beautylab.ui.screens.home.HomeIntent.EnteredHome
+import com.nek12.beautylab.ui.screens.home.HomeState.DisplayingContent
+import com.nek12.beautylab.ui.screens.home.HomeState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
 import kotlinx.coroutines.Dispatchers
 
@@ -14,17 +25,13 @@ class HomeViewModel(
     private val authManager: AuthManager,
 ): MVIViewModel<HomeState, HomeIntent, HomeAction>() {
 
-    override val initialState get() = HomeState.Loading
+    override val initialState get() = Loading
     override fun recover(from: Exception) = HomeState.Error(from.genericMessage)
 
-    init {
-        launchLoadData()
-    }
-
     override suspend fun reduce(intent: HomeIntent): HomeState = when (intent) {
-        is HomeIntent.ClickedBrand -> withState<HomeState.DisplayingContent> {
+        is ClickedBrand -> withState<DisplayingContent> {
             send(
-                HomeAction.GoToProductList(
+                GoToProductList(
                     FiltersPayload(
                         brandId = intent.item.id
                     )
@@ -32,9 +39,9 @@ class HomeViewModel(
             )
             currentState
         }
-        is HomeIntent.ClickedCategory -> withState<HomeState.DisplayingContent> {
+        is ClickedCategory -> withState<DisplayingContent> {
             send(
-                HomeAction.GoToProductList(
+                GoToProductList(
                     FiltersPayload(
                         categoryId = intent.item.id
                     )
@@ -42,23 +49,32 @@ class HomeViewModel(
             )
             currentState
         }
-        is HomeIntent.ClickedProduct -> withState<HomeState.DisplayingContent> {
-            send(HomeAction.GoToProductDetails(intent.item.id))
+        is ClickedProduct -> withState<DisplayingContent> {
+            send(GoToProductDetails(intent.item.id))
             currentState
         }
-        is HomeIntent.ClickedRetry -> {
+        is ClickedRetry -> {
             launchLoadData()
-            HomeState.Loading
+            Loading
+        }
+        ClickedLogout -> {
+            authManager.reset()
+            send(GoToLogIn)
+            currentState
+        }
+        is EnteredHome -> {
+            launchLoadData()
+            Loading
         }
     }
 
     private fun launchLoadData() = launchForState(Dispatchers.IO) {
         repo.getMainScreen().fold(
-            onSuccess = { HomeState.DisplayingContent(it) },
+            onSuccess = { DisplayingContent(it) },
             onError = {
                 when (it) {
                     is ApiError.Unauthorized -> {
-                        send(HomeAction.GoToLogIn)
+                        send(GoToLogIn)
                         authManager.reset()
                     }
                 }
