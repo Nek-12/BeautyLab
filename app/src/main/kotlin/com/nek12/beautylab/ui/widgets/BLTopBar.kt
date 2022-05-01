@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
 
 @Composable
@@ -19,6 +20,7 @@ fun BLTopBar(
         modifier = modifier,
         contentColor = MaterialTheme.colors.primary,
         backgroundColor = Color.Transparent,
+        elevation = 0.dp,
         title = {
             Text(
                 title,
