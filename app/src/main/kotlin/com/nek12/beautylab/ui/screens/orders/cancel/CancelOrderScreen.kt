@@ -36,12 +36,13 @@ import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.DestinationStyle.BottomSheet
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
 @Composable
-@Destination
+@Destination(style = BottomSheet::class)
 fun CancelOrderScreen(
     orderId: UUID,
     navigator: DestinationsNavigator
@@ -81,8 +82,8 @@ private fun MVIIntentScope<CancelOrderIntent, CancelOrderAction>.CancelOrderCont
                         modifier = Modifier.padding(8.dp),
                         firstIcon = GMRIcon.gmr_delete_forever,
                         secondIcon = GMRIcon.gmr_close,
-                        onFirstClick = { send(ClickedDeclineCancellation) },
-                        onSecondClick = { send(ClickedConfirmCancellation) }
+                        onFirstClick = { send(ClickedConfirmCancellation) },
+                        onSecondClick = { send(ClickedDeclineCancellation) }
                     )
 
                 }

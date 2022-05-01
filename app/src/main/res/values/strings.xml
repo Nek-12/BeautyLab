@@ -93,4 +93,5 @@
     <string name="unable_to_cancel_order">We couldn\'t cancel your order. Contact support for further assistance.</string>
     <string name="cancel_success_description">Success! We have canceled your order. Refresh your transaction list if changes are not reflected yet.</string>
     <string name="order_history">See order history</string>
+    <string name="pending_orders_profile_subtitle">Your pending orders</string>
 </resources>

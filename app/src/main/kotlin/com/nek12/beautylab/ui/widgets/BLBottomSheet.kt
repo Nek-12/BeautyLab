@@ -6,6 +6,7 @@ import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.navigation.material.BottomSheetNavigator
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
@@ -25,6 +26,7 @@ fun BLBottomSheet(
         sheetBackgroundColor = sheetBackgroundColor,
         sheetContentColor = sheetContentColor,
         content = content,
+        sheetElevation = 6.dp,
         scrimColor = Color.Black.copy(alpha = 0.5f), //Do not use white screen for dark theme
     )
 }

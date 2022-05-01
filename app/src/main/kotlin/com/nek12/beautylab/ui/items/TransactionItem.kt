@@ -84,7 +84,7 @@ fun TransactionItem(
     Surface(
         modifier = modifier,
         onClick = onClick,
-        border = BorderStroke(2.dp, MaterialTheme.colors.onBackground.copy(alpha = 0.5f)),
+        border = BorderStroke(1.dp, MaterialTheme.colors.onBackground.copy(alpha = 0.5f)),
         color = Color.Transparent,
         contentColor = MaterialTheme.colors.onBackground,
         shape = MaterialTheme.shapes.large,
@@ -98,25 +98,23 @@ fun TransactionItem(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 AsyncImage(
                     model = item.imageUrl,
                     contentDescription = null,
                     modifier = Modifier
-                        .clip(CircleShape)
-                        .size(52.dp)
                         .padding(8.dp)
-                        .weight(0.5f),
+                        .size(64.dp)
+                        .clip(CircleShape),
                     alignment = Alignment.Center,
                     contentScale = ContentScale.Crop,
                 )
 
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                        .fillMaxWidth(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -125,7 +123,7 @@ fun TransactionItem(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
-                        style = MaterialTheme.typography.h6,
+                        style = MaterialTheme.typography.subtitle1,
                         textAlign = TextAlign.Center,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

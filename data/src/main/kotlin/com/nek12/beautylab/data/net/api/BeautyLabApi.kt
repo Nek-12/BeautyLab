@@ -65,7 +65,7 @@ class BeautyLabApi(client: HttpClient): BaseApi(client) {
 
     suspend fun getPendingOwnTransactions() = get<List<GetTransactionResponse>, Any>("transaction/own/pending")
 
-    suspend fun getTransaction(id: UUID) = get<GetTransactionResponse, Any>("transaction/$id")
+    suspend fun getTransaction(id: UUID) = get<GetTransactionResponse, Any>("transaction/own/$id")
 
     suspend fun cancelTransaction(id: UUID) = post<GetTransactionResponse, Any>("transaction/cancel/$id")
 
