@@ -51,7 +51,6 @@ import com.nek12.beautylab.ui.widgets.SliderWithLabel
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.result.ResultBackNavigator
 import com.ramcosta.composedestinations.spec.DestinationStyle
 import com.vanpra.composematerialdialogs.MaterialDialog
@@ -65,7 +64,6 @@ import java.time.LocalDate
 @Destination(style = DestinationStyle.BottomSheet::class)
 fun ProductFiltersScreen(
     initialFilters: FiltersPayload,
-    navigator: DestinationsNavigator,
     resultNavigator: ResultBackNavigator<FiltersPayload>,
 ) = MVIComposable(getViewModel<ProductFiltersViewModel> { parametersOf(initialFilters) }) { state ->
 

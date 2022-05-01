@@ -19,5 +19,5 @@ object Values {
     const val detektConfigPath = "detekt.yml"
     const val detektReportFilename = "detekt_report"
     val supportedLocales = listOf("en", "ru")
-    val kotlinCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all")
+    val kotlinCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xcontext-receivers")
 }

@@ -1,8 +1,8 @@
 package com.nek12.beautylab.ui.screens.login
 
+import com.nek12.androidutils.extensions.android.Text
 import com.nek12.androidutils.extensions.core.fold
 import com.nek12.beautylab.R
-import com.nek12.beautylab.common.Text
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.input.Input

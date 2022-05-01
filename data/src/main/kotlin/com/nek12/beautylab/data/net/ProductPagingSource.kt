@@ -16,7 +16,7 @@ class ProductPagingSource(
 ): SequentialPagingSource<GetProductResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GetProductResponse> {
-        return api.products(request, params.key, params.loadSize, sort.value, direction.value).fold(
+        return api.getProducts(request, params.key, params.loadSize, sort.value, direction.value).fold(
             onSuccess = { LoadResult.Page(it.content, it.previousPage, it.nextPage) },
             onError = { LoadResult.Error(it) }
         )

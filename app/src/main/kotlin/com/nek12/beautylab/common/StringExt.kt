@@ -2,10 +2,15 @@ package com.nek12.beautylab.common
 
 import androidx.compose.runtime.Composable
 import com.nek12.androidutils.compose.string
+import com.nek12.androidutils.extensions.android.Text
+import com.nek12.androidutils.extensions.android.Text.Resource
 import com.nek12.beautylab.R
-import com.nek12.beautylab.common.Text.Resource
 import com.nek12.beautylab.common.input.ValidationError
 import com.nek12.beautylab.common.input.toMessages
+import com.nek12.beautylab.core.model.net.TransactionStatus
+import com.nek12.beautylab.core.model.net.TransactionStatus.CANCELED
+import com.nek12.beautylab.core.model.net.TransactionStatus.COMPLETED
+import com.nek12.beautylab.core.model.net.TransactionStatus.PENDING
 import com.nek12.beautylab.data.util.ApiError
 import java.time.Duration
 import java.time.ZonedDateTime
@@ -33,3 +38,10 @@ fun ZonedDateTime.toReadableDays(dateFormatter: DateTimeFormatter): String {
         else -> dateFormatter.format(this)
     }
 }
+
+val TransactionStatus.representation
+    @Composable get() = when (this) {
+        PENDING -> R.string.transaction_pending
+        COMPLETED -> R.string.transaction_completed
+        CANCELED -> R.string.transaction_canceled
+    }.string()

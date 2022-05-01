@@ -1,8 +1,8 @@
 package com.nek12.beautylab.ui.screens.home
 
 import androidx.compose.runtime.Immutable
+import com.nek12.androidutils.extensions.android.Text
 import com.nek12.beautylab.common.FiltersPayload
-import com.nek12.beautylab.common.Text
 import com.nek12.beautylab.core.model.net.mobile.MobileViewResponse
 import com.nek12.beautylab.ui.items.BrandChipItem
 import com.nek12.beautylab.ui.items.CategoryChipItem

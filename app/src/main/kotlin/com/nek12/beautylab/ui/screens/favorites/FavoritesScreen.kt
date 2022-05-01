@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.nek12.androidutils.compose.string
 import com.nek12.androidutils.extensions.core.copies
 import com.nek12.beautylab.common.Mock
 import com.nek12.beautylab.common.ScreenPreview

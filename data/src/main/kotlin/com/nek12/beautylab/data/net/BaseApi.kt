@@ -1,7 +1,6 @@
 package com.nek12.beautylab.data.net
 
 import com.nek12.androidutils.extensions.core.ApiResult
-import com.nek12.androidutils.extensions.core.wrap
 import com.nek12.beautylab.data.util.apiErrors
 import com.nek12.beautylab.data.util.log
 import io.ktor.client.*

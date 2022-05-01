@@ -2,15 +2,29 @@ package com.nek12.beautylab.common
 
 import com.nek12.beautylab.core.model.net.Color
 import com.nek12.beautylab.core.model.net.Country
+import com.nek12.beautylab.core.model.net.TransactionStatus.PENDING
 import com.nek12.beautylab.core.model.net.brand.BrandResponse
 import com.nek12.beautylab.core.model.net.product.GetProductResponse
 import com.nek12.beautylab.core.model.net.product.category.ProductCategoryResponse
+import com.nek12.beautylab.core.model.net.transaction.GetTransactionResponse
 import java.time.Instant
 import java.util.*
 
 
 object Mock {
 
+    val transaction
+        get() = GetTransactionResponse(
+            product = product,
+            buyerId = UUID.randomUUID(),
+            pricePerUnit = 27.0,
+            totalPrice = 277.0,
+            amount = 12,
+            date = Instant.now(),
+            status = PENDING,
+            comment = "Please be careful with my parcel",
+            id = UUID.randomUUID(),
+        )
     val category = ProductCategoryResponse(
         "Category", "Beauty", UUID.randomUUID(),
     )

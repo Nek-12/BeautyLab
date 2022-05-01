@@ -1,6 +1,6 @@
 package com.nek12.beautylab.ui.screens.signup
 
-import com.nek12.beautylab.common.Text
+import com.nek12.androidutils.extensions.android.Text
 import com.nek12.beautylab.common.input.Input
 import com.nek12.flowMVI.MVIAction
 import com.nek12.flowMVI.MVIIntent

@@ -1,7 +1,7 @@
 package com.nek12.beautylab.ui.screens.product.order_confirmation
 
 import androidx.compose.runtime.Immutable
-import com.nek12.beautylab.common.Text
+import com.nek12.androidutils.extensions.android.Text
 import com.nek12.beautylab.common.input.Input
 import com.nek12.beautylab.core.model.net.product.GetProductResponse
 import com.nek12.beautylab.ui.items.ProductCardItem

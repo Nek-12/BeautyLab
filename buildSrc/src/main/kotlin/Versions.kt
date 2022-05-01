@@ -18,7 +18,7 @@ object Versions {
     const val koin = "3.2.0-beta-1"
     const val detekt = "1.18.1"
     const val paging = "3.1.1"
-    const val utils = "0.7.0"
+    const val utils = "0.7.2"
     const val iconics = "5.3.3"
     const val williamChart = "3.11.0"
     const val arrow = "1.0.6-alpha.1"
@@ -32,7 +32,7 @@ object Versions {
     const val coil = "2.0.0-rc02"
     const val coilTransformations = "1.1.2"
     const val lifecycle = "2.5.0-alpha05"
-    const val mvi = "0.1.3"
+    const val mvi = "0.1.5"
     const val ktor = "2.0.0"
     const val flowExt = "0.2.0"
 

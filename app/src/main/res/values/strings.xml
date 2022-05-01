@@ -75,10 +75,22 @@
     <string name="select_amount">How many?</string>
     <string name="confirm_order_title">Confirm your order</string>
     <string name="comment">Comment</string>
-    <string name="order_comment_example">Please pack well...</string>
+    <string name="order_comment_example">Please pack well…</string>
     <string name="order_comment_hint">Leave a comment for the seller to see</string>
     <string name="invalid_data_error">The data you sent was invalid. Details: %s</string>
     <string name="order_error_dismiss">I\'ll try again</string>
     <string name="order_failure_message_template">What went wrong: %s</string>
     <string name="order_failure_title">We couldn\'t place your order</string>
+    <string name="unavailable_product">Product unavailable</string>
+    <string name="transaction_amount_price_template">%1$d item(s) for %2$.2f ₽</string>
+    <string name="transaction_pending">In processing</string>
+    <string name="transaction_completed">Completed</string>
+    <string name="transaction_canceled">Canceled</string>
+    <string name="transaction_status_template">Status: %s</string>
+    <string name="cancel_transaction">Cancel</string>
+    <string name="repeat">Repeat</string>
+    <string name="order_cancellation_confirmation">Are you sure you want to cancel the order? You will NOT get your money back if it has been shipped already!</string>
+    <string name="unable_to_cancel_order">We couldn\'t cancel your order. Contact support for further assistance.</string>
+    <string name="cancel_success_description">Success! We have canceled your order. Refresh your transaction list if changes are not reflected yet.</string>
+    <string name="order_history">See order history</string>
 </resources>

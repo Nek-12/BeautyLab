@@ -9,7 +9,7 @@ import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle.LONG
+import java.time.format.FormatStyle.MEDIUM
 
 @Composable
 fun BLDateCaption(
@@ -17,8 +17,8 @@ fun BLDateCaption(
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
 ) {
-    val formatter = remember { DateTimeFormatter.ofLocalizedDateTime(LONG) }
-    val text = formatter.format(date.toLocalDateTime())
+    val formatter = remember { DateTimeFormatter.ofLocalizedDateTime(MEDIUM) }
+    val text = formatter.format(date)
 
     BLCaption(R.string.created_at_template.string(text), modifier, color)
 }

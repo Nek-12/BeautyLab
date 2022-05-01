@@ -11,6 +11,7 @@ import com.mikepenz.iconics.typeface.IIcon
 import com.mikepenz.iconics.typeface.ITypeface
 import com.mikepenz.iconics.typeface.library.googlematerial.RoundedGoogleMaterial
 import com.nek12.androidutils.compose.string
+import com.nek12.androidutils.extensions.android.Text
 import com.nek12.beautylab.R
 import com.nek12.beautylab.core.model.net.Color
 import com.nek12.beautylab.core.model.net.SortDirection

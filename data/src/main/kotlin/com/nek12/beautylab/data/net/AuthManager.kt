@@ -3,9 +3,10 @@ package com.nek12.beautylab.data.net
 import android.content.Context
 import com.nek12.androidutils.extensions.core.ApiResult
 import com.nek12.androidutils.extensions.core.isValid
+import com.nek12.androidutils.extensions.core.map
 import com.nek12.androidutils.extensions.core.onError
+import com.nek12.androidutils.extensions.core.onSuccess
 import com.nek12.androidutils.extensions.core.orNull
-import com.nek12.androidutils.extensions.core.wrap
 import com.nek12.beautylab.core.BACKEND_URL
 import com.nek12.beautylab.core.model.net.user.AuthTokensResponse
 import com.nek12.beautylab.core.model.net.user.RefreshTokenRequest
@@ -34,10 +35,12 @@ class AuthManager(private val context: Context) {
             setBody(RefreshTokenRequest(context.refreshToken ?: return null))
         }.body<AuthTokensResponse>()
     }
+        .map { BearerTokens(it.accessToken, it.refreshToken) }
+        .onSuccess {
+            saveTokens(it.accessToken, it.refreshToken)
+        }
         .onError { reset() }
         .orNull()
-        ?.run { BearerTokens(accessToken, refreshToken) }
-        ?.also { saveTokens(it.accessToken, it.refreshToken) }
 
     fun reset() {
         context.accessToken = null

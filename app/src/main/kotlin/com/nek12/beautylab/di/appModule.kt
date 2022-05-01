@@ -4,7 +4,8 @@ import com.nek12.beautylab.ui.screens.favorites.FavoritesViewModel
 import com.nek12.beautylab.ui.screens.home.HomeViewModel
 import com.nek12.beautylab.ui.screens.login.LoginViewModel
 import com.nek12.beautylab.ui.screens.news.NewsViewModel
-import com.nek12.beautylab.ui.screens.orders.OrdersViewModel
+import com.nek12.beautylab.ui.screens.orders.cancel.CancelOrderViewModel
+import com.nek12.beautylab.ui.screens.orders.history.OrderHistoryViewModel
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsViewModel
 import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersViewModel
 import com.nek12.beautylab.ui.screens.product.list.ProductListViewModel
@@ -21,10 +22,11 @@ val appModule = module {
     viewModel { HomeViewModel(get(), get()) }
     viewModel { FavoritesViewModel(get()) }
     viewModel { NewsViewModel(get()) }
-    viewModel { OrdersViewModel() }
+    viewModel { OrderHistoryViewModel(get()) }
+    viewModel { params -> CancelOrderViewModel(params.get(), get()) }
     viewModel { params -> ProductListViewModel(params.getOrNull(), get()) }
     viewModel { params -> ProductDetailsViewModel(params.get(), get()) }
-    viewModel { ProfileViewModel() }
+    viewModel { ProfileViewModel(get()) }
     viewModel { params -> ProductFiltersViewModel(params.getOrNull(), get()) }
     viewModel { params -> OrderConfirmationViewModel(params.get(), get()) }
 }
