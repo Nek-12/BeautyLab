@@ -34,16 +34,19 @@ import com.nek12.beautylab.common.Mock
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.TransactionItem
+import com.nek12.beautylab.ui.screens.destinations.AboutAppScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.CancelOrderScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.LoginScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.OrderHistoryScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoBack
+import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToAboutApp
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToCancelOrder
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToLogIn
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToOrderHistory
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToProductDetails
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedCancelOrder
+import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedOrder
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedSeeHistory
@@ -56,6 +59,7 @@ import com.nek12.beautylab.ui.widgets.BLCircleIcon
 import com.nek12.beautylab.ui.widgets.BLEmptyView
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLIcon
+import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.beautylab.ui.widgets.BLUserProfileCard
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
@@ -80,6 +84,7 @@ fun ProfileScreen(
             is GoToLogIn -> navController.navigateTo(LoginScreenDestination) {
                 popUpTo(LoginScreenDestination.route)
             }
+            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
         }
     }
 
@@ -96,6 +101,11 @@ private fun MVIIntentScope<ProfileIntent, ProfileAction>.ProfileContent(
     Scaffold(
         bottomBar = { BLBottomBar(navController = navController) },
         scaffoldState = scaffoldState,
+        topBar = {
+            BLTopBar(title = R.string.me, actions = {
+                BLIcon(asset = GMRIcon.gmr_info_outline, onClick = { send(ClickedInfo) })
+            })
+        },
     ) { padding ->
         Box(
             modifier = Modifier

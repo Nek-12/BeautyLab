@@ -19,10 +19,14 @@ sealed class NewsState: MVIState {
 }
 
 @Immutable
-sealed class NewsIntent: MVIIntent
+sealed class NewsIntent: MVIIntent {
+
+    object ClickedInfo: NewsIntent()
+}
 
 @Immutable
 sealed class NewsAction: MVIAction {
 
+    object GoToAboutApp: NewsAction()
     object GoBack: NewsAction()
 }

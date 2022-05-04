@@ -14,18 +14,26 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.nek12.androidutils.compose.string
+import com.nek12.beautylab.R
+import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.NewsCardItem
+import com.nek12.beautylab.ui.screens.destinations.AboutAppScreenDestination
 import com.nek12.beautylab.ui.screens.news.NewsAction.GoBack
+import com.nek12.beautylab.ui.screens.news.NewsAction.GoToAboutApp
+import com.nek12.beautylab.ui.screens.news.NewsIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.news.NewsState.DisplayingNews
 import com.nek12.beautylab.ui.screens.news.NewsState.Error
 import com.nek12.beautylab.ui.screens.news.NewsState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
+import com.nek12.beautylab.ui.widgets.BLIcon
+import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.navigateTo
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -39,6 +47,7 @@ fun NewsScreen(
     consume { action ->
         when (action) {
             is GoBack -> navController.navigateUp()
+            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
         }
     }
 
@@ -59,7 +68,11 @@ private fun MVIIntentScope<NewsIntent, NewsAction>.NewsContent(
 
             Scaffold(
                 scaffoldState = scaffoldState,
-                // topBar = { BLTopBar(R.string.news) },
+                topBar = {
+                    BLTopBar(title = R.string.news, actions = {
+                        BLIcon(asset = GMRIcon.gmr_info_outline, onClick = { send(ClickedInfo) })
+                    })
+                },
                 bottomBar = { BLBottomBar(navController) }
             ) {
                 LazyColumn(Modifier.padding(it)) {

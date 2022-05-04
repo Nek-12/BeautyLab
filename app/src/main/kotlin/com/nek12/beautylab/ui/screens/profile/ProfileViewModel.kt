@@ -3,11 +3,13 @@ package com.nek12.beautylab.ui.screens.profile
 import com.nek12.androidutils.extensions.core.orThrow
 import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
+import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToAboutApp
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToCancelOrder
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToLogIn
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToOrderHistory
 import com.nek12.beautylab.ui.screens.profile.ProfileAction.GoToProductDetails
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedCancelOrder
+import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedOrder
 import com.nek12.beautylab.ui.screens.profile.ProfileIntent.ClickedSeeHistory
@@ -47,6 +49,10 @@ class ProfileViewModel(
         is ClickedLogout -> {
             authManager.reset()
             send(GoToLogIn)
+            currentState
+        }
+        is ClickedInfo -> {
+            send(GoToAboutApp)
             currentState
         }
     }

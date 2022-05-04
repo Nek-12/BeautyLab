@@ -31,12 +31,14 @@ sealed class FavoritesState: MVIState {
 @Immutable
 sealed class FavoritesIntent: MVIIntent {
 
+    object ClickedInfo: FavoritesIntent()
     data class ClickedProduct(val item: ProductCardItem): FavoritesIntent()
 }
 
 @Immutable
 sealed class FavoritesAction: MVIAction {
 
+    object GoToAboutApp: FavoritesAction()
     data class GoToProductDetails(val id: UUID): FavoritesAction()
     object GoBack: FavoritesAction()
 }

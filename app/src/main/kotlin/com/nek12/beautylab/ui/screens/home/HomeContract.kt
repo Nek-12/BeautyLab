@@ -51,11 +51,13 @@ sealed class HomeIntent: MVIIntent {
     object ClickedRetry: HomeIntent()
     object ClickedLogout: HomeIntent()
     object EnteredHome: HomeIntent()
+    object ClickedInfo: HomeIntent()
 }
 
 @Immutable
 sealed class HomeAction: MVIAction {
 
+    object GoToAboutApp: HomeAction()
     data class GoToProductList(val filters: FiltersPayload): HomeAction()
     object GoToLogIn: HomeAction()
     object GoToProfile: HomeAction()

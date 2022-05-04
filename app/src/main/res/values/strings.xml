@@ -19,7 +19,7 @@
     <string name="created_at_template">Created at: %1$s</string>
     <string name="home">Home</string>
     <string name="products">Products</string>
-    <string name="account">Me</string>
+    <string name="me">Me</string>
     <string name="cart">Cart</string>
     <string name="news">News</string>
     <string name="username">Username</string>
@@ -94,4 +94,35 @@
     <string name="cancel_success_description">Success! We have canceled your order. Refresh your transaction list if changes are not reflected yet.</string>
     <string name="order_history">See order history</string>
     <string name="pending_orders_profile_subtitle">Your pending orders</string>
+    <string name="about_app_description">
+        This is a proof of concept app for an online
+        store primarily oriented on beauty, fashion, hygiene and self-care products.
+        It has been developed as a showcase of the developer\'s experience.
+        Be aware that this is NOT a real store, your orders won\'t be processed,
+        there is no support, and any financial operations are emulated.
+        Please do not expose private data to the servers as they may not be maintained or secure.
+        When using this app\'s source code, please give credits to the author.
+        This app is provided on an "AS-IS" basis without any warranties or obligations from the author.
+        It is licensed under GPL-V3 license.
+    </string>
+
+    <string name="about_app_license">
+    Copyright 2022 © Nikita Vaizin \n\n
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version. \n\n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+    </string>
+
+    <string name="project_gh_link">https://github.com/Nek-12/BeautyLab</string>
+    <string name="project_ig_link">https://www.instagram.com/beautylab.byme/</string>
+    <string name="author_site_link">https://bit.ly/Nek-12</string>
+    <string name="author_gh_link">https://github.com/Nek-12</string>
+    <string name="projects_links">Project\'s links</string>
+    <string name="authors_links">Author\'s links</string>
+    <string name="browser_not_found">You don\'t have an app with which to open this link</string>
 </resources>

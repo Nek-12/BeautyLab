@@ -6,11 +6,13 @@ import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.data.util.ApiError
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToAboutApp
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToLogIn
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductDetails
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductList
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedBrand
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedProduct
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedRetry
@@ -65,6 +67,10 @@ class HomeViewModel(
         is EnteredHome -> {
             launchLoadData()
             Loading
+        }
+        is ClickedInfo -> {
+            send(GoToAboutApp)
+            currentState
         }
     }
 

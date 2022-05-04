@@ -5,6 +5,11 @@ import androidx.paging.map
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.ui.items.ProductCardItem
+import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoToAboutApp
+import com.nek12.beautylab.ui.screens.product.list.ProductListIntent.ClickedFilters
+import com.nek12.beautylab.ui.screens.product.list.ProductListIntent.ClickedInfo
+import com.nek12.beautylab.ui.screens.product.list.ProductListIntent.ClickedProduct
+import com.nek12.beautylab.ui.screens.product.list.ProductListIntent.SelectedFilters
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.DisplayingContent
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Error
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Loading
@@ -27,17 +32,21 @@ class ProductListViewModel(
 
 
     override suspend fun reduce(intent: ProductListIntent): ProductListState = when (intent) {
-        is ProductListIntent.ClickedFilters -> {
+        is ClickedFilters -> {
             send(ProductListAction.GoToFilters(currentFilters))
             currentState
         }
-        is ProductListIntent.ClickedProduct -> {
+        is ClickedProduct -> {
             send(ProductListAction.GoToProductDetails(intent.item.id))
             currentState
         }
-        is ProductListIntent.SelectedFilters -> {
+        is SelectedFilters -> {
             currentFilters = intent.filters
             DisplayingContent(getProductsData())
+        }
+        is ClickedInfo -> {
+            send(GoToAboutApp)
+            currentState
         }
     }
 

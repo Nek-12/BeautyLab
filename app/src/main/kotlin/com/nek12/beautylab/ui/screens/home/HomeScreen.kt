@@ -27,17 +27,21 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.nek12.androidutils.compose.string
 import com.nek12.beautylab.R
+import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.ui.items.ProductCardItem
+import com.nek12.beautylab.ui.screens.destinations.AboutAppScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.LoginScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductListScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProfileScreenDestination
+import com.nek12.beautylab.ui.screens.home.HomeAction.GoToAboutApp
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToLogIn
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductDetails
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProductList
 import com.nek12.beautylab.ui.screens.home.HomeAction.GoToProfile
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedBrand
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedCategory
+import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedLogout
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedProduct
 import com.nek12.beautylab.ui.screens.home.HomeIntent.ClickedRetry
@@ -47,7 +51,9 @@ import com.nek12.beautylab.ui.screens.home.HomeState.Error
 import com.nek12.beautylab.ui.screens.home.HomeState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
+import com.nek12.beautylab.ui.widgets.BLIcon
 import com.nek12.beautylab.ui.widgets.BLSpacer
+import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.beautylab.ui.widgets.BLUserProfileCard
 import com.nek12.beautylab.ui.widgets.ChipFlowRow
 import com.nek12.flowMVI.android.compose.MVIComposable
@@ -98,6 +104,7 @@ fun HomeScreen(
             is GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.id))
             is GoToProductList -> navController.navigateTo(ProductListScreenDestination(action.filters))
             is GoToProfile -> navController.navigateTo(ProfileScreenDestination())
+            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
         }
     }
 
@@ -108,6 +115,11 @@ fun HomeScreen(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        topBar = {
+            BLTopBar(title = R.string.home, actions = {
+                BLIcon(asset = GMRIcon.gmr_info_outline, onClick = { send(ClickedInfo) })
+            })
+        },
         bottomBar = { BLBottomBar(navController) },
     ) { padding ->
         Box(

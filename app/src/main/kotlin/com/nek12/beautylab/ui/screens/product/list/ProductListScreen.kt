@@ -22,22 +22,28 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.nek12.androidutils.compose.string
+import com.nek12.beautylab.R
 import com.nek12.beautylab.common.FiltersPayload
 import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.genericMessage
 import com.nek12.beautylab.ui.items.ProductCardItem
+import com.nek12.beautylab.ui.screens.destinations.AboutAppScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductDetailsScreenDestination
 import com.nek12.beautylab.ui.screens.destinations.ProductFiltersScreenDestination
 import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoBack
+import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoToAboutApp
 import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoToFilters
 import com.nek12.beautylab.ui.screens.product.list.ProductListAction.GoToProductDetails
+import com.nek12.beautylab.ui.screens.product.list.ProductListIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.DisplayingContent
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Error
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLFab
+import com.nek12.beautylab.ui.widgets.BLIcon
+import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
@@ -64,6 +70,7 @@ fun ProductListScreen(
             is GoBack -> navController.navigateUp()
             is GoToFilters -> navController.navigateTo(ProductFiltersScreenDestination(action.filters))
             is GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.id))
+            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
         }
     }
 
@@ -80,6 +87,11 @@ private fun MVIIntentScope<ProductListIntent, ProductListAction>.ProductListCont
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = { BLBottomBar(navController) },
+        topBar = {
+            BLTopBar(title = R.string.products, actions = {
+                BLIcon(asset = GMRIcon.gmr_info_outline, onClick = { send(ClickedInfo) })
+            })
+        },
         floatingActionButton = {
             BLFab(
                 GMRIcon.gmr_filter_alt,

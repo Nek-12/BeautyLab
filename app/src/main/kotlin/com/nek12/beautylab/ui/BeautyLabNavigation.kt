@@ -63,7 +63,7 @@ enum class BottomBarDestination(
 
     Home(HomeScreenDestination, GMRIcon.gmr_home, R.string.home),
     Products(ProductListScreenDestination(), GMRIcon.gmr_shopping_bag, R.string.products),
-    Profile(ProfileScreenDestination, GMRIcon.gmr_account_circle, R.string.account),
+    Profile(ProfileScreenDestination, GMRIcon.gmr_account_circle, R.string.me),
     Favorites(FavoritesScreenDestination, GMRIcon.gmr_favorite, R.string.favorites),
     News(NewsScreenDestination, GMRIcon.gmr_receipt_long, R.string.news),
 }

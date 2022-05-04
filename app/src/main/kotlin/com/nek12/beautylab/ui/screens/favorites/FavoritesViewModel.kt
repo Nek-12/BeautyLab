@@ -2,7 +2,9 @@ package com.nek12.beautylab.ui.screens.favorites
 
 import com.nek12.androidutils.extensions.core.orThrow
 import com.nek12.beautylab.data.repo.BeautyLabRepo
+import com.nek12.beautylab.ui.screens.favorites.FavoritesAction.GoToAboutApp
 import com.nek12.beautylab.ui.screens.favorites.FavoritesAction.GoToProductDetails
+import com.nek12.beautylab.ui.screens.favorites.FavoritesIntent.ClickedInfo
 import com.nek12.beautylab.ui.screens.favorites.FavoritesIntent.ClickedProduct
 import com.nek12.beautylab.ui.screens.favorites.FavoritesState.DisplayingFavorites
 import com.nek12.beautylab.ui.screens.favorites.FavoritesState.Empty
@@ -24,6 +26,10 @@ class FavoritesViewModel(
     override suspend fun reduce(intent: FavoritesIntent): FavoritesState = when (intent) {
         is ClickedProduct -> {
             send(GoToProductDetails(intent.item.id))
+            currentState
+        }
+        is ClickedInfo -> {
+            send(GoToAboutApp)
             currentState
         }
     }

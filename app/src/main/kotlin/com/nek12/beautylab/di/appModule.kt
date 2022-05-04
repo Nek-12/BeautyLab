@@ -1,5 +1,6 @@
 package com.nek12.beautylab.di
 
+import com.nek12.beautylab.ui.screens.about.AboutAppViewModel
 import com.nek12.beautylab.ui.screens.favorites.FavoritesViewModel
 import com.nek12.beautylab.ui.screens.home.HomeViewModel
 import com.nek12.beautylab.ui.screens.login.LoginViewModel
@@ -29,4 +30,5 @@ val appModule = module {
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { params -> ProductFiltersViewModel(params.getOrNull(), get()) }
     viewModel { params -> OrderConfirmationViewModel(params.get(), get()) }
+    viewModel { AboutAppViewModel() }
 }

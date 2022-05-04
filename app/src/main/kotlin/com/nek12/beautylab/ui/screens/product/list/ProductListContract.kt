@@ -23,6 +23,7 @@ sealed class ProductListState: MVIState {
 @Immutable
 sealed class ProductListIntent: MVIIntent {
 
+    object ClickedInfo: ProductListIntent()
     data class ClickedProduct(val item: ProductCardItem): ProductListIntent()
     object ClickedFilters: ProductListIntent()
     data class SelectedFilters(val filters: FiltersPayload): ProductListIntent()
@@ -31,6 +32,7 @@ sealed class ProductListIntent: MVIIntent {
 @Immutable
 sealed class ProductListAction: MVIAction {
 
+    object GoToAboutApp: ProductListAction()
     object GoBack: ProductListAction()
     data class GoToProductDetails(val id: UUID): ProductListAction()
     data class GoToFilters(val filters: FiltersPayload): ProductListAction()
