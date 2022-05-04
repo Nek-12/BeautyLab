@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nek12.beautylab.common.input.Form
@@ -44,6 +45,7 @@ fun BLTextInput(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(),
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
 
     Column(modifier) {
@@ -63,6 +65,7 @@ fun BLTextInput(
             keyboardActions = keyboardActions,
             keyboardOptions = keyboardOptions,
             maxLines = maxLines,
+            visualTransformation = visualTransformation,
         )
         Row(
             modifier = modifier

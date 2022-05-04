@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
@@ -122,6 +123,7 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = false, keyboardType = KeyboardType.Password, imeAction = ImeAction.Next,
                         ),
+                        visualTransformation = PasswordVisualTransformation(),
                     )
                     BLTextInput(
                         input = state.passwordConfirmation,
@@ -132,7 +134,8 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = false, keyboardType = KeyboardType.Password, imeAction = ImeAction.Go,
                         ),
-                        keyboardActions = KeyboardActions { send(ClickedSignUp) }
+                        keyboardActions = KeyboardActions { send(ClickedSignUp) },
+                        visualTransformation = PasswordVisualTransformation(),
                     )
                     Row(
                         Modifier

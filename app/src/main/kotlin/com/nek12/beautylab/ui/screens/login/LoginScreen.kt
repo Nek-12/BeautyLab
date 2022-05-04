@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.ImeAction.Companion
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
@@ -124,7 +125,8 @@ fun MVIIntentScope<LoginIntent, LoginAction>.LoginScreenContent(state: LoginStat
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = false, keyboardType = KeyboardType.Password, imeAction = Companion.Go,
                         ),
-                        keyboardActions = KeyboardActions { send(ClickedLogin) }
+                        keyboardActions = KeyboardActions { send(ClickedLogin) },
+                        visualTransformation = PasswordVisualTransformation()
                     )
                     Row(
                         Modifier
