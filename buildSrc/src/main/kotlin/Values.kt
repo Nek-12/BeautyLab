@@ -5,9 +5,9 @@ object Values {
     const val applicationId = "com.nek12.beautylab"
     val versionCode = generateGitPatchVersion()
 
-    const val majorRelease = 0
+    const val majorRelease = 1
     const val minorRelease = 0
-    const val patch = 1
+    const val patch = 0
     val versionName = "$majorRelease.$minorRelease.$patch ($versionCode)"
 
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"

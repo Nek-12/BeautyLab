@@ -19,6 +19,7 @@ sealed class SignUpState: MVIState {
 
 sealed class SignUpAction: MVIAction {
     data class ShowSnackbar(val text: Text): SignUpAction()
+    object GoToHome: SignUpAction()
     object GoBack: SignUpAction()
 }
 

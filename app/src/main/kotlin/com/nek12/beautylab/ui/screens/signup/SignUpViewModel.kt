@@ -11,6 +11,7 @@ import com.nek12.beautylab.common.input.Input.Invalid
 import com.nek12.beautylab.common.input.ValidationError
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
+import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoToHome
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.ShowSnackbar
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.ClickedSignUp
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.GoBackClicked
@@ -74,7 +75,7 @@ class SignUpViewModel(
 
     private fun launchSignUp(username: String, name: String, password: String) = launchForState {
         repo.signUp(username, name, password).fold(
-            onSuccess = { send(GoBack) },
+            onSuccess = { send(GoToHome) },
             onError = { send(ShowSnackbar(it.genericMessage)) }
         )
         AcceptingInput(

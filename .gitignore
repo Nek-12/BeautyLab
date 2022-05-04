@@ -181,3 +181,4 @@ key.jks
 .idea/misc.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
+/app/release/output-metadata.json

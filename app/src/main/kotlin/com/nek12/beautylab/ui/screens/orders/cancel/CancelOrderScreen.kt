@@ -62,6 +62,7 @@ fun CancelOrderScreen(
 private fun MVIIntentScope<CancelOrderIntent, CancelOrderAction>.CancelOrderContent(state: CancelOrderState) {
     Box(
         Modifier
+            .fillMaxWidth()
             .heightIn(min = 400.dp)
             .padding(8.dp), contentAlignment = Alignment.Center
     ) {

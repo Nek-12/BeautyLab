@@ -80,8 +80,8 @@ class HomeViewModel(
             onError = {
                 when (it) {
                     is ApiError.Unauthorized -> {
-                        send(GoToLogIn)
                         authManager.reset()
+                        send(GoToLogIn)
                     }
                 }
                 HomeState.Error(it.genericMessage)

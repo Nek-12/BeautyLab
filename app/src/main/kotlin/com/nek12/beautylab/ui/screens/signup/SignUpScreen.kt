@@ -14,7 +14,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
-import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarDuration.Long
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -33,7 +33,9 @@ import com.nek12.beautylab.common.GMRIcon
 import com.nek12.beautylab.common.ScreenPreview
 import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
+import com.nek12.beautylab.ui.screens.destinations.HomeScreenDestination
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
+import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoToHome
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.ShowSnackbar
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.ClickedSignUp
 import com.nek12.beautylab.ui.screens.signup.SignUpState.AcceptingInput
@@ -59,8 +61,12 @@ fun SignUpScreen(
 
     consume { action ->
         when (action) {
-            is ShowSnackbar -> snackbar(action.text.string(context), scaffoldState, SnackbarDuration.Long)
+            is ShowSnackbar -> snackbar(action.text.string(context), scaffoldState, Long)
             is GoBack -> navigator.navigateUp()
+            GoToHome -> navigator.navigate(HomeScreenDestination) {
+                popUpTo(HomeScreenDestination.route)
+                launchSingleTop = true
+            }
         }
     }
 
@@ -144,7 +150,7 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         Arrangement.Center,
                         Alignment.CenterVertically
                     ) {
-                        Button({ send(SignUpIntent.ClickedSignUp) }) {
+                        Button({ send(ClickedSignUp) }) {
                             Text(R.string.sign_up.string())
                         }
                     }
