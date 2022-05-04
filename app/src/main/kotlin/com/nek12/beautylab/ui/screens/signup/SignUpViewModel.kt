@@ -12,9 +12,9 @@ import com.nek12.beautylab.common.input.ValidationError
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.ShowSnackbar
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.ClickedSignUp
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.GoBackClicked
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.NameChanged
-import com.nek12.beautylab.ui.screens.signup.SignUpIntent.OkClicked
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.PasswordChanged
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.PasswordConfirmationChanged
 import com.nek12.beautylab.ui.screens.signup.SignUpIntent.UsernameChanged
@@ -33,7 +33,7 @@ class SignUpViewModel(
     private val passwordForm = Form.Password
 
     override suspend fun reduce(intent: SignUpIntent) = when (intent) {
-        is OkClicked -> withState<AcceptingInput> {
+        is ClickedSignUp -> withState<AcceptingInput> {
             val password = passwordForm.validate(password.value)
             val username = usernameForm.validate(username.value)
             val name = nameForm.validate(name.value)

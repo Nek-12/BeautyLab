@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
@@ -19,6 +21,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nek12.androidutils.compose.string
@@ -29,6 +34,7 @@ import com.nek12.beautylab.common.input.Form
 import com.nek12.beautylab.common.snackbar
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.GoBack
 import com.nek12.beautylab.ui.screens.signup.SignUpAction.ShowSnackbar
+import com.nek12.beautylab.ui.screens.signup.SignUpIntent.ClickedSignUp
 import com.nek12.beautylab.ui.screens.signup.SignUpState.AcceptingInput
 import com.nek12.beautylab.ui.screens.signup.SignUpState.Loading
 import com.nek12.beautylab.ui.widgets.BLIcon
@@ -91,6 +97,10 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         lengthRange = Form.Username.DEFAULT_LENGTH_RANGE,
                         label = R.string.username.string(),
                         modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = false, capitalization = KeyboardCapitalization.None,
+                            keyboardType = KeyboardType.Ascii, imeAction = ImeAction.Next,
+                        ),
                     )
                     BLTextInput(
                         input = state.name,
@@ -98,6 +108,10 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         lengthRange = Form.Name.DEFAULT_LENGTH_RANGE,
                         label = R.string.your_name.string(),
                         modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = true, capitalization = KeyboardCapitalization.Words,
+                            keyboardType = KeyboardType.Text, imeAction = ImeAction.Next,
+                        ),
                     )
                     BLTextInput(
                         input = state.password,
@@ -105,6 +119,9 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         lengthRange = Form.Password.LENGTH_RANGE,
                         label = R.string.password.string(),
                         modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = false, keyboardType = KeyboardType.Password, imeAction = ImeAction.Next,
+                        ),
                     )
                     BLTextInput(
                         input = state.passwordConfirmation,
@@ -112,6 +129,10 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         lengthRange = Form.Password.LENGTH_RANGE,
                         label = R.string.password.string(),
                         modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = false, keyboardType = KeyboardType.Password, imeAction = ImeAction.Go,
+                        ),
+                        keyboardActions = KeyboardActions { send(ClickedSignUp) }
                     )
                     Row(
                         Modifier
@@ -120,7 +141,7 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
                         Arrangement.Center,
                         Alignment.CenterVertically
                     ) {
-                        Button({ send(SignUpIntent.OkClicked) }) {
+                        Button({ send(SignUpIntent.ClickedSignUp) }) {
                             Text(R.string.sign_up.string())
                         }
                     }
@@ -132,7 +153,6 @@ fun MVIIntentScope<SignUpIntent, SignUpAction>.SignUpScreenContent(state: SignUp
         }
     }
 }
-
 
 @Composable
 @Preview(name = "LoginScreen", showSystemUi = false, showBackground = true)

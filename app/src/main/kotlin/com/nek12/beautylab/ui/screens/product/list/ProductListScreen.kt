@@ -13,8 +13,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,7 +36,6 @@ import com.nek12.beautylab.ui.screens.product.list.ProductListState.DisplayingCo
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Error
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Loading
 import com.nek12.beautylab.ui.widgets.BLBottomBar
-import com.nek12.beautylab.ui.widgets.BLEmptyView
 import com.nek12.beautylab.ui.widgets.BLErrorView
 import com.nek12.beautylab.ui.widgets.BLFab
 import com.nek12.flowMVI.android.compose.MVIComposable
@@ -99,26 +96,21 @@ private fun MVIIntentScope<ProductListIntent, ProductListAction>.ProductListCont
             when (state) {
                 is DisplayingContent -> {
                     val items = state.data.collectAsLazyPagingItems()
-                    val isEmpty by derivedStateOf { items.itemCount == 0 }
 
-                    if (isEmpty) {
-                        BLEmptyView()
-                    } else {
-                        LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(horizontal = 8.dp)) {
-                            items(items) { item ->
-                                if (item != null) {
-                                    ProductCardItem(
-                                        item = item,
-                                        onClick = { send(ProductListIntent.ClickedProduct(item)) })
-                                } else {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(152.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        CircularProgressIndicator()
-                                    }
+                    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(horizontal = 8.dp)) {
+                        items(items) { item ->
+                            if (item != null) {
+                                ProductCardItem(
+                                    item = item,
+                                    onClick = { send(ProductListIntent.ClickedProduct(item)) })
+                            } else {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(152.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
                                 }
                             }
                         }

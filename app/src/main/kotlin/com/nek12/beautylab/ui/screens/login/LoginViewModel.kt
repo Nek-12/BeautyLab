@@ -9,9 +9,9 @@ import com.nek12.beautylab.common.input.Input
 import com.nek12.beautylab.data.net.AuthManager
 import com.nek12.beautylab.data.repo.BeautyLabRepo
 import com.nek12.beautylab.data.util.ApiError
-import com.nek12.beautylab.ui.screens.login.LoginIntent.OkClicked
+import com.nek12.beautylab.ui.screens.login.LoginIntent.ClickedLogin
+import com.nek12.beautylab.ui.screens.login.LoginIntent.ClickedSignUp
 import com.nek12.beautylab.ui.screens.login.LoginIntent.PasswordChanged
-import com.nek12.beautylab.ui.screens.login.LoginIntent.SignUpClicked
 import com.nek12.beautylab.ui.screens.login.LoginIntent.UsernameChanged
 import com.nek12.beautylab.ui.screens.login.LoginState.AcceptingInput
 import com.nek12.beautylab.ui.screens.login.LoginState.Loading
@@ -34,7 +34,7 @@ class LoginViewModel(
     private val passwordForm = Form.Password
 
     override suspend fun reduce(intent: LoginIntent) = when (intent) {
-        is OkClicked -> withState<AcceptingInput> {
+        is ClickedLogin -> withState<AcceptingInput> {
             val password = passwordForm.validate(password.value)
             val username = usernameForm.validate(username.value)
 
@@ -51,7 +51,7 @@ class LoginViewModel(
         is UsernameChanged -> withState<AcceptingInput> {
             copy(username = usernameForm.validate(intent.value))
         }
-        SignUpClicked -> {
+        ClickedSignUp -> {
             send(LoginAction.GoToSignUp)
             currentState
         }

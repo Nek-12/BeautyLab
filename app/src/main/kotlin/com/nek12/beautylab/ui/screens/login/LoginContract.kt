@@ -27,6 +27,6 @@ sealed class LoginIntent: MVIIntent {
 
     data class UsernameChanged(val value: String): LoginIntent()
     data class PasswordChanged(val value: String): LoginIntent()
-    object OkClicked: LoginIntent()
-    object SignUpClicked: LoginIntent()
+    object ClickedLogin: LoginIntent()
+    object ClickedSignUp: LoginIntent()
 }
