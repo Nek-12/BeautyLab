@@ -96,13 +96,13 @@
     <string name="pending_orders_profile_subtitle">Your pending orders</string>
     <string name="about_app_description">
         This is a proof of concept app for an online
-        store primarily oriented on beauty, fashion, hygiene and self-care products.
-        It has been developed as a showcase of the developer\'s experience.
+        store primarily oriented on beauty, fashion, hygiene and self-care products.\n
+        It has been developed as a showcase of the developer\'s experience.\n
         Be aware that this is NOT a real store, your orders won\'t be processed,
-        there is no support, and any financial operations are emulated.
-        Please do not expose private data to the servers as they may not be maintained or secure.
-        When using this app\'s source code, please give credits to the author.
-        This app is provided on an "AS-IS" basis without any warranties or obligations from the author.
+        there is no support, and any financial operations are emulated.\n
+        Please do not expose private data to the servers as they may not be maintained or secure.\n
+        When using this app\'s source code, please give credits to the author.\n
+        This app is provided on an "AS-IS" basis without any warranties or obligations from the author.\n
         It is licensed under GPL-V3 license.
     </string>
 
