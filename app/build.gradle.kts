@@ -47,7 +47,6 @@ android {
         getByName("release") {
             isMinifyEnabled = Values.isMinifyEnabledRelease
             isShrinkResources = Values.isMinifyEnabledRelease
-
             proguardFiles(
                 getDefaultProguardFile(Values.defaultProguardFile),
                 Values.proguardFiles,
@@ -58,6 +57,14 @@ android {
             versionNameSuffix = "-d"
             isRenderscriptDebuggable = true
             applicationIdSuffix = ".debug"
+            isMinifyEnabled = Values.isMinifyEnabledDebug
+            isShrinkResources = Values.isMinifyEnabledDebug
+
+            proguardFiles(
+                getDefaultProguardFile(Values.defaultProguardFile),
+                Values.proguardFiles,
+            )
+            ndk.debugSymbolLevel = Values.debugSymbolLevel
         }
     }
     compileOptions {

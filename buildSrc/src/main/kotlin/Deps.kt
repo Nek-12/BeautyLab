@@ -136,6 +136,7 @@ object Deps {
             coilCompose,
             destinations,
             mvi,
+            tooling,
         ) + with(Dialogs) {
             listOf(
                 dialogs,

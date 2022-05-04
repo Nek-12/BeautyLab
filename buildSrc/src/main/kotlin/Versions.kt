@@ -9,16 +9,16 @@ object Versions {
     const val minSdk = 26
     const val buildTools = "32.0.0"
     const val gradleAndroid = "7.1.3"
-    const val kotlin = "1.6.20"
+    const val kotlin = "1.6.21"
     const val datetime = "0.3.2"
-    const val ksp = "1.0.4"
+    const val ksp = "1.0.5"
     const val activity = "1.5.0-beta01" //do NOT use alpha until Tiramisu release
     const val serialization = "1.3.2"
     const val room = "2.5.0-alpha01"
     const val koin = "3.2.0-beta-1"
     const val detekt = "1.18.1"
     const val paging = "3.1.1"
-    const val utils = "0.7.2"
+    const val utils = "0.7.3"
     const val iconics = "5.3.3"
     const val williamChart = "3.11.0"
     const val arrow = "1.0.6-alpha.1"
@@ -32,7 +32,7 @@ object Versions {
     const val coil = "2.0.0-rc02"
     const val coilTransformations = "1.1.2"
     const val lifecycle = "2.5.0-alpha05"
-    const val mvi = "0.1.5"
+    const val mvi = "0.1.7"
     const val ktor = "2.0.0"
     const val flowExt = "0.2.0"
 

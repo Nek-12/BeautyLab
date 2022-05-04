@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -5,6 +7,10 @@ plugins {
 //    id(Deps.Plugins.ksp) version "${Versions.kotlin}-${Versions.ksp}"
     kotlin(Deps.Plugins.serialization) version Versions.kotlin
 }
+
+val keyStorePassword: String = gradleLocalProperties(rootDir).getProperty("keyStorePassword")
+val keyPasswd: String = gradleLocalProperties(rootDir).getProperty("keyPassword")
+val keyStorePath = "../key.jks"
 
 android {
 
@@ -19,7 +25,8 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = Values.isMinifyEnabledRelease
+            isMinifyEnabled = false //TODO: Bugged minifyReleaseWithR8 task as of may 2 2022
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile(Values.defaultProguardFile),
                 Values.proguardFiles,
@@ -42,6 +49,22 @@ android {
             isIncludeAndroidResources = true
         }
     }
+
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "BeautyLab"
+            keyPassword = keyPasswd
+            storeFile = file(keyStorePath)
+            storePassword = keyStorePassword
+        }
+        create("release") {
+            keyAlias = "BeautyLab"
+            keyPassword = keyPasswd
+            storeFile = file(keyStorePath)
+            storePassword = keyStorePassword
+        }
+    }
+
 //
 //    ksp {
 //        arg("room.schemaLocation", "dbschema/")

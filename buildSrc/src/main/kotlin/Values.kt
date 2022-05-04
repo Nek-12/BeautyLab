@@ -8,10 +8,11 @@ object Values {
     const val majorRelease = 0
     const val minorRelease = 0
     const val patch = 1
-    val versionName = "$majorRelease.$minorRelease.${patch} ($versionCode)"
+    val versionName = "$majorRelease.$minorRelease.$patch ($versionCode)"
 
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val isMinifyEnabledRelease = true
+    const val isMinifyEnabledDebug = false
     const val defaultProguardFile = "proguard-android-optimize.txt"
     const val proguardFiles = "proguard-rules.pro"
     const val consumerProguardFiles = "consumer-rules.pro"
@@ -19,5 +20,10 @@ object Values {
     const val detektConfigPath = "detekt.yml"
     const val detektReportFilename = "detekt_report"
     val supportedLocales = listOf("en", "ru")
-    val kotlinCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xcontext-receivers")
+    val kotlinCompilerArgs = listOf(
+        "-opt-in=kotlin.RequiresOptIn",
+        "-Xjvm-default=all",
+        "-P", // TODO: Remove once support 1.6.21
+        "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+    )
 }
