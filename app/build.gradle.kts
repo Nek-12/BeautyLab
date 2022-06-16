@@ -14,7 +14,6 @@ val keyStorePath = "../key.jks"
 
 android {
     compileSdk = Versions.compileSdk
-    buildToolsVersion = Versions.buildTools
 
     defaultConfig {
 
