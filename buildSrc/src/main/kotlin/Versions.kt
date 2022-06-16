@@ -50,7 +50,7 @@ object Versions {
         const val material3 = "1.0.0-alpha03"
         const val constraintLayout = "1.1.0-alpha02"
         const val navigation = "2.5.0-rc02"
-        const val dialogs = "0.7.0"
+        const val dialogs = "0.8.0-beta"
         const val destinations = "1.5.12-beta"
         const val collapsingToolbar = "2.3.3"
         const val paging = "1.0.0-alpha15"
