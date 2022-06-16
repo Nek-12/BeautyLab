@@ -15,15 +15,15 @@ import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.Displa
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.Error
 import com.nek12.beautylab.ui.screens.product.details.ProductDetailsState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.async
 import java.util.*
 
 class ProductDetailsViewModel(
     private val productId: UUID,
     private val repo: BeautyLabRepo,
-): MVIViewModel<ProductDetailsState, ProductDetailsIntent, ProductDetailsAction>() {
+): MVIViewModel<ProductDetailsState, ProductDetailsIntent, ProductDetailsAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

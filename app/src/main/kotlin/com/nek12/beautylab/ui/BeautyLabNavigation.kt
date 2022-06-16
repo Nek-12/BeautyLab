@@ -29,8 +29,6 @@ import com.ramcosta.composedestinations.spec.Direction
 @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun BeautyLabNavigation() {
-
-
     val navController = rememberAnimatedNavController()
 
     val bottomSheetNavigator = rememberBottomSheetNavigator()
@@ -53,7 +51,6 @@ fun BeautyLabNavigation() {
         )
     }
 }
-
 
 enum class BottomBarDestination(
     val direction: Direction,

@@ -59,7 +59,7 @@ import com.nek12.beautylab.ui.widgets.ChipFlowRow
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.ramcosta.composedestinations.navigation.navigateTo
+import com.ramcosta.composedestinations.navigation.navigate
 import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalPagerApi::class)
@@ -100,11 +100,11 @@ fun HomeScreen(
 
     consume { action ->
         when (action) {
-            is GoToLogIn -> navController.navigateTo(LoginScreenDestination())
-            is GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.id))
-            is GoToProductList -> navController.navigateTo(ProductListScreenDestination(action.filters))
-            is GoToProfile -> navController.navigateTo(ProfileScreenDestination())
-            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
+            is GoToLogIn -> navController.navigate(LoginScreenDestination())
+            is GoToProductDetails -> navController.navigate(ProductDetailsScreenDestination(action.id))
+            is GoToProductList -> navController.navigate(ProductListScreenDestination(action.filters))
+            is GoToProfile -> navController.navigate(ProfileScreenDestination())
+            is GoToAboutApp -> navController.navigate(AboutAppScreenDestination)
         }
     }
 

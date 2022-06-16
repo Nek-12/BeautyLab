@@ -16,13 +16,12 @@ import com.nek12.beautylab.ui.screens.login.LoginIntent.UsernameChanged
 import com.nek12.beautylab.ui.screens.login.LoginState.AcceptingInput
 import com.nek12.beautylab.ui.screens.login.LoginState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 
 class LoginViewModel(
     private val repo: BeautyLabRepo,
     private val authManager: AuthManager,
-): MVIViewModel<LoginState, LoginIntent, LoginAction>() {
-
-    override val initialState get() = AcceptingInput()
+): MVIViewModel<LoginState, LoginIntent, LoginAction>(AcceptingInput()) {
 
     init {
         if (authManager.isLoggedIn) {

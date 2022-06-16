@@ -22,12 +22,11 @@ import com.nek12.beautylab.ui.screens.signup.SignUpIntent.UsernameChanged
 import com.nek12.beautylab.ui.screens.signup.SignUpState.AcceptingInput
 import com.nek12.beautylab.ui.screens.signup.SignUpState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 
 class SignUpViewModel(
     private val repo: BeautyLabRepo,
-): MVIViewModel<SignUpState, SignUpIntent, SignUpAction>() {
-
-    override val initialState get() = AcceptingInput()
+): MVIViewModel<SignUpState, SignUpIntent, SignUpAction>(AcceptingInput()) {
 
     private val usernameForm = Form.Username()
     private val nameForm = Form.Name()

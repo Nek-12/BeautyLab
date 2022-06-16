@@ -9,13 +9,13 @@ import com.nek12.beautylab.ui.screens.news.NewsState.DisplayingNews
 import com.nek12.beautylab.ui.screens.news.NewsState.Error
 import com.nek12.beautylab.ui.screens.news.NewsState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.flow.map
 
 class NewsViewModel(
     val repo: BeautyLabRepo,
-): MVIViewModel<NewsState, NewsIntent, NewsAction>() {
+): MVIViewModel<NewsState, NewsIntent, NewsAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

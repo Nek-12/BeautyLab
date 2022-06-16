@@ -13,7 +13,7 @@ import com.nek12.beautylab.ui.BottomBarDestination
 import com.nek12.beautylab.ui.screens.NavGraphs
 import com.nek12.beautylab.ui.screens.appDestination
 import com.nek12.beautylab.ui.screens.destinations.Destination
-import com.ramcosta.composedestinations.navigation.navigateTo
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
 
 @Composable
@@ -27,7 +27,7 @@ fun BLBottomBar(
             BottomNavigationItem(
                 selected = currentDestination == destination.direction,
                 onClick = {
-                    navController.navigateTo(destination.direction) {
+                    navController.navigate(destination.direction) {
                         popUpTo(NavGraphs.root.startRoute) {
                             saveState = false
                         }

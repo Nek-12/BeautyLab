@@ -6,8 +6,8 @@ import androidx.core.text.isDigitsOnly
 import arrow.core.Either
 import arrow.core.Nel
 import arrow.core.ValidatedNel
-import arrow.core.combineAll
-import arrow.core.computations.either
+import arrow.core.continuations.either
+import arrow.core.fold
 import arrow.core.invalidNel
 import arrow.core.validNel
 import arrow.typeclasses.Monoid
@@ -137,7 +137,7 @@ operator fun Array<out Rule>.invoke(input: String, strategy: Strategy): Either<N
         }
         LazyEvaluation -> {
             map { it(input) }
-                .combineAll(Monoid.validated(Semigroup.nonEmptyList(), Monoid.string()))
+                .fold(Monoid.validated(Semigroup.nonEmptyList(), Monoid.string()))
                 .map { input }
                 .toEither()
         }

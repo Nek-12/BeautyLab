@@ -11,12 +11,12 @@ import com.nek12.beautylab.ui.screens.favorites.FavoritesState.Empty
 import com.nek12.beautylab.ui.screens.favorites.FavoritesState.Error
 import com.nek12.beautylab.ui.screens.favorites.FavoritesState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 
 class FavoritesViewModel(
     private val repo: BeautyLabRepo,
-): MVIViewModel<FavoritesState, FavoritesIntent, FavoritesAction>() {
+): MVIViewModel<FavoritesState, FavoritesIntent, FavoritesAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

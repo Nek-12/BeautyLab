@@ -64,7 +64,7 @@ import com.nek12.beautylab.ui.widgets.BLUserProfileCard
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.navigateTo
+import com.ramcosta.composedestinations.navigation.navigate
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -78,13 +78,13 @@ fun ProfileScreen(
     consume { action ->
         when (action) {
             is GoBack -> navController.navigateUp()
-            is GoToCancelOrder -> navController.navigateTo(CancelOrderScreenDestination(action.id))
-            is GoToOrderHistory -> navController.navigateTo(OrderHistoryScreenDestination)
-            is GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.productId))
-            is GoToLogIn -> navController.navigateTo(LoginScreenDestination) {
+            is GoToCancelOrder -> navController.navigate(CancelOrderScreenDestination(action.id))
+            is GoToOrderHistory -> navController.navigate(OrderHistoryScreenDestination)
+            is GoToProductDetails -> navController.navigate(ProductDetailsScreenDestination(action.productId))
+            is GoToLogIn -> navController.navigate(LoginScreenDestination) {
                 popUpTo(LoginScreenDestination.route)
             }
-            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
+            is GoToAboutApp -> navController.navigate(AboutAppScreenDestination)
         }
     }
 

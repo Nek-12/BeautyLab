@@ -17,14 +17,14 @@ import com.nek12.beautylab.ui.screens.product.order_confirmation.OrderConfirmati
 import com.nek12.beautylab.ui.screens.product.order_confirmation.OrderConfirmationState.Error
 import com.nek12.beautylab.ui.screens.product.order_confirmation.OrderConfirmationState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import java.util.*
 
 class OrderConfirmationViewModel(
     val productId: UUID,
     val repo: BeautyLabRepo,
-): MVIViewModel<OrderConfirmationState, OrderConfirmationIntent, OrderConfirmationAction>() {
+): MVIViewModel<OrderConfirmationState, OrderConfirmationIntent, OrderConfirmationAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

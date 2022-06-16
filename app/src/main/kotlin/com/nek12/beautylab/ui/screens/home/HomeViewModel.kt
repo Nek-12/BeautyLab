@@ -20,14 +20,14 @@ import com.nek12.beautylab.ui.screens.home.HomeIntent.EnteredHome
 import com.nek12.beautylab.ui.screens.home.HomeState.DisplayingContent
 import com.nek12.beautylab.ui.screens.home.HomeState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.Dispatchers
 
 class HomeViewModel(
     private val repo: BeautyLabRepo,
     private val authManager: AuthManager,
-): MVIViewModel<HomeState, HomeIntent, HomeAction>() {
+): MVIViewModel<HomeState, HomeIntent, HomeAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = HomeState.Error(from.genericMessage)
 
     override suspend fun reduce(intent: HomeIntent): HomeState = when (intent) {

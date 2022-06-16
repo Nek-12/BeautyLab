@@ -14,16 +14,16 @@ import com.nek12.beautylab.ui.screens.product.list.ProductListState.DisplayingCo
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Error
 import com.nek12.beautylab.ui.screens.product.list.ProductListState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class ProductListViewModel(
     initialFilters: FiltersPayload?,
     private val repo: BeautyLabRepo,
-): MVIViewModel<ProductListState, ProductListIntent, ProductListAction>() {
+): MVIViewModel<ProductListState, ProductListIntent, ProductListAction>(Loading) {
 
     private var currentFilters: FiltersPayload = initialFilters ?: FiltersPayload()
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

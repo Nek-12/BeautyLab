@@ -15,13 +15,13 @@ import com.nek12.beautylab.ui.screens.orders.history.OrderHistoryState.Displayin
 import com.nek12.beautylab.ui.screens.orders.history.OrderHistoryState.Error
 import com.nek12.beautylab.ui.screens.orders.history.OrderHistoryState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.flow.map
 
 class OrderHistoryViewModel(
     private val repo: BeautyLabRepo,
-): MVIViewModel<OrderHistoryState, OrderHistoryIntent, OrderHistoryAction>() {
+): MVIViewModel<OrderHistoryState, OrderHistoryIntent, OrderHistoryAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

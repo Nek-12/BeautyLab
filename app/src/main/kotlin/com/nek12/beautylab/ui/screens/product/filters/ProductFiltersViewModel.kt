@@ -21,6 +21,7 @@ import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.Error
 import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.Loading
 import com.nek12.beautylab.ui.screens.product.filters.ProductFiltersState.SelectingFilters
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import java.time.ZoneOffset
@@ -28,9 +29,8 @@ import java.time.ZoneOffset
 class ProductFiltersViewModel(
     private val initialFilters: FiltersPayload?,
     private val repo: BeautyLabRepo,
-): MVIViewModel<ProductFiltersState, ProductFiltersIntent, ProductFiltersAction>() {
+): MVIViewModel<ProductFiltersState, ProductFiltersIntent, ProductFiltersAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

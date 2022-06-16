@@ -17,14 +17,14 @@ import com.nek12.beautylab.ui.screens.profile.ProfileState.DisplayingProfile
 import com.nek12.beautylab.ui.screens.profile.ProfileState.Error
 import com.nek12.beautylab.ui.screens.profile.ProfileState.Loading
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import kotlinx.coroutines.async
 
 class ProfileViewModel(
     val repo: BeautyLabRepo,
     val authManager: AuthManager,
-): MVIViewModel<ProfileState, ProfileIntent, ProfileAction>() {
+): MVIViewModel<ProfileState, ProfileIntent, ProfileAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Error(from)
 
     init {

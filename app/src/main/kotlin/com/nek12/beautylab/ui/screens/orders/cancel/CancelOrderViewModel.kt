@@ -14,14 +14,14 @@ import com.nek12.beautylab.ui.screens.orders.cancel.CancelOrderState.Failed
 import com.nek12.beautylab.ui.screens.orders.cancel.CancelOrderState.Loading
 import com.nek12.beautylab.ui.screens.orders.cancel.CancelOrderState.Success
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 import java.util.*
 
 class CancelOrderViewModel(
     private val transactionId: UUID,
     private val repo: BeautyLabRepo,
-): MVIViewModel<CancelOrderState, CancelOrderIntent, CancelOrderAction>() {
+): MVIViewModel<CancelOrderState, CancelOrderIntent, CancelOrderAction>(Loading) {
 
-    override val initialState get() = Loading
     override fun recover(from: Exception) = Failed(from)
 
     init {

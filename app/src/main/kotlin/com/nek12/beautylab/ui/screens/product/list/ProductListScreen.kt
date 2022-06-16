@@ -47,7 +47,7 @@ import com.nek12.beautylab.ui.widgets.BLTopBar
 import com.nek12.flowMVI.android.compose.MVIComposable
 import com.nek12.flowMVI.android.compose.MVIIntentScope
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.navigateTo
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.result.NavResult
 import com.ramcosta.composedestinations.result.ResultRecipient
 import org.koin.androidx.compose.getViewModel
@@ -68,9 +68,9 @@ fun ProductListScreen(
     consume { action ->
         when (action) {
             is GoBack -> navController.navigateUp()
-            is GoToFilters -> navController.navigateTo(ProductFiltersScreenDestination(action.filters))
-            is GoToProductDetails -> navController.navigateTo(ProductDetailsScreenDestination(action.id))
-            is GoToAboutApp -> navController.navigateTo(AboutAppScreenDestination)
+            is GoToFilters -> navController.navigate(ProductFiltersScreenDestination(action.filters))
+            is GoToProductDetails -> navController.navigate(ProductDetailsScreenDestination(action.id))
+            is GoToAboutApp -> navController.navigate(AboutAppScreenDestination)
         }
     }
 

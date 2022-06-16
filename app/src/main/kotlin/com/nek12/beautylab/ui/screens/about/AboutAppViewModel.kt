@@ -11,10 +11,9 @@ import com.nek12.beautylab.ui.screens.about.AboutAppIntent.ClickedProjectGithub
 import com.nek12.beautylab.ui.screens.about.AboutAppIntent.ClickedProjectInstagram
 import com.nek12.beautylab.ui.screens.about.AboutAppState.DisplayingAbout
 import com.nek12.flowMVI.android.MVIViewModel
+import com.nek12.flowMVI.currentState
 
-class AboutAppViewModel: MVIViewModel<AboutAppState, AboutAppIntent, AboutAppAction>() {
-
-    override val initialState get() = DisplayingAbout
+class AboutAppViewModel: MVIViewModel<AboutAppState, AboutAppIntent, AboutAppAction>(DisplayingAbout) {
 
     override suspend fun reduce(intent: AboutAppIntent): AboutAppState {
         val action = when (intent) {
