@@ -28,6 +28,8 @@ class BeautyLabApi(client: HttpClient): BaseApi(client) {
 
     suspend fun logIn(request: LoginRequest) = post<EditUserResponse, LoginRequest>("auth/login/", request)
 
+    suspend fun logOut() = post<Unit, Any>("auth/logout/")
+
     suspend fun mainView() = get<MobileViewResponse, Any>("mobile/main/")
 
     //e.g.: /api/product/?page=0&per_page=5&sort=createdAt&createdAt.dir=desc

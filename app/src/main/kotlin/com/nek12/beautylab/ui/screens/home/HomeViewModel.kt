@@ -60,9 +60,9 @@ class HomeViewModel(
             Loading
         }
         ClickedLogout -> {
-            authManager.reset()
+            repo.logOut()
             send(GoToLogIn)
-            currentState
+            Loading
         }
         is EnteredHome -> {
             launchLoadData()

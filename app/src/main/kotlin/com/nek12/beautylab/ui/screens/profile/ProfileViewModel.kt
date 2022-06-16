@@ -47,9 +47,9 @@ class ProfileViewModel(
             currentState
         }
         is ClickedLogout -> {
-            authManager.reset()
+            repo.logOut()
             send(GoToLogIn)
-            currentState
+            Loading
         }
         is ClickedInfo -> {
             send(GoToAboutApp)

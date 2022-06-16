@@ -33,6 +33,10 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
 
     suspend fun getMainScreen() = api.mainView()
 
+    suspend fun logOut() = api
+        .logOut()
+        .also { authManager.reset() }
+
     fun getProducts(request: GetProductsFilteredRequest, sort: ProductSort, direction: SortDirection) =
         paged { api.getProducts(request, key, loadSize, sort.value, direction.value) }
 
@@ -45,6 +49,7 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
     suspend fun getProduct(id: UUID) = api.getProduct(id)
 
     suspend fun getFavorite(productId: UUID) = getFavorites().map { list ->
+        // not a very good approach, but there's not getFavoriteById method on BE
         list.firstOrNull { it.product.id == productId }
     }
 
@@ -65,6 +70,7 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
 
     fun getNews() = paged { api.getNews(key, loadSize) }
 
+
     private fun <T: Any> paged(call: suspend LoadParams<Int>.() -> ApiResult<PageResponse<T>>) = Pager(
         config = PagingConfig(BeautyLabApi.PAGE_SIZE),
         pagingSourceFactory = { PagedResultSource(call) },
@@ -76,5 +82,4 @@ class BeautyLabRepo(private val api: BeautyLabApi, private val authManager: Auth
     }
 
     suspend fun getTransaction(id: UUID) = api.getTransaction(id)
-
 }

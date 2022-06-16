@@ -5,7 +5,10 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.nek12.androidutils.compose.string
@@ -41,7 +44,16 @@ fun BLBottomBar(
                         tint = LocalContentColor.current
                     )
                 },
-                label = { Text(destination.label.string()) },
+                label = {
+                    Text(
+                        destination.label.string(),
+                        maxLines = 1,
+                        fontSize = 12.sp,
+                        overflow = TextOverflow.Ellipsis,
+                        softWrap = false,
+                        textAlign = TextAlign.Center,
+                    )
+                },
             )
         }
     }
