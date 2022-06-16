@@ -24,8 +24,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false //TODO: Bugged minifyReleaseWithR8 task as of may 2 2022
-            isShrinkResources = false
+            isMinifyEnabled = Values.isMinifyEnabledRelease
             proguardFiles(
                 getDefaultProguardFile(Values.defaultProguardFile),
                 Values.proguardFiles,
@@ -78,10 +77,10 @@ android {
         dataBinding = false
         prefab = false
         renderScript = false
-        resValues = false
+        resValues = true
         shaders = false
         viewBinding = false
-        androidResources = false
+        androidResources = true
         mlModelBinding = false
         prefabPublishing = false
     }

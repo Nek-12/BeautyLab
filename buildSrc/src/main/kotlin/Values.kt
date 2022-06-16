@@ -23,7 +23,5 @@ object Values {
     val kotlinCompilerArgs = listOf(
         "-opt-in=kotlin.RequiresOptIn",
         "-Xjvm-default=all",
-        "-P", // TODO: Remove once support 1.6.21
-        "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
     )
 }

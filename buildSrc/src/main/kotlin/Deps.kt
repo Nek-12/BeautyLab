@@ -90,7 +90,8 @@ object Deps {
 
         object Dialogs {
 
-            //https://github.com/vanpra/compose-material-dialogs
+            // https://github.com/vanpra/compose-material-dialogs
+
             const val dialogs = "io.github.vanpra.compose-material-dialogs:core:${Versions.Compose.dialogs}"
             const val datetime = "io.github.vanpra.compose-material-dialogs:datetime:${Versions.Compose.dialogs}"
             const val color = "io.github.vanpra.compose-material-dialogs:color:${Versions.Compose.dialogs}"
@@ -171,16 +172,6 @@ object Deps {
         const val room = "$group:room:${Versions.utils}"
         const val preferences = "$group:preferences-ktx:${Versions.utils}"
         const val compose = "$group:compose-ktx:${Versions.utils}"
-    }
-
-    object WilliamChart {
-
-        const val group = "com.diogobernardino.williamchart"
-
-        //note the : ---------------------------------\/ here
-        const val williamCharts = "com.diogobernardino:williamchart:${Versions.williamChart}"
-        const val sliderTooltip = "$group:tooltip-slider:${Versions.williamChart}"
-        const val tooltipPoints = "$group:tooltip-points:${Versions.williamChart}"
     }
 
     object Iconics {

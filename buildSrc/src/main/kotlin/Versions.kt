@@ -20,7 +20,6 @@ object Versions {
     const val paging = "3.2.0-alpha01"
     const val utils = "0.7.7"
     const val iconics = "5.3.3"
-    const val williamChart = "3.11.0"
     const val arrow = "1.1.3-alpha.19"
     const val material = "1.6.0-alpha01"
     const val logcat = "0.1"
