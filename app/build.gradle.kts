@@ -42,6 +42,22 @@ android {
         }
     }
 
+
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "BeautyLab"
+            keyPassword = keyPasswd
+            storeFile = file(keyStorePath)
+            storePassword = keyStorePassword
+        }
+        create("release") {
+            keyAlias = "BeautyLab"
+            keyPassword = keyPasswd
+            storeFile = file(keyStorePath)
+            storePassword = keyStorePassword
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = Values.isMinifyEnabledRelease
@@ -51,6 +67,7 @@ android {
                 Values.proguardFiles,
             )
             ndk.debugSymbolLevel = Values.debugSymbolLevel
+            signingConfig = signingConfigs.getByName("release")
         }
         getByName("debug") {
             versionNameSuffix = "-d"
@@ -58,6 +75,7 @@ android {
             applicationIdSuffix = ".debug"
             isMinifyEnabled = Values.isMinifyEnabledDebug
             isShrinkResources = Values.isMinifyEnabledDebug
+            signingConfig = signingConfigs.getByName("debug")
 
             proguardFiles(
                 getDefaultProguardFile(Values.defaultProguardFile),
@@ -95,20 +113,6 @@ android {
         }
     }
 
-    signingConfigs {
-        getByName("debug") {
-            keyAlias = "BeautyLab"
-            keyPassword = keyPasswd
-            storeFile = file(keyStorePath)
-            storePassword = keyStorePassword
-        }
-        create("release") {
-            keyAlias = "BeautyLab"
-            keyPassword = keyPasswd
-            storeFile = file(keyStorePath)
-            storePassword = keyStorePassword
-        }
-    }
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.Compose.compose
         useLiveLiterals = true
